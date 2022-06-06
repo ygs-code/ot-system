@@ -1,0 +1,14 @@
+BlogsAdmin 
+BlogsAdmin/*
+BlogsAdmin/**
+BlogsAdmin/**/*
+
+BlogsClient 
+BlogsClient/*
+BlogsClient/**
+BlogsClient/**/*
+
+BlogsServer 
+BlogsServer/*
+BlogsServer/**
+BlogsServer/**/*
