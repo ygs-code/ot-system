@@ -19,6 +19,7 @@
   "homepage": "https://github.com/qq281113270/Blogs#readme",
   "dependencies": {
     "import-from": "^4.0.0",
-    "ora": "^6.1.0"
+    "ora": "^6.1.0",
+    "webpack-cli-util": "^0.5.1"
   }
 }

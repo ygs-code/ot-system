@@ -1,0 +1,158 @@
+.site-layout .site-layout-background {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  position: relative;
+  overflow: auto;
+}
+
+.dropdown-root-box {
+  // background: rebeccapurple;
+  height: 100%;
+  float: right;
+  // display: flex;
+  // justify-content: flex-end;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  margin-right: 20px;
+  width: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+
+  .action {
+    cursor: pointer;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+    height: 100%;
+
+    > i {
+      font-size: 16px;
+      vertical-align: middle;
+    }
+
+    &:hover,
+    &:global(.ant-popover-open) {
+      background: #ccc;
+    }
+  }
+
+  .search {
+    padding: 0;
+    margin: 0 12px;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .account {
+    .avatar {
+      margin: 16px 8px 16px 0;
+      background: #ccc;
+      vertical-align: middle;
+    }
+  }
+
+  .right-name {
+    display: inline-block;
+    max-width: 110px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .right-icon {
+    color: #999;
+    font-size: 12px !important;
+    // margin-bottom: 2px;
+    margin-left: 5px;
+  }
+
+  .dropdown-link {
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    img {
+      width: 35px;
+      height: 35px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    .account-name {
+      margin-left: 15px;
+    }
+  }
+}
+
+.dropdown-box {
+  padding: 10px;
+}
+.dropdown-select {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  cursor: pointer;
+
+  li {
+    list-style: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  li:nth-child(1).odd {
+    line-height: 50px;
+  }
+
+  li:nth-child(1) {
+    width: 80px;
+    line-height: 30px;
+  }
+
+  li:nth-child(2) {
+    width: auto;
+    flex: 1;
+    position: relative;
+
+    > svg {
+      float: right;
+      margin-right: -10px;
+    }
+
+    dl {
+      display: flex;
+
+      dd {
+        font-size: 14px;
+        flex: 1;
+
+        > svg {
+          position: absolute;
+          right: -8px;
+          top: 12px;
+        }
+      }
+
+      dd:nth-child(1) {
+        padding-right: 30px;
+        padding-left: 10px;
+        div:nth-child(1) {
+          padding-top: 3px;
+        }
+        div:nth-child(2) {
+          color: #666;
+        }
+      }
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
