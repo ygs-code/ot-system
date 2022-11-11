@@ -3,5 +3,6 @@ export default {
   marketing: "/marketing",
   home: "/",
   user: "/user",
-  LogIn: "/LogIn"
+  LogIn: "/LogIn",
+  Register: "/Register"
 };

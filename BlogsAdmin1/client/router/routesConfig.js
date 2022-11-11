@@ -28,11 +28,11 @@ export default [
     name: "LogIn",
     entry: "/pages/LogIn/index.js",
     level: 1
+  },
+  {
+    path: "/Register",
+    name: "Register",
+    entry: "/pages/Register/index.js",
+    level: 1
   }
-  // {
-  //   path: "/Register",
-  //   name: "Register",
-  //   entry: "/pages/Register/index.js",
-  //   level: 1
-  // }
 ];

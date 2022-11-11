@@ -26,17 +26,9 @@ const tailLayout = {
 };
 
 const Index = (props) => {
-  const { history } = props;
+  const { history, pushRoute, routePaths } = props;
   const [verifyCodeData, setVerifyCodeData] = useState({});
   console.log("props122======", props);
-  useEffect(() => {
-    setTimeout(() => {
-      historyPush({
-        history,
-        url: "/"
-      });
-    }, 1000);
-  }, []);
 
   const onFinish = async (values) => {
     const {
@@ -55,10 +47,7 @@ const Index = (props) => {
     setUserInfo(userInfo);
     message.success("登录成功");
     setTimeout(() => {
-      historyPush({
-        history,
-        url: "/"
-      });
+      pushRoute(routePaths.home);
     }, 1500);
   };
 
@@ -135,9 +124,7 @@ const Index = (props) => {
             <Button
               className="submit"
               onClick={() => {
-                historyPush({
-                  url: routePaths.register
-                });
+                pushRoute(routePaths.Register);
               }}>
               注册
             </Button>
@@ -148,4 +135,4 @@ const Index = (props) => {
   );
 };
 
-export default mapRedux(["user"])(Index);
+export default mapRedux(["user"])(addRouterApi(Index));

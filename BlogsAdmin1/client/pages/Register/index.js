@@ -1,37 +1,37 @@
 import React from "react";
-import { register } from "client/common/js/request/index";
-import "client/common/css/base.less";
-import "./index.less";
+import { register } from "client/assets/js/request/index";
 import { Form, Input, Button, Checkbox, message } from "antd";
-import { routePaths, historyPush, getHistory } from "client/router";
 import { checkPhone, checkUser, checkPassword, checkEmail } from "client/utils";
-import VerificationCode from "cliemt/component/VerificationCode";
-
+import VerificationCode from "client/component/VerificationCode";
+import {
+  routePaths,
+  historyPush,
+  getHistory,
+  addRouterApi
+} from "client/router";
+import Store, { mapRedux } from "client/redux";
+import "client/assets/css/base.less";
+import "./index.less";
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 16 }
 };
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+  wrapperCol: { offset: 8, span: 16 }
 };
 
-const Index = () => {
+const Index = (props) => {
+  const { pushRoute, routePaths } = props;
+
   const onFinish = async (values) => {
-    // console.log('register=', register);
-    // console.log('Success:', values);
-    console.log("values======", values);
     const data = await register(values);
     message.success("注册成功");
     setTimeout(() => {
-      historyPush({
-        url: routePaths.logLn,
-      });
+      pushRoute(routePaths.home);
     }, 1500);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    // console.log('Failed:', errorInfo);
-  };
+  const onFinishFailed = (errorInfo) => {};
 
   return (
     <div className="center log-in">
@@ -41,8 +41,7 @@ const Index = () => {
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
+        onFinishFailed={onFinishFailed}>
         <Form.Item
           label="用户名"
           name="name"
@@ -50,7 +49,7 @@ const Index = () => {
           rules={[
             {
               required: true,
-              message: "请输入用户名!",
+              message: "请输入用户名!"
             },
             ({ getFieldValue }) => ({
               validator(rule, value) {
@@ -58,10 +57,9 @@ const Index = () => {
                   return Promise.resolve();
                 }
                 return Promise.reject("用户名必须最少为6位，并且以字母开头");
-              },
-            }),
-          ]}
-        >
+              }
+            })
+          ]}>
           <Input />
         </Form.Item>
         <Form.Item
@@ -71,7 +69,7 @@ const Index = () => {
           rules={[
             {
               required: true,
-              message: "请输入手机号！",
+              message: "请输入手机号！"
             },
             ({ getFieldValue }) => ({
               validator(rule, value) {
@@ -79,10 +77,9 @@ const Index = () => {
                   return Promise.resolve();
                 }
                 return Promise.reject("请输入正确的手机号码");
-              },
-            }),
-          ]}
-        >
+              }
+            })
+          ]}>
           <Input />
         </Form.Item>
 
@@ -93,7 +90,7 @@ const Index = () => {
           rules={[
             {
               required: true,
-              message: "请输入邮箱！",
+              message: "请输入邮箱！"
             },
             ({ getFieldValue }) => ({
               validator(rule, value) {
@@ -101,10 +98,9 @@ const Index = () => {
                   return Promise.resolve();
                 }
                 return Promise.reject("请输入正确的邮箱");
-              },
-            }),
-          ]}
-        >
+              }
+            })
+          ]}>
           <Input />
         </Form.Item>
 
@@ -115,7 +111,7 @@ const Index = () => {
           rules={[
             {
               required: true,
-              message: "请输入密码!",
+              message: "请输入密码!"
             },
             ({ getFieldValue }) => ({
               validator(rule, value) {
@@ -125,10 +121,9 @@ const Index = () => {
                   );
                 }
                 return Promise.resolve();
-              },
-            }),
-          ]}
-        >
+              }
+            })
+          ]}>
           <Input.Password />
         </Form.Item>
         <Form.Item
@@ -138,7 +133,7 @@ const Index = () => {
           rules={[
             {
               required: true,
-              message: "请输入密码!",
+              message: "请输入密码!"
             },
             ({ getFieldValue }) => ({
               validator(rule, value) {
@@ -155,10 +150,9 @@ const Index = () => {
                 //     return Promise.resolve();
                 //   }
                 //   return Promise.reject('输入两次密码不相同，请重新输入');
-              },
-            }),
-          ]}
-        >
+              }
+            })
+          ]}>
           <Input.Password />
         </Form.Item>
 
@@ -170,18 +164,16 @@ const Index = () => {
               className="submit"
               type="primary"
               htmlType="submit"
-              onClick={() => {}}
-            >
+              onClick={() => {}}>
               确定
             </Button>
             <Button
               className="submit"
               onClick={() => {
                 historyPush({
-                  url: routePaths.logLn,
+                  url: routePaths.logLn
                 });
-              }}
-            >
+              }}>
               登录
             </Button>
           </div>
@@ -191,4 +183,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default mapRedux()(addRouterApi(Index));
