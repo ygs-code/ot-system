@@ -13,10 +13,15 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
-  HomeOutlined,
+  HomeOutlined
 } from "@ant-design/icons";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { routePaths, historyPush, getHistory, pathComponent } from "client/router";
+import {
+  routePaths,
+  historyPush,
+  getHistory,
+  pathComponent
+} from "client/router";
 import { Layout, Menu, Select, Dropdown, Avatar, Breadcrumb } from "antd";
 import "./index.less";
 
@@ -25,9 +30,7 @@ const { Header, Sider, Content } = Layout;
 const { Item } = Breadcrumb;
 export default memo(
   forwardRef((props, ref) => {
-    const {
-      data = [],
-    } = props;
+    const { data = [] } = props;
 
     return (
       <Breadcrumb className="breadcrumb">
@@ -39,8 +42,7 @@ export default memo(
               href={href || null}
               onClick={() => {
                 path && historyPush(path);
-              }}
-            >
+              }}>
               {component ? component : null}
               {label ? label : null}
             </Item>

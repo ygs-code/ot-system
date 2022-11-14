@@ -3,7 +3,7 @@ import React, {
   useCallback,
   forwardRef,
   useState,
-  useEffect,
+  useEffect
 } from "react";
 import Icon, {
   MenuUnfoldOutlined,
@@ -19,10 +19,9 @@ import Icon, {
   AppstoreOutlined,
   WarningOutlined,
   SettingOutlined,
-  ProjectOutlined,
+  ProjectOutlined
 } from "@ant-design/icons";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { routePaths, historyPush, getHistory, pathComponent } from "client/router";
+
 import { Layout, Menu, Select } from "antd";
 const { SubMenu } = Menu;
 const { Option } = Select;
@@ -31,27 +30,18 @@ const Performance = memo(
   forwardRef((props, ref) => {
     return (
       <svg
-        t="1605254552337"
         className="performance"
         viewBox="0 0 1024 1024"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        p-id="2577"
         width="18"
         height="18"
-        fill="rgb(157, 164, 172)"
-      >
+        fill="rgb(157, 164, 172)">
         <defs>
           <style type="text/css"></style>
         </defs>
-        <path
-          d="M512 128c51.9 0 102.2 10.1 149.5 30.2 45.7 19.3 86.8 47 122.1 82.3s63 76.4 82.3 122.1c20 47.3 30.2 97.6 30.2 149.5S886 614.3 865.9 661.6c-19.3 45.7-47 86.8-82.3 122.1s-76.4 63-122.1 82.3c-47.3 20-97.6 30.2-149.5 30.2S409.8 886.1 362.5 866c-45.7-19.3-86.8-47-122.1-82.3s-63-76.4-82.3-122.1c-20-47.3-30.2-97.6-30.2-149.5s10.1-102.2 30.2-149.5c19.3-45.7 47-86.8 82.3-122.1s76.4-63 122.1-82.3C409.8 138.1 460.1 128 512 128m0-64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z"
-          p-id="2578"
-        ></path>
-        <path
-          d="M254 403c14.1-33.3 34.3-63.3 60-89 25.7-25.7 55.7-45.9 89-60 34.5-14.6 71.2-22 109-22s74.5 7.4 109 22c33.3 14.1 63.3 34.3 89 60l28.3-28.3C680.4 227.8 600.4 192 512 192c-176.7 0-320 143.3-320 320h40c0-37.8 7.4-74.5 22-109zM557.3 557.2c-25 25-65.5 25-90.5 0s-25-65.5 0-90.5S693 331 693 331 582.3 532.2 557.3 557.2z"
-          p-id="2579"
-        ></path>
+        <path d="M512 128c51.9 0 102.2 10.1 149.5 30.2 45.7 19.3 86.8 47 122.1 82.3s63 76.4 82.3 122.1c20 47.3 30.2 97.6 30.2 149.5S886 614.3 865.9 661.6c-19.3 45.7-47 86.8-82.3 122.1s-76.4 63-122.1 82.3c-47.3 20-97.6 30.2-149.5 30.2S409.8 886.1 362.5 866c-45.7-19.3-86.8-47-122.1-82.3s-63-76.4-82.3-122.1c-20-47.3-30.2-97.6-30.2-149.5s10.1-102.2 30.2-149.5c19.3-45.7 47-86.8 82.3-122.1s76.4-63 122.1-82.3C409.8 138.1 460.1 128 512 128m0-64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z"></path>
+        <path d="M254 403c14.1-33.3 34.3-63.3 60-89 25.7-25.7 55.7-45.9 89-60 34.5-14.6 71.2-22 109-22s74.5 7.4 109 22c33.3 14.1 63.3 34.3 89 60l28.3-28.3C680.4 227.8 600.4 192 512 192c-176.7 0-320 143.3-320 320h40c0-37.8 7.4-74.5 22-109zM557.3 557.2c-25 25-65.5 25-90.5 0s-25-65.5 0-90.5S693 331 693 331 582.3 532.2 557.3 557.2z"></path>
       </svg>
     );
   })
@@ -419,97 +409,105 @@ export default memo(
       //     // },
       //   ]);
       // } else {
-        setMenuData([
-          // {
-          //   // title: "项目列表",
-          //   // url: "/index", // 路由地址
-          //   // iconComponent: <ProjectOutlined />,
-          //   // key: "1",
-          //   // children: [
-          //   //   {
-          //   //     title: "脚本异常",
-          //   //     url: "http:xxxxx", // 路由地址
-          //   //     // iconComponent: <WarningOutlined/>,
-          //   //     key: "1-1",
-          //   //     children: [
-          //   //       // 子菜单
-          //   //     ],
-          //   //   },
-          //   //   {
-          //   //     title: "资源下载",
-          //   //     url: "http:xxxxx", // 路由地址
-          //   //     // iconComponent: <WarningOutlined/>,
-          //   //     key: "1-2",
-          //   //     children: [
-          //   //       // 子菜单
-          //   //     ],
-          //   //   },
-          //   //   {
-          //   //     title: "网络请求",
-          //   //     url: "http:xxxxx", // 路由地址
-          //   //     // iconComponent: <WarningOutlined/>,
-          //   //     key: "1-3",
-          //   //     children: [
-          //   //       // 子菜单
-          //   //     ],
-          //   //   },
-          //   // ],
-          // },
-          {
-            title: "设置",
-            url: "http:xxxxx", // 路由地址
-            iconComponent: <SettingOutlined />,
-            key: "2",
-            children: [
-              {
-                title: "个人信息",
-                url: "http:xxxxx", // 路由地址
-                // iconComponent: <HomeOutlined/>,
-                // key: "2-1",
-                children: [
-                  // 子菜单
-                ],
-              },
-              {
-                title: "角色与权限",
-                url: "http:xxxxx", // 路由地址
-                // iconComponent: <HomeOutlined/>,
-                // key: "2-1",
-                children: [
-                  // 子菜单
-                ],
-              },
-              // {
-              //   title: "资源下载",
-              //   url: "http:xxxxx", // 路由地址
-              //   iconComponent: <HomeOutlined/>,
-              //   key: "2-2",
-              //   children: [
-              //     // 子菜单
-              //   ],
-              // },
-              // {
-              //   title: "页面(URL)",
-              //   url: "http:xxxxx", // 路由地址
-              //   iconComponent: <HomeOutlined/>,
-              //   key: "2-3",
-              //   children: [
-              //     // 子菜单
-              //   ],
-              // },
-              // {
-              //   title: "页面(路由)",
-              //   url: "http:xxxxx", // 路由地址
-              //   iconComponent: <HomeOutlined/>,
-              //   key: "2-4",
-              //   children: [
-              //     // 子菜单
-              //   ],
-              // },
-            ],
-          },
-        ]);
-        setSelectedKeys("0");
+      setMenuData([
+        // {
+        //   // title: "项目列表",
+        //   // url: "/index", // 路由地址
+        //   // iconComponent: <ProjectOutlined />,
+        //   // key: "1",
+        //   // children: [
+        //   //   {
+        //   //     title: "脚本异常",
+        //   //     url: "http:xxxxx", // 路由地址
+        //   //     // iconComponent: <WarningOutlined/>,
+        //   //     key: "1-1",
+        //   //     children: [
+        //   //       // 子菜单
+        //   //     ],
+        //   //   },
+        //   //   {
+        //   //     title: "资源下载",
+        //   //     url: "http:xxxxx", // 路由地址
+        //   //     // iconComponent: <WarningOutlined/>,
+        //   //     key: "1-2",
+        //   //     children: [
+        //   //       // 子菜单
+        //   //     ],
+        //   //   },
+        //   //   {
+        //   //     title: "网络请求",
+        //   //     url: "http:xxxxx", // 路由地址
+        //   //     // iconComponent: <WarningOutlined/>,
+        //   //     key: "1-3",
+        //   //     children: [
+        //   //       // 子菜单
+        //   //     ],
+        //   //   },
+        //   // ],
+        // },
+        {
+          title: "系统设置",
+          url: "http:xxxxx", // 路由地址
+          iconComponent: <SettingOutlined />,
+          key: "1",
+          children: [
+            {
+              title: "用户设置",
+              url: "http:xxxxx", // 路由地址
+              iconComponent: <SettingOutlined />,
+              key: "2",
+              children: [
+                {
+                  title: "个人信息",
+                  url: "http:xxxxx", // 路由地址
+                  // iconComponent: <HomeOutlined/>,
+                  // key: "2-1",
+                  children: [
+                    // 子菜单
+                  ]
+                },
+                {
+                  title: "角色与权限",
+                  url: "http:xxxxx", // 路由地址
+                  // iconComponent: <HomeOutlined/>,
+                  // key: "2-1",
+                  children: [
+                    // 子菜单
+                  ]
+                }
+                // {
+                //   title: "资源下载",
+                //   url: "http:xxxxx", // 路由地址
+                //   iconComponent: <HomeOutlined/>,
+                //   key: "2-2",
+                //   children: [
+                //     // 子菜单
+                //   ],
+                // },
+                // {
+                //   title: "页面(URL)",
+                //   url: "http:xxxxx", // 路由地址
+                //   iconComponent: <HomeOutlined/>,
+                //   key: "2-3",
+                //   children: [
+                //     // 子菜单
+                //   ],
+                // },
+                // {
+                //   title: "页面(路由)",
+                //   url: "http:xxxxx", // 路由地址
+                //   iconComponent: <HomeOutlined/>,
+                //   key: "2-4",
+                //   children: [
+                //     // 子菜单
+                //   ],
+                // },
+              ]
+            }
+          ]
+        }
+      ]);
+      setSelectedKeys("0");
       // }
     };
     useEffect(() => {
@@ -522,7 +520,7 @@ export default memo(
         DesktopOutlined: <DesktopOutlined />,
         ContainerOutlined: <ContainerOutlined />,
         WarningOutlined: <WarningOutlined />,
-        PerformanceIcon: <PerformanceIcon />,
+        PerformanceIcon: <PerformanceIcon />
       };
       return (key in ionComponent && ionComponent[key]) || null;
     }, []);
@@ -559,10 +557,8 @@ export default memo(
           const { key: selectedKeys } = value;
           setSelectedKeys(selectedKeys);
         }}
-        defaultSelectedKeys={[selectedKeys]}
-      >
-        
-          {/*
+        defaultSelectedKeys={[selectedKeys]}>
+        {/*
         //   isProjectPage() ? (
         //   <Menu.Item key="-1" icon={<HomeOutlined />}>
         //     <Select
