@@ -28,7 +28,6 @@ const tailLayout = {
 const Index = (props) => {
   const { history, pushRoute, routePaths } = props;
   const [verifyCodeData, setVerifyCodeData] = useState({});
-  console.log("props122======", props);
 
   const onFinish = async (values) => {
     const {
@@ -124,8 +123,6 @@ const Index = (props) => {
             <Button
               className="submit"
               onClick={() => {
-                console.log("routePaths.Register==", routePaths.Register);
-                console.log("routePaths.Register==", routePaths.Register);
                 pushRoute(routePaths.Register);
               }}>
               注册
