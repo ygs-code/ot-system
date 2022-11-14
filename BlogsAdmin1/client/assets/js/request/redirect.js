@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/js/request/redirect.js
  */
-import { routePaths, historyPush, getHistory } from "client/router";
+import { routePaths, historyPush, getHistory, history } from "client/router";
 import token from "./token";
 
 export const codeMap = {
@@ -14,20 +14,24 @@ export const codeMap = {
   401: (errorInfo) => {
     let XHRQueue = (errorInfo && errorInfo[2] && errorInfo[2].XHRQueue) || [];
     localStorage.removeItem("token");
+
     token.clearQueue();
     //  停止剩余的请求
     for (let index = XHRQueue.length - 1; index >= 0; index--) {
       XHRQueue[index].xmlHttp && XHRQueue[index].xmlHttp.abort();
       XHRQueue.splice(index, 1);
     }
+
     //重定向到登录页面
     historyPush({
-      url: routePaths.logLn
+      history,
+      url: routePaths.LogIn
     });
   },
   415: (errorInfo) => {
-    // historyPush(
-    //   url: routePaths.logLn,
-    // });
+    historyPush({
+      history,
+      url: routePaths.LogIn
+    });
   }
 };

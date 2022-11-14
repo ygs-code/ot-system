@@ -454,7 +454,7 @@ export default memo(
             {
               title: "用户设置",
               url: "http:xxxxx", // 路由地址
-              iconComponent: <SettingOutlined />,
+              // iconComponent: <SettingOutlined />,
               key: "2",
               children: [
                 {
