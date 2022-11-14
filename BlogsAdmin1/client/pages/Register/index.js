@@ -21,7 +21,7 @@ const tailLayout = {
 };
 
 const Index = (props) => {
-  const { pushRoute, routePaths } = props;
+  const { history, pushRoute, routePaths } = props;
 
   const onFinish = async (values) => {
     const data = await register(values);
@@ -170,9 +170,10 @@ const Index = (props) => {
             <Button
               className="submit"
               onClick={() => {
-                historyPush({
-                  url: routePaths.logLn
-                });
+                pushRoute(routePaths.LogIn);
+                // historyPush({
+                //   url: routePaths.LogIn
+                // });
               }}>
               登录
             </Button>
