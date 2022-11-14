@@ -224,9 +224,9 @@ const Index = memo((props) => {
         user: { setUserInfo, login, fetchUser, getUserInfo }
       }
     } = props;
-    getUserInfo({
-      // id:8
-    });
+    // getUserInfo({
+    //   // id:8
+    // });
     return () => {};
   }, []);
   const toggle = useCallback(() => {

@@ -21,6 +21,11 @@ const addRouterApi = (Component) => {
     }
 
     pushRoute = (parameter) => {
+      if (typeof parameter === "string") {
+        parameter = {
+          path: parameter
+        };
+      }
       const { name, url, path } = parameter;
       const { history } = this.props;
       historyPush({
@@ -53,6 +58,11 @@ class AddRouterApi extends React.Component {
   }
 
   pushRoute = (parameter) => {
+    if (typeof parameter === "string") {
+      parameter = {
+        path: parameter
+      };
+    }
     const { name, url, path } = parameter;
     const { history } = this.props;
 

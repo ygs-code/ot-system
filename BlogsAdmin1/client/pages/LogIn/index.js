@@ -124,6 +124,8 @@ const Index = (props) => {
             <Button
               className="submit"
               onClick={() => {
+                console.log("routePaths.Register==", routePaths.Register);
+                console.log("routePaths.Register==", routePaths.Register);
                 pushRoute(routePaths.Register);
               }}>
               注册
