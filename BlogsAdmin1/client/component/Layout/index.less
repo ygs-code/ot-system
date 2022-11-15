@@ -1,0 +1,66 @@
+.home {
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.root-layout {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  // overflow: hidden;
+
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .trigger:hover {
+    color: 0.189ff;
+  }
+
+  .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 16px;
+  }
+
+  .menu-select {
+    width: calc(100% - 20px);
+  }
+
+  .site-layout {
+    overflow: auto;
+    width: 100%;
+    background: rgb(240, 242, 245);
+    // box-shadow: 0 2px 6px rgb(0 0 0%);
+    // min-width: 1100px;
+    .ant-layout-header {
+      // min-width: 1015px;
+    }
+    .site-layout-background {
+      background: #fff;
+    }
+
+    .children-page {
+      background: red;
+      overflow: auto;
+      height: ~"calc(100vh - 94px);
+      width: ~" calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 15px;
+      background: #fff;
+      padding: 15px;
+    }
+  }
+}
+
+.ant-layout.ant-layout-has-sider > .ant-layout,
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+  overflow-x: visible !important;
+  box-sizing: border-box;
+}

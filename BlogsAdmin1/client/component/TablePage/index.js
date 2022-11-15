@@ -15,25 +15,25 @@ import React, {
   useState,
   useCallback,
   Children,
-  PureComponent,
+  PureComponent
 } from "react";
 import { Layout, Select } from "antd";
 import Table from "client/component/Table";
-import {SearchForm} from "client/component/Form";
+import { SearchForm } from "client/component/Form";
 export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       tableData: {
-        list: [{ title: "你好" }],
+        list: [{ title: "你好" }]
       },
-      dataSource: [],
+      dataSource: []
     };
   }
   // 获取默认搜索参数
   getDefaultSearchParams = () => {
     return {
-      status: "",
+      status: ""
     };
   };
 
@@ -70,7 +70,7 @@ export default class extends PureComponent {
   getTableProps = () => {
     return {};
   };
-  
+
   renderSearch = (props = {}) => {
     return (
       <SearchForm

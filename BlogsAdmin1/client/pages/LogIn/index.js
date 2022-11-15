@@ -43,7 +43,9 @@ const Index = (props) => {
     } = data;
 
     localStorage.setItem("token", token);
+
     setUserInfo(userInfo);
+
     message.success("登录成功");
     setTimeout(() => {
       pushRoute(routePaths.home);

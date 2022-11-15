@@ -452,38 +452,38 @@ export default memo(
           key: "1",
           children: [
             {
-              title: "用户设置",
+              title: "账号权限",
               url: "http:xxxxx", // 路由地址
               // iconComponent: <SettingOutlined />,
               key: "2",
               children: [
                 {
-                  title: "个人信息",
+                  title: "账号管理",
                   url: "http:xxxxx", // 路由地址
                   // iconComponent: <HomeOutlined/>,
-                  // key: "2-1",
+                  key: "5",
                   children: [
                     // 子菜单
                   ]
                 },
                 {
-                  title: "角色与权限",
+                  title: "角色管理",
                   url: "http:xxxxx", // 路由地址
                   // iconComponent: <HomeOutlined/>,
-                  // key: "2-1",
+                  key: "3",
+                  children: [
+                    // 子菜单
+                  ]
+                },
+                {
+                  title: "权限管理",
+                  url: "http:xxxxx", // 路由地址
+                  // iconComponent: <HomeOutlined/>,
+                  key: "4",
                   children: [
                     // 子菜单
                   ]
                 }
-                // {
-                //   title: "资源下载",
-                //   url: "http:xxxxx", // 路由地址
-                //   iconComponent: <HomeOutlined/>,
-                //   key: "2-2",
-                //   children: [
-                //     // 子菜单
-                //   ],
-                // },
                 // {
                 //   title: "页面(URL)",
                 //   url: "http:xxxxx", // 路由地址
@@ -527,7 +527,6 @@ export default memo(
     const getMenu = useCallback((menuData = [], index = null) => {
       return menuData.map((item, _index) => {
         const menuKey = index == null ? _index : `${index}_${_index}`;
-        console.log("menuKey=", menuKey);
         return item.children && item.children.length ? (
           <SubMenu key={menuKey} icon={item.iconComponent} title={item.title}>
             {getMenu(item.children, menuKey)}

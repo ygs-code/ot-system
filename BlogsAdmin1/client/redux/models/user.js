@@ -17,6 +17,7 @@ export default (global) => ({
   reducers: {
     setBreadcrumb(state, { payload }) {
       console.log("payload======", payload);
+      debugger;
       return {
         ...state,
         breadcrumb: [
@@ -25,7 +26,9 @@ export default (global) => ({
         ]
       };
     },
-    setUserInfo(state, { payload }) {
+    setUserInfo(state, payload) {
+      console.log("payload======", payload);
+      debugger;
       return {
         ...state,
         userInfo: {

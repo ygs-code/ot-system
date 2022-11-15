@@ -22,12 +22,11 @@ const tailLayout = {
 
 const Index = (props) => {
   const { history, pushRoute, routePaths } = props;
-
   const onFinish = async (values) => {
     const data = await register(values);
     message.success("注册成功");
     setTimeout(() => {
-      pushRoute(routePaths.home);
+      pushRoute(routePaths.LogIn);
     }, 1500);
   };
 

@@ -14,7 +14,10 @@ const Index = (options) => {
   return (C) => {
     class A extends PureComponent {
       componentDidMount() {
-        const { dispatch: { user: { setBreadcrumb } = {} } = {} } = this.props;
+        const { dispatch: { breadcrumb: { setBreadcrumb } = {} } = {} } =
+          this.props;
+        console.log("this.props==", this.props);
+        console.log("setBreadcrumb==", breadcrumb);
         if (title) {
           document.title = title;
         }
@@ -24,7 +27,7 @@ const Index = (options) => {
         return <C {...this.props} />;
       }
     }
-    return mapRedux(["user"])(A);
+    return mapRedux()(A);
   };
 };
 

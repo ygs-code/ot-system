@@ -49,7 +49,7 @@ const mapRedux = (modelsName) => (Component) => {
 };
 
 const getPropsState = (global, modelKey, dataKey = "initState") => {
-  let initState = {};
+  let initState;
   if (
     global &&
     global.__INITIAL_STATE__ &&

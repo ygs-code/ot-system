@@ -13,7 +13,7 @@ import React, {
   useCallback,
   Children,
   PureComponent,
-  useEffect,
+  useEffect
 } from "react";
 import {
   Form,
@@ -27,7 +27,7 @@ import {
   Switch,
   Slider,
   TimePicker,
-  Transfer,
+  Transfer
 } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { CheckDataType } from "client/utils";
@@ -48,7 +48,7 @@ const ItemChild = (props) => {
     timepicker: <TimePicker {...itemChildProps}></TimePicker>,
     transfer: <Transfer {...itemChildProps}></Transfer>,
     checkbox: <Checkbox {...itemChildProps}></Checkbox>,
-    password: <Password {...itemChildProps}></Password>,
+    password: <Password {...itemChildProps}></Password>
   };
   return render
     ? render(props)
@@ -64,7 +64,7 @@ const BaseForm = (props) => {
     fields = [],
     formProps = {},
     onReady = () => {},
-    children = [],
+    children = []
   } = props;
   const [form] = Form.useForm();
 
@@ -85,30 +85,29 @@ const BaseForm = (props) => {
         form={form}
         name="basic"
         labelCol={{
-          span: 5,
+          span: 5
         }}
         wrapperCol={{
-          span: 8,
+          span: 8
         }}
         initialValues={{
-          remember: true,
+          remember: true
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        {...formProps}
-      >
-        {fields.map((item) => {
+        {...formProps}>
+        {fields.map((item, index) => {
           const { type, title, items = [] } = item;
           return type != "section" ? (
-            <Form.Item {...item}>
+            <Form.Item {...item} key={index}>
               <ItemChild {...item}></ItemChild>
             </Form.Item>
           ) : (
-            <div className="section">
+            <div className="section" key={index}>
               <div className="title">{title}</div>
-              {items.map((item) => {
+              {items.map((item, index) => {
                 return (
-                  <Form.Item {...item}>
+                  <Form.Item {...item} key={index}>
                     <ItemChild {...item}></ItemChild>
                   </Form.Item>
                 );
@@ -135,7 +134,7 @@ const SearchForm = (props) => {
     formProps = {},
     onReady = () => {},
     children = [],
-    shrinkLength,
+    shrinkLength
   } = props;
   const [form] = Form.useForm();
   const [expand, setExpand] = useState(false);
@@ -178,26 +177,24 @@ const SearchForm = (props) => {
         form={form}
         name="basic"
         labelCol={{
-          span: 10,
+          span: 10
         }}
         wrapperCol={{
-          span: 30,
+          span: 30
         }}
         initialValues={{
-          remember: true,
+          remember: true
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        {...formProps}
-      >
+        {...formProps}>
         {renderFields()}
         <div className={`buttons`}>
           <a
             style={{ fontSize: 12 }}
             onClick={() => {
               setExpand(!expand);
-            }}
-          >
+            }}>
             {expand ? (
               <>
                 <UpOutlined />
