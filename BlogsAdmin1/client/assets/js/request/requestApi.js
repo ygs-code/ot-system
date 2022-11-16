@@ -110,6 +110,9 @@ export const login = (parameter) => {
             code
             data {
               token 
+              permissionData
+              authKeys
+              roleData
               userInfo {
                   name
                   phone

@@ -55,7 +55,7 @@ const Index = (props) => {
                 if (checkUser(value)) {
                   return Promise.resolve();
                 }
-                return Promise.reject("用户名必须最少为6位，并且以字母开头");
+                return Promise.reject("用户名必须最少为4位，并且以字母开头");
               }
             })
           ]}>
