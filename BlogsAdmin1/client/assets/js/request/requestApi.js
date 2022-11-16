@@ -111,12 +111,12 @@ export const login = (parameter) => {
             data {
               token 
               authKeys
-              roleData{
+              role{
                 id 
                 name 
                 description 
               }
-              permissionData {
+              permission{
                 id 
                 name 
                 description 
