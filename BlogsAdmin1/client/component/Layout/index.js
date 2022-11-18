@@ -63,8 +63,8 @@ const Index = memo((props) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const getUser = useCallback(async () => {
-    let data = await getUserInfo({});
-    console.log("data=========", data);
+    // let data = await getUserInfo({});
+    // console.log("data=========", data);
   }, []);
 
   useEffect(() => {

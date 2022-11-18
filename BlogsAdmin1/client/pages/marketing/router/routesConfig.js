@@ -16,7 +16,7 @@ export default [
     children: [
       {
         path: "/discount-coupon/:id",
-        name: "DiscountCoupon",
+        name: "discountCoupon",
         entry: "/pages/marketing/pages/DiscountCoupon/index.js",
         level: 2,
         children: []

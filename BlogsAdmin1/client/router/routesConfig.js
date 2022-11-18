@@ -23,15 +23,15 @@ export default [
   },
 
   {
-    path: "/LogIn",
+    path: "/log-in",
     exact: true,
-    name: "LogIn",
+    name: "logIn",
     entry: "/pages/LogIn/index.js",
     level: 1
   },
   {
-    path: "/Register",
-    name: "Register",
+    path: "/register",
+    name: "register",
     entry: "/pages/Register/index.js",
     level: 1
   }

@@ -1,8 +1,11 @@
 export default {
-  DiscountCoupon: "/marketing/discount-coupon/:id",
+  discountCoupon: "/marketing/discount-coupon/:id",
   marketing: "/marketing",
+  accountManagementDetails: "/system/account-management/details/:action/:id?",
+  accountManagement: "/system/account-management",
+  system: "/system",
   home: "/",
   user: "/user",
-  LogIn: "/LogIn",
-  Register: "/Register"
+  logIn: "/log-in",
+  register: "/register"
 };

@@ -49,9 +49,20 @@ const Performance = memo(
 const PerformanceIcon = (props) => <Icon component={Performance} />;
 export default memo(
   forwardRef((props, ref) => {
-    const { match: { path, params: { id } = {} } = {} } = props;
+    const {
+      match: { path, params: { id } = {} } = {},
+
+      routePaths = {},
+      pushRoute
+    } = props;
 
     const [selectedKeys, setSelectedKeys] = useState("-1");
+
+    const goTo = useCallback((menu) => {
+      console.log("props====", props);
+      console.log("menu=====", menu);
+      pushRoute(menu.url);
+    }, []);
     /*
     menuData=[
       {name:'菜单名称',
@@ -459,7 +470,7 @@ export default memo(
               children: [
                 {
                   title: "账号管理",
-                  url: "http:xxxxx", // 路由地址
+                  url: routePaths.accountManagement, // 路由地址
                   // iconComponent: <HomeOutlined/>,
                   key: "5",
                   children: [
@@ -532,7 +543,12 @@ export default memo(
             {getMenu(item.children, menuKey)}
           </SubMenu>
         ) : (
-          <Menu.Item key={menuKey} icon={item.iconComponent}>
+          <Menu.Item
+            key={menuKey}
+            icon={item.iconComponent}
+            onClick={() => {
+              goTo(item);
+            }}>
             {item.title}
           </Menu.Item>
         );

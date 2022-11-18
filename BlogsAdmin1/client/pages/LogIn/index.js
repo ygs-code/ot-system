@@ -125,7 +125,7 @@ const Index = (props) => {
             <Button
               className="submit"
               onClick={() => {
-                pushRoute(routePaths.Register);
+                pushRoute(routePaths.register);
               }}>
               注册
             </Button>

@@ -23,10 +23,13 @@ const tailLayout = {
 const Index = (props) => {
   const { history, pushRoute, routePaths } = props;
   const onFinish = async (values) => {
-    const data = await register(values);
+    const data = await register({
+      type: 1,
+      ...values
+    });
     message.success("注册成功");
     setTimeout(() => {
-      pushRoute(routePaths.LogIn);
+      pushRoute(routePaths.logIn);
     }, 1500);
   };
 
@@ -169,7 +172,7 @@ const Index = (props) => {
             <Button
               className="submit"
               onClick={() => {
-                pushRoute(routePaths.LogIn);
+                pushRoute(routePaths.logIn);
                 // historyPush({
                 //   url: routePaths.LogIn
                 // });

@@ -97,7 +97,6 @@ export const register = (parameter) => {
 
 // 登录
 export const login = (parameter) => {
-  console.log("parameter=====", parameter);
   const { password, name, verificationCode } = parameter;
   return query(
     "login",
@@ -105,7 +104,7 @@ export const login = (parameter) => {
         login(
           password:"${password}",
           name:"${name}",
-          verificationCode:"${verificationCode}",
+          verificationCode:"${verificationCode}"
           ){
             code
             data {

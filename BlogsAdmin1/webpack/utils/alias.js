@@ -5,4 +5,4 @@ module.exports = {
   "@": path.join(process.cwd()),
   client: path.join(process.cwd(), "/client"),
   server: path.join(process.cwd(), "/server")
-};
+}

@@ -454,7 +454,6 @@ export const GraphqlClient = new Graphql({
     // },
     //响应拦截
     response: (response) => {
-      console.log("response=", response);
       return Graphql.interceptors.response(response);
     }
   },
