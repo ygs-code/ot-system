@@ -54,7 +54,9 @@ class Index extends TablePage {
       status: ""
     };
   };
-
+  componentDidMount(){
+    debugger
+  }
   // 定义搜索栏字段
   getSearchFields = () => {
     return [

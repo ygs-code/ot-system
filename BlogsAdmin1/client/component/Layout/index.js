@@ -76,19 +76,21 @@ const Index = memo((props) => {
     setCollapsed(!collapsed);
   }, [collapsed]);
   return (
-    <Layout className="root-layout">
-      {/*左侧菜单*/}
-      <Sider
-        width="250"
-        className="sider"
-        trigger={null}
-        collapsible
-        collapsed={collapsed}>
-        {/*菜单*/}
-        <Menu collapsed={collapsed} {...props} />
-      </Sider>
+    <div className="root-layout">
+      <div className="sider-layout">
+        {/*左侧菜单*/}
+        <Sider
+          width="250"
+          className="sider"
+          trigger={null}
+          collapsible
+          collapsed={collapsed}>
+          {/*菜单*/}
+          <Menu collapsed={collapsed} {...props} />
+        </Sider>
+      </div>
 
-      <Layout className="site-layout">
+      <div className="site-layout">
         {/*顶部*/}
         <Header
           className="site-layout"
@@ -111,8 +113,8 @@ const Index = memo((props) => {
             return <>{child}</>;
           })}
         </div>
-      </Layout>
-    </Layout>
+      </div>
+    </div>
   );
 });
 

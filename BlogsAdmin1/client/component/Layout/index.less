@@ -7,8 +7,54 @@
 
 .root-layout {
   height: 100vh;
+  width: 100vw;
   padding: 0;
   margin: 0;
+  position: relative;
+
+  .sider-layout {
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+
+    .ant-layout-sider{
+        height: 100vh;
+    }
+  }
+  .site-layout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: auto;
+    width: calc(~"100% - 250px");
+    background: rgb(240, 242, 245);
+
+    // box-shadow: 0 2px 6px rgb(0 0 0%);
+    // min-width: 1100px;
+    .ant-layout-header {
+      // min-width: 1015px;
+    }
+    .site-layout-background {
+      background: #fff;
+    }
+
+    .children-page {
+      background: red;
+      overflow: auto;
+      height: calc(~"100vh - 94px");
+      width: calc(~"100% - 30px");
+      box-sizing: border-box;
+      margin: 15px;
+      background: #fff;
+      padding: 15px;
+      -moz-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*firefox*/
+      -webkit-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*webkit*/
+      box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*opera或ie9*/
+    }
+  }
+
   // overflow: hidden;
 
   .trigger {
@@ -31,34 +77,6 @@
 
   .menu-select {
     width: calc(100% - 20px);
-  }
-
-  .site-layout {
-    overflow: auto;
-    width: 100%;
-    background: rgb(240, 242, 245);
-    // box-shadow: 0 2px 6px rgb(0 0 0%);
-    // min-width: 1100px;
-    .ant-layout-header {
-      // min-width: 1015px;
-    }
-    .site-layout-background {
-      background: #fff;
-    }
-
-    .children-page {
-      background: red;
-      overflow: auto;
-      height: ~"calc(100vh - 94px);
-      width: ~" calc(100% - 30px);
-      box-sizing: border-box;
-      margin: 15px;
-      background: #fff;
-      padding: 15px;
-      -moz-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*firefox*/
-      -webkit-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*webkit*/
-      box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*opera或ie9*/
-    }
   }
 }
 

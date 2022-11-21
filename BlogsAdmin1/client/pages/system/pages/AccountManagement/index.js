@@ -48,6 +48,12 @@ class Index extends TablePage {
       dataSource: []
     };
   }
+
+  componentDidMount() {
+    console.log("AccountManagement");
+    debugger;
+  }
+
   // 获取默认搜索参数
   getDefaultSearchParams = () => {
     return {

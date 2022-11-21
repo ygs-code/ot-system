@@ -35,6 +35,7 @@ import Header from "client/component/Header";
 import Store, { mapRedux } from "client/redux";
 import SetBreadcrumbAndTitle from "client/component/SetBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
+import { set } from "core-js/core/dict";
 
 console.log("layout=======", layout);
 
@@ -48,6 +49,20 @@ class Index extends TablePage {
       dataSource: []
     };
   }
+  componentDidMount() {
+    const {
+      pushRoute,
+      routePaths: { accountManagement }
+    } = this.props;
+    console.log("this.props=", this.props);
+    console.log("home");
+
+    debugger;
+    setTimeout(() => {
+      pushRoute(accountManagement);
+    }, 3000);
+  }
+
   // 获取默认搜索参数
   getDefaultSearchParams = () => {
     return {
