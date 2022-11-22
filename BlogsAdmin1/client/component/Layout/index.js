@@ -69,12 +69,18 @@ const Index = memo((props) => {
 
   useEffect(() => {
     const { dispatch: { user: { login, fetchUser } = {} } = {} } = props;
+    const adminCollapsed = sessionStorage.getItem("adminCollapsed");
+
+    setCollapsed(adminCollapsed == 1 ? true : false);
     getUser();
+
     return () => {};
   }, []);
   const toggle = useCallback(() => {
     setCollapsed(!collapsed);
+    sessionStorage.setItem("adminCollapsed", !collapsed ? "1" : "0");
   }, [collapsed]);
+
   return (
     <Layout className="root-layout">
       {/*左侧菜单*/}

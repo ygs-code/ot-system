@@ -63,29 +63,20 @@ class ClientRouter {
       "utf-8"
     );
 
-    let isMatchRoute = this.getMatch(
+    let isMatchRoutes = this.getMatch(
       routesComponent,
       ctx.req._parsedUrl.pathname
     );
 
-    if (isMatchRoute) {
-      const { Component } = isMatchRoute;
-
-      const syncComponent = await Component();
-
+    if (isMatchRoutes.length) {
       // 路由注入到react中
       let history = getMemoryHistory({ initialEntries: [ctx.req.url] });
       history = {
-        ...history,
-        ...isMatchRoute
+        ...history
+        // ...isMatchRoute
       };
+
       const { isExact, path, url, params } = history;
-
-      delete history.Component;
-      delete history.syncComponent;
-      const { WrappedComponent: { getInitPropsState, getMetaProps } = {} } =
-        syncComponent;
-
       let props = {
         ...history,
         dispatch,
@@ -98,31 +89,78 @@ class ClientRouter {
         }
       };
 
+      let syncRouteComponent = [];
+      let metaProps = {};
+      for (let item of isMatchRoutes) {
+        const { Component } = item;
+
+        const syncComponent = await Component();
+        const { WrappedComponent: { getInitPropsState, getMetaProps } = {} } =
+          syncComponent;
+
+        metaProps = getMetaProps
+          ? {
+              ...metaProps,
+              ...getMetaProps()
+            }
+          : metaProps;
+
+        if (getInitPropsState) {
+          // 拉去请求或者查询sql等操作
+          await getInitPropsState(
+            // 注入props
+            props
+          );
+        }
+
+        syncRouteComponent.push({
+          ...item,
+          Component: syncComponent
+        });
+      }
+
+      // syncRouteComponent
+      //     // 同步路由配置
+      //     routesComponent: [
+      //       {
+      //         ...isMatchRoute,
+      //         Component: syncComponent
+      //       }
+      //     ]
+
+      // const { Component } = isMatchRoutes;
+
+      // const syncComponent = await Component();
+
+      // delete history.Component;
+      // delete history.syncComponent;
+      // const { WrappedComponent: { getInitPropsState, getMetaProps } = {} } =
+      //   syncComponent;
+
       // await getBaseInitState(dispatch, getState(), props);
 
-      if (getInitPropsState) {
-        // 拉去请求或者查询sql等操作
-        await getInitPropsState(
-          // 注入props
-          props
-        );
-      }
+      // if (getInitPropsState) {
+      //   // 拉去请求或者查询sql等操作
+      //   await getInitPropsState(
+      //     // 注入props
+      //     props
+      //   );
+      // }
 
       // 渲染html
       let renderedHtml = await this.reactToHtml({
-        // ctx,
         store,
         template,
-        isMatchRoute,
         history,
-        syncComponent
+        isMatchRoutes,
+        routesComponent: syncRouteComponent
       });
 
       renderedHtml = ejs.render(renderedHtml, {
         htmlWebpackPlugin: {
           options: {
             ...stringToObject(htmlWebpackPluginOptions),
-            ...(getMetaProps ? getMetaProps() : {})
+            ...metaProps
           }
         }
       });
@@ -141,7 +179,7 @@ class ClientRouter {
     return path.replace(reg, "/");
   }
   // 创建标签
-  async createTags({ isMatchRoute }) {
+  async createTags({ isMatchRoutes }) {
     let { assetsManifest } = this.options;
 
     if (assetsManifest) {
@@ -153,9 +191,12 @@ class ClientRouter {
       } catch (error) {}
     }
 
+    
     const modulesToBeLoaded = [
       ...assetsManifest.entrypoints,
-      "client" + isMatchRoute.entry
+      ...isMatchRoutes.map((item) => {
+        return "client" + item.entry;
+      })
     ];
 
     let bundles = getBundles(assetsManifest, modulesToBeLoaded);
@@ -201,47 +242,48 @@ class ClientRouter {
   }
   // 获取路由
   getMatch(routesArray, url) {
+    let routers = [];
     for (let router of routesArray) {
       let $router = matchPath(url, {
         path: router.path,
         exact: router.exact
       });
 
+   
+
       if ($router) {
-        return {
+        routers.push({
           ...router,
           ...$router
-        };
+        });
       }
     }
+
+    return routers;
   }
   // 创建react转换成HTMl
   async reactToHtml({
     // ctx,
     store,
     template,
-    isMatchRoute,
-    syncComponent,
-    history
+    isMatchRoutes,
+    // syncComponent,
+    history,
+    routesComponent
   }) {
     let initState = store.getState();
-
+   
     let rootString = renderToString(
       <App
         {...{
           store,
           history,
           // 同步路由配置
-          routesComponent: [
-            {
-              ...isMatchRoute,
-              Component: syncComponent
-            }
-          ]
+          routesComponent
         }}
       />
     );
-    let { scripts, styles } = await this.createTags({ isMatchRoute });
+    let { scripts, styles } = await this.createTags({ isMatchRoutes });
 
     const helmet = Helmet.renderStatic();
     let renderedHtml = this.assemblyHTML(template, {
@@ -255,6 +297,7 @@ class ClientRouter {
       styles,
       initState
     });
+    console.log('renderedHtml===',renderedHtml)
     return renderedHtml;
   }
 }

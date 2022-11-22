@@ -26,7 +26,6 @@ const renderApp = () => {
   if (isSsr && !module.hot) {
     hydrateRoot(
       document.getElementById("root"),
-
       <App
         {...{
           history,

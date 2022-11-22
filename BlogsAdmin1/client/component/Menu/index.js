@@ -51,12 +51,13 @@ export default memo(
   forwardRef((props, ref) => {
     const {
       match: { path, params: { id } = {} } = {},
-
       routePaths = {},
       pushRoute
     } = props;
+    console.log("Menu props=====", props);
 
     const [selectedKeys, setSelectedKeys] = useState("-1");
+    const [openKeys, setOpenKeys] = useState([]);
 
     const goTo = useCallback((menu) => {
       pushRoute(menu.url);
@@ -268,7 +269,14 @@ export default memo(
       setSelectedKeys("0");
     };
     useEffect(() => {
-      // getMenuData();
+      const menuSelectedKeys =
+        sessionStorage.getItem("adminMenuSelectedKeys") || "";
+      let menuOpenKeys = sessionStorage.getItem("adminMenuOpenKeys") || "[]";
+      menuOpenKeys = JSON.parse(menuOpenKeys);
+
+      setSelectedKeys(menuSelectedKeys);
+      setOpenKeys(menuOpenKeys);
+      // defaultOpenKeys
     }, [id, path]);
 
     const mapIconComponent = useCallback((key) => {
@@ -314,9 +322,17 @@ export default memo(
         theme="dark"
         mode="inline"
         selectedKeys={[selectedKeys]}
+        openKeys={openKeys}
+        onOpenChange={(keyPath) => {
+          sessionStorage.setItem("adminMenuOpenKeys", JSON.stringify(keyPath));
+          setOpenKeys(keyPath);
+        }}
         onSelect={(value) => {
-          const { key: selectedKeys } = value;
+          const { key: selectedKeys, keyPath } = value;
+          sessionStorage.setItem("adminMenuSelectedKeys", selectedKeys);
+          sessionStorage.setItem("adminMenuOpenKeys", JSON.stringify(keyPath));
           setSelectedKeys(selectedKeys);
+          setOpenKeys(keyPath);
         }}
         defaultSelectedKeys={[selectedKeys]}>
         {/*

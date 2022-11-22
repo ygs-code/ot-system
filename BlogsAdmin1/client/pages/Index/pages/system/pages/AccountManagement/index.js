@@ -49,6 +49,7 @@ class Index extends TablePage {
 
   componentDidMount() {
     console.log("AccountManagement");
+    // console.log('this.props=======',this.props)
   }
 
   // 获取默认搜索参数
