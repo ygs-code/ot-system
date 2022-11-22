@@ -16,12 +16,12 @@ const Index = (options) => {
       componentDidMount() {
         const { dispatch: { breadcrumb: { setBreadcrumb } = {} } = {} } =
           this.props;
-        console.log("this.props==", this.props);
-        console.log("setBreadcrumb==", breadcrumb);
         if (title) {
           document.title = title;
         }
-        breadcrumb && setBreadcrumb(breadcrumb);
+        if (breadcrumb) {
+          setBreadcrumb(breadcrumb);
+        }
       }
       render() {
         return <C {...this.props} />;

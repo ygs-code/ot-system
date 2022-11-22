@@ -36,8 +36,6 @@ import Store, { mapRedux } from "client/redux";
 import SetBreadcrumbAndTitle from "client/component/SetBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
 
-console.log("layout=======", layout);
-
 class Index extends TablePage {
   constructor(props) {
     super(props);
@@ -48,15 +46,18 @@ class Index extends TablePage {
       dataSource: []
     };
   }
+
+  componentDidMount() {
+    console.log("AccountManagement");
+  }
+
   // 获取默认搜索参数
   getDefaultSearchParams = () => {
     return {
       status: ""
     };
   };
-  componentDidMount(){
-    debugger
-  }
+
   // 定义搜索栏字段
   getSearchFields = () => {
     return [
@@ -220,13 +221,13 @@ class Index extends TablePage {
   }
 }
 
-export default mapRedux(["user"])(
+export default mapRedux()(
   // 权限控制
   SetBreadcrumbAndTitle({
     //设置面包屑和标题
     breadcrumb: [
       {
-        label: "主页"
+        label: "账号管理"
         // href: "http://localhost:3000/index",
         // path: "xxxx",
       },
@@ -244,5 +245,5 @@ export default mapRedux(["user"])(
       // },
     ],
     title: "主页"
-  })(addRouterApi(layout(Index)))
+  })(addRouterApi(Index))
 );

@@ -8,7 +8,6 @@ import {
 } from "@ant-design/icons";
 import { connect } from "react-redux";
 import "./index.less";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
 import React, {
   Suspense,
   lazy,
@@ -35,8 +34,7 @@ import Header from "client/component/Header";
 import Store, { mapRedux } from "client/redux";
 import SetBreadcrumbAndTitle from "client/component/SetBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
-
-console.log("layout=======", layout);
+import { set } from "core-js/core/dict";
 
 class Index extends TablePage {
   constructor(props) {
@@ -48,10 +46,12 @@ class Index extends TablePage {
       dataSource: []
     };
   }
-
   componentDidMount() {
-    console.log("AccountManagement");
-    debugger;
+    const {
+      pushRoute,
+      routePaths: { accountManagement }
+    } = this.props;
+    console.log("home");
   }
 
   // 获取默认搜索参数
@@ -224,7 +224,7 @@ class Index extends TablePage {
   }
 }
 
-export default mapRedux(["user"])(
+export default mapRedux()(
   // 权限控制
   SetBreadcrumbAndTitle({
     //设置面包屑和标题
@@ -248,5 +248,5 @@ export default mapRedux(["user"])(
       // },
     ],
     title: "主页"
-  })(addRouterApi(layout(Index)))
+  })(addRouterApi(Index))
 );

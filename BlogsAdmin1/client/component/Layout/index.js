@@ -48,7 +48,7 @@ const Index = memo((props) => {
     children,
     history: { push }
   } = props;
-  console.log("props========", props);
+
   // useEffect(() => {
   //   // 登录拦截
   //   if (!token.get()) {
@@ -76,24 +76,21 @@ const Index = memo((props) => {
     setCollapsed(!collapsed);
   }, [collapsed]);
   return (
-    <div className="root-layout">
-      <div className="sider-layout">
-        {/*左侧菜单*/}
-        <Sider
-          width="250"
-          className="sider"
-          trigger={null}
-          collapsible
-          collapsed={collapsed}>
-          {/*菜单*/}
-          <Menu collapsed={collapsed} {...props} />
-        </Sider>
-      </div>
+    <Layout className="root-layout">
+      {/*左侧菜单*/}
+      <Sider
+        width="250"
+        className="sider"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}>
+        {/*菜单*/}
+        <Menu collapsed={collapsed} {...props} />
+      </Sider>
 
-      <div className="site-layout">
+      <Layout className="site-layout">
         {/*顶部*/}
         <Header
-          className="site-layout"
           // avatar="头像地址"
           nickname={name}
           areaCode={name}
@@ -113,8 +110,8 @@ const Index = memo((props) => {
             return <>{child}</>;
           })}
         </div>
-      </div>
-    </div>
+      </Layout>
+    </Layout>
   );
 });
 

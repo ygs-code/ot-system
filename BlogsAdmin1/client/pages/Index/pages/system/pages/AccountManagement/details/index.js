@@ -35,9 +35,8 @@ import Header from "client/component/Header";
 import Store, { mapRedux } from "client/redux";
 import SetBreadcrumbAndTitle from "client/component/SetBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
-import { set } from "core-js/core/dict";
 
-console.log("layout=======", layout);
+
 
 class Index extends TablePage {
   constructor(props) {
@@ -49,27 +48,15 @@ class Index extends TablePage {
       dataSource: []
     };
   }
-  componentDidMount() {
-    const {
-      pushRoute,
-      routePaths: { accountManagement }
-    } = this.props;
-    console.log("this.props=", this.props);
-    console.log("home");
-
-    debugger;
-    setTimeout(() => {
-      pushRoute(accountManagement);
-    }, 3000);
-  }
-
   // 获取默认搜索参数
   getDefaultSearchParams = () => {
     return {
       status: ""
     };
   };
-
+  componentDidMount(){
+    debugger
+  }
   // 定义搜索栏字段
   getSearchFields = () => {
     return [
@@ -233,29 +220,29 @@ class Index extends TablePage {
   }
 }
 
-export default mapRedux(["user"])(
+export default mapRedux()(
   // 权限控制
   SetBreadcrumbAndTitle({
     //设置面包屑和标题
-    breadcrumb: [
-      {
-        label: "主页"
-        // href: "http://localhost:3000/index",
-        // path: "xxxx",
-      },
-      {
-        label: "菜单2",
-        // href: "http://localhost:3000/index",
-        path: "/",
-        component: ""
-      }
-      // {
-      //   label: "菜单3",
-      //   // href: "http://localhost:3000/index",
-      //   // path: "/",
-      //   component: "",
-      // },
-    ],
-    title: "主页"
+    // breadcrumb: [
+    //   {
+    //     label: "角色管理" 
+    //     // href: "http://localhost:3000/index",
+    //     // path: "xxxx",
+    //   },
+    //   {
+    //     label: "菜单2",
+    //     // href: "http://localhost:3000/index",
+    //     path: "/",
+    //     component: ""
+    //   }
+    //   // {
+    //   //   label: "菜单3",
+    //   //   // href: "http://localhost:3000/index",
+    //   //   // path: "/",
+    //   //   component: "",
+    //   // },
+    // ],
+    // title: "主页"
   })(addRouterApi(layout(Index)))
 );

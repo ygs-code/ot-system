@@ -34,10 +34,11 @@ export default memo(
 
     return (
       <Breadcrumb className="breadcrumb">
-        {data.map((item) => {
+        {data.map((item, index) => {
           const { label, href, path, component } = item;
           return href || path ? (
             <Item
+              key={index}
               className="has-link"
               href={href || null}
               onClick={() => {
@@ -47,7 +48,7 @@ export default memo(
               {label ? label : null}
             </Item>
           ) : (
-            <Item>
+            <Item key={index}>
               {component ? component : null}
               {label ? label : null}
             </Item>

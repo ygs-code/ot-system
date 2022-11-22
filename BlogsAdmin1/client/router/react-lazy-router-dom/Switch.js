@@ -93,7 +93,7 @@ class Switch extends Component {
   getComponent = () => {
     const { AsynComponent, locationKey, match } = this.state;
     let { children } = this.props;
-    let { history = {}, location = {} } = this.context;
+    let { history = {}, location = {}, routesComponent = [] } = this.context;
     let { key } = location;
 
     if (!Object.keys(this.context).length) {
@@ -115,6 +115,7 @@ class Switch extends Component {
             history={history}
             location={location}
             exact={match.isExact}
+            routesComponent={routesComponent}
           />
         </MatchContext.Provider>
       );
@@ -122,6 +123,7 @@ class Switch extends Component {
 
     var newMatch = null;
     let SyncComponent = null;
+
     Children.forEach(children, (el) => {
       if (newMatch === null) {
         let {
@@ -142,6 +144,7 @@ class Switch extends Component {
           strict: strict,
           sensitive: sensitive
         });
+
         if (newMatch) {
           SyncComponent = this.getSyncComponent(component, (AsynComponent) => {
             this.setState({
@@ -174,6 +177,7 @@ class Switch extends Component {
           history={history}
           location={location}
           exact={newMatch?.isExact}
+          routesComponent={routesComponent}
         />
       </MatchContext.Provider>
     ) : (
@@ -188,6 +192,7 @@ class Switch extends Component {
           history={history}
           location={location}
           exact={newMatch?.isExact}
+          routesComponent={routesComponent}
         />
       </MatchContext.Provider>
     );

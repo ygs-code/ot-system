@@ -65,6 +65,6 @@ export const CheckPageAuth = (authKey) => {
         );
       }
     }
-    return mapRedux("user")(Auth);
+    return mapRedux()(Auth);
   };
 };

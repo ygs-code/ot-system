@@ -75,7 +75,8 @@ class Router extends Component {
     };
   };
   render() {
-    const { children, staticContext, loading, history } = this.props;
+    const { children, staticContext, loading, history, routesComponent } =
+      this.props;
     const { location } = this.state;
     /* eslint-disable   */
     return createElement(RouterContext.Provider, {
@@ -83,7 +84,8 @@ class Router extends Component {
         history,
         location,
         staticContext,
-        loading
+        loading,
+        routesComponent
       },
       children: children ? Children.only(children) : null
     });
@@ -94,6 +96,9 @@ class Router extends Component {
 Router.propTypes = {
   history: PropTypes.object.isRequired,
   staticContext: PropTypes.object,
+  /* eslint-disable   */
+  routesComponent: PropTypes.array,
+  /* eslint-enable   */
   loading: function (props, propName, componentName) {
     if (!props[propName]) {
       return new Error(

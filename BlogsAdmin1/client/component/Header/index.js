@@ -27,7 +27,7 @@ export default memo(
       onClick = () => {},
       breadcrumb
     } = props;
-    console.log(" Header props===", props);
+
     const getMenu = useCallback(() => {
       return (
         <Menu className="dropdown-box">

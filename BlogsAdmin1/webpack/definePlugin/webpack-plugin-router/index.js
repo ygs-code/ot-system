@@ -68,15 +68,21 @@ class WebpackPluginRouter {
         code.compilationErrors.push(errorMessage);
       }
 
-      if (cachePaths.has(path)) {
+
+      if (
+        cachePaths.has(path) &&
+        !(name[0] === "~" || cachePaths.get(path).name[0] === "~")
+      ) {
+        console.log("cachePaths===", cachePaths);
+        console.log("cachePaths.get(path)===", cachePaths.get(path));
         const { routesConfigPath: cacheRoutesConfigPath } =
           cachePaths.get(path);
         errorMessage = `[webpack-plugin-router]
- 路由path: ${path} 命名重名冲突，请重新修改 路由path: ${path} 
-   in ${cacheRoutesConfigPath}
-   in ${routesConfigPath}  
- ✖ 1 problem (1 error, 0 warnings)                     
-`;
+       路由path: ${path} 命名重名冲突，请重新修改 路由path: ${path}
+         in ${cacheRoutesConfigPath}
+         in ${routesConfigPath}
+       ✖ 1 problem (1 error, 0 warnings)
+      `;
         if (
           compilation &&
           compilation.errors &&
@@ -140,7 +146,10 @@ import ${this.firstToUpper(name)} from "client${entry}"`;
                      routesConfigPath:"${routesConfigPath}",
                    },`;
 
-      code.routePaths += `
+      code.routePaths +=
+        name[0] === "~"
+          ? ""
+          : `
   ${name}:"${path}",`;
     }
     return code;
@@ -253,7 +262,6 @@ export default routesComponentConfig;
       let routesConfigs = [];
       readFile(entry, (value) => {
         const { path, filename } = value;
-        watch.includes();
         if (watch.includes(filename)) {
           const content = require(path).default;
           routesConfigs.push({

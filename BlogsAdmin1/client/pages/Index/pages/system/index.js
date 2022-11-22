@@ -9,7 +9,7 @@
 import React from "react";
 
 const Index = () => {
-  return <div className="user">营销菜单页面</div>;
+  return <div className="user">系统菜单页面</div>;
 };
 
 export default Index;

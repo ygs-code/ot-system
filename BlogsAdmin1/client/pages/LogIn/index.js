@@ -136,4 +136,4 @@ const Index = (props) => {
   );
 };
 
-export default mapRedux(["user"])(addRouterApi(Index));
+export default mapRedux()(addRouterApi(Index));

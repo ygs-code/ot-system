@@ -34,7 +34,11 @@ class Index extends Component {
     return (
       <ConfigProvider locale={zhCN}>
         <Provider store={store}>
-          <Routers history={history} routesComponent={routesComponent} />
+          <Routers
+            level={1}
+            history={history}
+            routesComponent={routesComponent}
+          />
         </Provider>
       </ConfigProvider>
     );

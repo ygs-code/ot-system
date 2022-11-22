@@ -10,18 +10,11 @@
 export default [
   {
     path: "/",
-    exact: true,
-    name: "home",
-    entry: "/pages/Home/index.js",
+    exact: false,
+    name: "index",
+    entry: "/pages/Index/index.js",
     level: 1
   },
-  {
-    path: "/user",
-    name: "user",
-    entry: "/pages/User/index.js",
-    level: 1
-  },
-
   {
     path: "/log-in",
     exact: true,

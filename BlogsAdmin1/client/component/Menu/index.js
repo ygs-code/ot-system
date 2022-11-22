@@ -59,8 +59,6 @@ export default memo(
     const [selectedKeys, setSelectedKeys] = useState("-1");
 
     const goTo = useCallback((menu) => {
-      console.log("props====", props);
-      console.log("menu=====", menu);
       pushRoute(menu.url);
     }, []);
 
