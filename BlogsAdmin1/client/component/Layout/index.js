@@ -1,11 +1,11 @@
 import "./index.less";
 
-// import { getUserInfo } from "client/assets/js/request";
 import {
   Layout
   //  Menu,
   // Select
 } from "antd";
+import { getUserInfo } from "client/assets/js/request";
 import Header from "client/component/Header";
 import Menu from "client/component/Menu";
 import { mapRedux } from "client/redux";
@@ -38,8 +38,8 @@ const Index = memo((props) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const getUser = useCallback(async () => {
-    // let data = await getUserInfo({});
-    // console.log("data=========", data);
+    let data = await getUserInfo({});
+    console.log("data=========", data);
   }, []);
 
   useEffect(() => {

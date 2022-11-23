@@ -185,14 +185,29 @@ export const getUserInfo = (parameter = {}) => {
       query{
           getUserInfo(id: "${id}") {
             code
-            message
             data {
-              name
-              phone
-              token
-              id
+              token 
+              authKeys
+              role{
+                id 
+                name 
+                description 
+              }
+              permission{
+                id 
+                name 
+                description 
+                authKey 
+                parentAuthKey 
+              }
+              userInfo {
+                  name
+                  phone
+                  id
+              } 
             }
-          }
+            message
+          } 
       }
     `,
     {},

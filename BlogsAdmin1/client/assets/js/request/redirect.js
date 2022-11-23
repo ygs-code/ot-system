@@ -22,17 +22,17 @@ export const codeMap = {
       XHRQueue[index].xmlHttp && XHRQueue[index].xmlHttp.abort();
       XHRQueue.splice(index, 1);
     }
-
+    console.log("routePaths==", routePaths);
     //重定向到登录页面
     historyPush({
       history,
-      url: routePaths.LogIn
+      url: routePaths.logIn
     });
   },
   415: () => {
     historyPush({
       history,
-      url: routePaths.LogIn
+      url: routePaths.logIn
     });
   }
 };

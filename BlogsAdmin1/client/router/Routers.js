@@ -35,8 +35,12 @@ const Routers = (props) => {
           .filter((item) => {
             return item.level === level;
           })
+          .sort((a, b) => {
+            return b.path.length - a.path.length;
+          })
           .map((route) => {
             let { path, exact = true, Component } = route;
+
             return (
               <Route
                 key={path}

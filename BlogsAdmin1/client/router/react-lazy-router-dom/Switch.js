@@ -104,7 +104,6 @@ class Switch extends Component {
     }
 
     if (key === locationKey) {
-      console.log("match11==", match);
       return (
         <MatchContext.Provider
           value={{
@@ -148,7 +147,6 @@ class Switch extends Component {
         });
 
         if (newMatch) {
-          console.log("newMatch=====", newMatch);
           SyncComponent = this.getSyncComponent(component, (AsynComponent) => {
             this.setState({
               isSync: false,
