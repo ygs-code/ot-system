@@ -6,7 +6,8 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/js/request/redirect.js
  */
-import { routePaths, historyPush, history } from "client/router";
+import { history, historyPush, routePaths } from "client/router";
+
 import token from "./token";
 
 export const codeMap = {

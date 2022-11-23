@@ -1,11 +1,11 @@
+import PropTypes from "prop-types";
 import {
-  createContext,
+  Children,
   Component,
-  createElement,
-  Children
+  createContext,
+  createElement
   // isValidElement
 } from "react";
-import PropTypes from "prop-types";
 var createNamedContext = function createNamedContext(name) {
   var context = createContext();
   context.displayName = name;
@@ -115,4 +115,4 @@ Router.propTypes = {
   }
 };
 
-export { Router, RouterContext as __RouterContext };
+export { RouterContext as __RouterContext, Router };

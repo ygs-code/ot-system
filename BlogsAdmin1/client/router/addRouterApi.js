@@ -6,11 +6,12 @@
  * @FilePath: /react-loading-ssr/client/router/addRouterApi.js
  * @Description:
  */
-import React from "react";
-import hoistStatics from "hoist-non-react-statics";
 import { withRouter } from "client/router/react-lazy-router-dom";
-import routePaths from "./routePaths";
+import hoistStatics from "hoist-non-react-statics";
+import React from "react";
+
 import { historyPush } from "./historyPush";
+import routePaths from "./routePaths";
 
 const addRouterApi = (Component) => {
   const displayName =

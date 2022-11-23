@@ -1,15 +1,15 @@
 import "./index.less";
-import React from "react";
-import { addRouterApi } from "client/router";
+
 import {
   // Layout,
   //  Menu,
   Input
 } from "antd";
-
-import { mapRedux } from "client/redux";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
+import { mapRedux } from "client/redux";
+import { addRouterApi } from "client/router";
+import React from "react";
 
 class Index extends TablePage {
   constructor(props) {

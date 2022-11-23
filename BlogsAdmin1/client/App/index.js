@@ -6,16 +6,17 @@
  * @FilePath: /react-ssr-lazy-loading/client/App/App.js
  * @Description:
  */
-import React, { Component } from "react";
-import { Provider } from "react-redux";
-import Routers from "client/router";
-import { ConfigProvider } from "antd";
-// 由于 antd 组件的默认文案是英文，所以需要修改为中文
-import zhCN from "antd/es/locale/zh_CN";
 import "antd/dist/antd.css";
 import "./index.less";
 import "client/assets/css/base.less";
 import "bootstrap/dist/css/bootstrap.css";
+
+import { ConfigProvider } from "antd";
+// 由于 antd 组件的默认文案是英文，所以需要修改为中文
+import zhCN from "antd/es/locale/zh_CN";
+import Routers from "client/router";
+import React, { Component } from "react";
+import { Provider } from "react-redux";
 
 // let {
 //   NODE_ENV, // 环境参数

@@ -6,11 +6,11 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/component/Breadcrumb/index.js
  */
-import React, { memo, forwardRef } from "react";
-
-import { historyPush } from "client/router";
-import { Breadcrumb } from "antd";
 import "./index.less";
+
+import { Breadcrumb } from "antd";
+import { historyPush } from "client/router";
+import React, { forwardRef, memo } from "react";
 const { Item } = Breadcrumb;
 export default memo(
   forwardRef((props) => {

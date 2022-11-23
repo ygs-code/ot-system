@@ -1,6 +1,7 @@
+import hoistStatics from "hoist-non-react-statics";
 import React, { Component, createElement } from "react";
 import invariant from "tiny-invariant";
-import hoistStatics from "hoist-non-react-statics";
+
 import { MatchContext } from "./Switch";
 
 export const withRouter = (Target) => {

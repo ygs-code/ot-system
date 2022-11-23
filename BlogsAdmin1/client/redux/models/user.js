@@ -7,6 +7,7 @@
  * @FilePath: /error-sytem/client/src/redux/models/reducers/user.js
  */
 import { getUserInfo } from "client/assets/js/request";
+
 import { getPropsState } from "../index";
 export default (global) => ({
   name: "user",

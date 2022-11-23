@@ -6,8 +6,9 @@
  * @FilePath: /react-ssr-lazy-loading/client/component/Table/index.js
  * @Description:
  */
-import React from "react";
 import "./index.less";
+
+import React from "react";
 
 const Index = (props) => {
   const { columns = [], dataSource = [], rowKey } = props;

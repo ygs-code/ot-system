@@ -6,25 +6,25 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/component/Form/index.js
  */
-import React, { useState, useCallback, Children, useEffect } from "react";
+import "./index.less";
+
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import {
-  Form,
-  Input,
   Button,
   Checkbox,
+  Form,
+  Input,
   InputNumber,
   Radio,
   Rate,
   Select,
-  Switch,
   Slider,
+  Switch,
   TimePicker,
   Transfer
 } from "antd";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { CheckDataType } from "client/utils";
-
-import "./index.less";
+import React, { Children, useCallback, useEffect, useState } from "react";
 const { Password } = Input;
 const ItemChild = (props) => {
   let { type = "", itemChildProps = {}, component, render } = props;

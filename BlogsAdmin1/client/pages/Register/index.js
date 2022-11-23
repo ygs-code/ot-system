@@ -1,12 +1,13 @@
-import React from "react";
-import { register } from "client/assets/js/request/index";
-import { Form, Input, Button, message } from "antd";
-import { checkPhone, checkUser, checkPassword, checkEmail } from "client/utils";
-import VerificationCode from "client/component/VerificationCode";
-import { addRouterApi } from "client/router";
-import { mapRedux } from "client/redux";
 import "client/assets/css/base.less";
 import "./index.less";
+
+import { Button, Form, Input, message } from "antd";
+import { register } from "client/assets/js/request/index";
+import VerificationCode from "client/component/VerificationCode";
+import { mapRedux } from "client/redux";
+import { addRouterApi } from "client/router";
+import { checkEmail, checkPassword, checkPhone, checkUser } from "client/utils";
+import React from "react";
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 }

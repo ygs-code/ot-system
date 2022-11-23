@@ -136,4 +136,4 @@ const diffData = (oldData, newData) => {
   }
   return flag;
 };
-export { recursionTreeData, filterTreeData, deepCopy, diffData, findTreeData };
+export { deepCopy, diffData, filterTreeData, findTreeData, recursionTreeData };

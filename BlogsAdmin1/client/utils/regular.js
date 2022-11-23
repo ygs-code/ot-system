@@ -12,9 +12,9 @@ const checkEmail = (code) =>
 
 export {
   checkEmail,
+  checkPassword,
   checkPhone,
   checkUser,
-  checkPassword,
   checkVerificationCode,
   firstToUpper
 };

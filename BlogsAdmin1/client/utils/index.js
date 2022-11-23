@@ -6,55 +6,55 @@
  * @FilePath: /react-loading-ssr/client/utils/index.js
  * @Description:
  */
-import {
-  throttle,
-  stabilization,
-  statusThrottle
-} from "./throttlingStabilization";
 // import {
 //     deepCopy
 // } from './deepCopy'
 // import {SubscribePublished} from './SubscribePublished';
 import { CheckDataType } from "./CheckDataType";
 import {
-  filterTreeData,
-  recursionTreeData,
   deepCopy,
   diffData,
-  findTreeData
+  filterTreeData,
+  findTreeData,
+  recursionTreeData
 } from "./ergodic";
+import { getBaseInitState } from "./getBaseInitState";
 // import {FloatingBall} from './FloatingBall';
 import { getStyle } from "./getCssAttr";
 import {
+  checkPassword,
   checkPhone,
   checkUser,
-  checkPassword,
   checkVerificationCode,
   firstToUpper
 } from "./regular";
-import { getBaseInitState } from "./getBaseInitState";
 import stringToObject from "./stringToObject";
+import {
+  stabilization,
+  statusThrottle,
+  throttle
+} from "./throttlingStabilization";
 
 export {
-  stringToObject,
-  getBaseInitState,
-  // FloatingBall, // 浮动球 类
-  throttle, // 节流函数
-  stabilization, // 防抖函数
-  statusThrottle, //  状态拦截器
-  deepCopy, // 深度拷贝
   // SubscribePublished, // 订阅发布
   CheckDataType, // 检查数据类型
-  filterTreeData, // 过滤树数据结构
-  recursionTreeData, // 递归循环树数据
-  diffData, // 比较新旧两个数据
-  findTreeData, // 搜索到树数据的某一条数据单条 不包括父层数据的
-  getStyle, // 获取样式
+  checkPassword,
   checkPhone,
   checkUser,
-  checkPassword,
   checkVerificationCode,
-  firstToUpper
+  deepCopy, // 深度拷贝
+  diffData, // 比较新旧两个数据
+  filterTreeData, // 过滤树数据结构
+  findTreeData, // 搜索到树数据的某一条数据单条 不包括父层数据的
+  firstToUpper,
+  getBaseInitState,
+  getStyle, // 获取样式
+  recursionTreeData, // 递归循环树数据
+  stabilization, // 防抖函数
+  statusThrottle, //  状态拦截器
+  stringToObject,
+  // FloatingBall, // 浮动球 类
+  throttle // 节流函数
 };
 // 整体输出
 export * from "./regular.js";

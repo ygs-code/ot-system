@@ -6,12 +6,13 @@
  * @FilePath: /react-ssr-lazy-loading/client/index.js
  * @Description:
  */
+import store from "client/redux";
+import { getBrowserHistory } from "client/router/history";
+import routesComponent from "client/router/routesComponent";
 import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
+
 import App from "./App/index.js";
-import { getBrowserHistory } from "client/router/history";
-import store from "client/redux";
-import routesComponent from "client/router/routesComponent";
 
 // 如果是开发环境 先拷贝 服务器文件到 dist
 let {

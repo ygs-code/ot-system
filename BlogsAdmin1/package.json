@@ -23,7 +23,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@webpack-cli/serve": "^1.7.0"
+    "@webpack-cli/serve": "^1.7.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0"
   },
   "dependencies": {
     "@babel/cli": "^7.18.10",

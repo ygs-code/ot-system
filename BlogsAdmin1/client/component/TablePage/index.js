@@ -8,9 +8,10 @@
  */
 
 import "./index.less";
-import React, { PureComponent } from "react";
-import Table from "client/component/Table";
+
 import { SearchForm } from "client/component/Form";
+import Table from "client/component/Table";
+import React, { PureComponent } from "react";
 export default class extends PureComponent {
   constructor(props) {
     super(props);

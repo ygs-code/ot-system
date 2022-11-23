@@ -1,17 +1,16 @@
 import "./index.less";
-import React, { useState, useCallback, Children, useEffect, memo } from "react";
-import { addRouterApi } from "client/router";
 
 // import { getUserInfo } from "client/assets/js/request";
-
 import {
   Layout
   //  Menu,
   // Select
 } from "antd";
-import Menu from "client/component/Menu";
 import Header from "client/component/Header";
+import Menu from "client/component/Menu";
 import { mapRedux } from "client/redux";
+import { addRouterApi } from "client/router";
+import React, { Children, memo, useCallback, useEffect, useState } from "react";
 // import token from "@/common/js/request/token";
 const { Sider } = Layout;
 

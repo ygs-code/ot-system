@@ -1,7 +1,13 @@
+export * from "./lazy";
+export * from "./matchPath";
+export * from "./Route";
+export * from "./Router";
+export * from "./Switch";
+export * from "./withRouter";
 export {
   generatePath,
-  Prompt,
   MemoryRouter,
+  Prompt,
   Redirect,
   StaticRouter,
   useHistory,
@@ -9,9 +15,3 @@ export {
   useParams,
   useRouteMatch
 } from "react-router-dom";
-export * from "./Switch";
-export * from "./Router";
-export * from "./Route";
-export * from "./withRouter";
-export * from "./matchPath";
-export * from "./lazy";

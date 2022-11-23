@@ -1,9 +1,9 @@
-import XMLHttpRequest from "./XMLHttpRequest";
 import baseUrl from "./baseUrl";
-import { codeMap } from "./redirect";
-import token from "./token";
 import filterGraphqlData from "./filterGraphqlData";
+import { codeMap } from "./redirect";
 import { error as errorMessage } from "./requestMessage";
+import token from "./token";
+import XMLHttpRequest from "./XMLHttpRequest";
 
 // 导出普通请求
 export default class Request {

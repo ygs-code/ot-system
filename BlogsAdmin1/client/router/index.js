@@ -1,7 +1,7 @@
-import Routers from "./Routers";
 import addRouterApi from "./addRouterApi";
-export * from "./historyPush";
+import Routers from "./Routers";
 export * from "./history";
+export * from "./historyPush";
 import routePaths from "./routePaths";
 
 export { addRouterApi, routePaths };

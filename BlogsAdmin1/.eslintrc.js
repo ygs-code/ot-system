@@ -20,7 +20,15 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  plugins: ["react", "jsx-a11y", "import", "@babel", "react-hooks", "prettier"],
+  plugins: [
+    "simple-import-sort",
+    "react",
+    "jsx-a11y",
+    "import",
+    "@babel",
+    "react-hooks",
+    "prettier"
+  ],
   parser: "@babel/eslint-parser",
   parserOptions: {
     requireConfigFile: false,
@@ -52,6 +60,8 @@ module.exports = {
   //   "warn" or 1 - 将规则视为一个警告（不会影响退出码）,只警告，不会退出程序
   //   "error" or 2 - 将规则视为一个错误 (退出码为1)，报错并退出程序
   rules: {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "no-constant-condition": 2, //禁止在条件中使用常量表达式 if(true) if(1)
     "no-lonely-if": 1, //禁止else语句内只有if语句
     curly: [2, "all"], //必须使用 if(){} 中的{}

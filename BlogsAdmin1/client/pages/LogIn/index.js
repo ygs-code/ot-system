@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
 import "client/assets/css/base.less";
 import "./index.less";
-import { Form, Input, Button, message } from "antd";
-import { addRouterApi } from "client/router";
+
+import { Button, Form, Input, message } from "antd";
 import { login } from "client/assets/js/request/index";
 import VerificationCode from "client/component/VerificationCode";
-import { checkPhone, checkUser, checkPassword, checkEmail } from "client/utils";
 import { mapRedux } from "client/redux";
+import { addRouterApi } from "client/router";
+import { checkEmail, checkPassword, checkPhone, checkUser } from "client/utils";
+import React, { useEffect } from "react";
 
 const layout = {
   labelCol: { span: 8 },

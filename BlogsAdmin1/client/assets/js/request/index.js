@@ -6,16 +6,16 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/js/request/index.js
  */
-import XMLHttpRequest from "./XMLHttpRequest";
 import baseUrl from "./baseUrl";
+import XMLHttpRequest from "./XMLHttpRequest";
 // 合并成一个对象
 // import * as requestApi from './requestApi';
 // 改名接口导入
 // export { register as Register } from './requestApi';
 
 export {
-  XMLHttpRequest,
-  baseUrl
+  baseUrl,
+  XMLHttpRequest
   // 改名导出
   // baseUrl as $baseUrl
 };

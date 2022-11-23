@@ -1,13 +1,14 @@
+import PropTypes from "prop-types";
 import React, {
-  Component,
   Children,
+  Component,
   createContext
   // createElement
 } from "react";
 import invariant from "tiny-invariant";
+
 import { matchPath } from "./matchPath";
 import { __RouterContext as RouterContext } from "./Router";
-import PropTypes from "prop-types";
 var createNamedContext = function createNamedContext(name) {
   var context = createContext();
   context.displayName = name;
@@ -213,4 +214,4 @@ Switch.propTypes = {
   ]).isRequired
 };
 
-export { Switch, MatchContext };
+export { MatchContext, Switch };
