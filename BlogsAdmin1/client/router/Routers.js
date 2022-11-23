@@ -15,9 +15,7 @@ import {
   Route
 } from "client/router/react-lazy-router-dom";
 
-const NoPages = (props) => {
-  console.log("props=====", props);
-
+const NoPages = () => {
   return (
     <div style={{ padding: "1rem" }}>
       <p>There s nothing here!</p>
@@ -35,7 +33,7 @@ const Routers = (props) => {
       <Routes>
         {routesComponent
           .filter((item) => {
-            return item.level == level;
+            return item.level === level;
           })
           .map((route) => {
             let { path, exact = true, Component } = route;

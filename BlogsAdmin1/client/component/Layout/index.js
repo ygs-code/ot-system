@@ -1,52 +1,28 @@
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  HomeOutlined
-} from "@ant-design/icons";
-import { connect } from "react-redux";
 import "./index.less";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  useCallback,
-  Children,
-  useEffect,
-  memo
-} from "react";
-import {
-  routePaths,
-  historyPush,
-  getHistory,
-  addRouterApi
-} from "client/router";
+import React, { useState, useCallback, Children, useEffect, memo } from "react";
+import { addRouterApi } from "client/router";
 
-import { getUserInfo } from "client/assets/js/request";
+// import { getUserInfo } from "client/assets/js/request";
 
 import {
-  Layout,
+  Layout
   //  Menu,
-  Select
+  // Select
 } from "antd";
 import Menu from "client/component/Menu";
 import Header from "client/component/Header";
-import Store, { mapRedux } from "client/redux";
+import { mapRedux } from "client/redux";
 // import token from "@/common/js/request/token";
-const { Sider, Content } = Layout;
+const { Sider } = Layout;
 
 // 权限跳转登录页面可以在这控制
 const Index = memo((props) => {
   const {
     state: {
       breadcrumb: { items = [] } = {},
-      user: { userInfo: { name, phone, account } = {} } = {}
+      user: { userInfo: { name, phone } = {} } = {}
     } = {},
-    children,
-    history: { push }
+    children
   } = props;
 
   // useEffect(() => {
@@ -68,10 +44,9 @@ const Index = memo((props) => {
   }, []);
 
   useEffect(() => {
-    const { dispatch: { user: { login, fetchUser } = {} } = {} } = props;
     const adminCollapsed = sessionStorage.getItem("adminCollapsed");
 
-    setCollapsed(adminCollapsed == 1 ? true : false);
+    setCollapsed(adminCollapsed === 1 ? true : false);
     getUser();
 
     return () => {};
@@ -112,7 +87,7 @@ const Index = memo((props) => {
 
         {/*中间子页面*/}
         <div className="children-page">
-          {Children.map(children, (child, index) => {
+          {Children.map(children, (child) => {
             return <>{child}</>;
           })}
         </div>

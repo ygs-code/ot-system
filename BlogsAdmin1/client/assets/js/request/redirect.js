@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/js/request/redirect.js
  */
-import { routePaths, historyPush, getHistory, history } from "client/router";
+import { routePaths, historyPush, history } from "client/router";
 import token from "./token";
 
 export const codeMap = {
@@ -28,7 +28,7 @@ export const codeMap = {
       url: routePaths.LogIn
     });
   },
-  415: (errorInfo) => {
+  415: () => {
     historyPush({
       history,
       url: routePaths.LogIn

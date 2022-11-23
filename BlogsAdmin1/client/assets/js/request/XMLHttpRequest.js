@@ -5,7 +5,7 @@ class XHR {
     timeout: 3000,
     withCredentials: true
   };
-  constructor(options) {
+  constructor() {
     // const { method = 'POST', url = '' } = options;
     // this.defaultConfig={
     //     timeout:3000,
@@ -68,7 +68,7 @@ class XHR {
           this.send();
         })
         .catch((errorInfo) => {
-          const { error = () => {}, complete = () => {} } = errorInfo;
+          const { error = () => {} } = errorInfo;
           console.error("http 请求异常,未发送http请求。", errorInfo);
           error(options);
         });
@@ -187,7 +187,7 @@ class XHR {
 
     this.xmlHttp.open(
       method,
-      method == "GET"
+      method === "GET"
         ? url +
             (this.queryStringify(parameter)
               ? `?${this.queryStringify(parameter)}`
@@ -249,20 +249,23 @@ class XHR {
       parameter: { operationName } = {}
     } = this.options;
     const XHRQueue = XHR.XHRQueue || [];
-    if (this.xmlHttp.readyState == 4) {
-      if (this.xmlHttp.status == 200) {
+    if (this.xmlHttp.readyState === 4) {
+      if (this.xmlHttp.status === 200) {
         // 从队列中剔除
         for (let index = XHRQueue.length - 1; index >= 0; index--) {
           //是graphq请求
-          if (operationName && XHRQueue[index].operationName == operationName) {
+          if (
+            operationName &&
+            XHRQueue[index].operationName === operationName
+          ) {
             XHRQueue.splice(index, 1);
-          } else if (XHRQueue[index].urlSuffix == urlSuffix) {
+          } else if (XHRQueue[index].urlSuffix === urlSuffix) {
             XHRQueue.splice(index, 1);
           }
         }
 
         complete(
-          dataType == "json"
+          dataType === "json"
             ? JSON.parse(this.xmlHttp.responseText)
             : this.xmlHttp.responseText,
           this.xmlHttp,
@@ -273,7 +276,7 @@ class XHR {
         );
 
         success(
-          dataType == "json"
+          dataType === "json"
             ? JSON.parse(this.xmlHttp.responseText)
             : this.xmlHttp.responseText,
           this.xmlHttp,
@@ -305,7 +308,7 @@ class XHR {
     let { parameter = {}, method, dataType = "json" } = this.options;
     if (!(parameter instanceof FormData)) {
       parameter =
-        dataType == "json"
+        dataType === "json"
           ? JSON.stringify(parameter)
           : this.queryStringify(parameter); //this.queryStringify(data)
     }
@@ -315,7 +318,7 @@ class XHR {
     //     formData.append(key, data[key]);
     // });
     // this.xmlHttp.responseType = 'json';
-    if (method == "POST") {
+    if (method === "POST") {
       this.xmlHttp.send(parameter);
     } else {
       this.xmlHttp.send();

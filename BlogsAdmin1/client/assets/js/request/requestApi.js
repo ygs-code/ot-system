@@ -6,9 +6,9 @@
  * @Description: In User Settings Edit
  * @FilePath: /Blogs/BlogsAdmin/src/common/js/request/requestApi.js
  */
-import Request, { gql, GraphqlClient } from "./request";
+import { gql, GraphqlClient } from "./request";
 
-var userId = "559645cd1a38532d14349246";
+// var userId = "559645cd1a38532d14349246";
 
 // 获取验证码
 // export const getVerifyCode = () => {
@@ -152,7 +152,7 @@ export const getUser = () => {
 };
 
 //   更改
-export const setUserInfo = (parameter) => {
+export const setUserInfo = () => {
   return GraphqlClient.mutate({
     operationName: "setUserInfo",
     mutation: `
@@ -202,7 +202,7 @@ export const getUserInfo = (parameter = {}) => {
   );
 };
 
-export const hello = (data) => {
+export const hello = () => {
   return GraphqlClient.query({
     operationName: "getUserInfo",
     name: "hello",

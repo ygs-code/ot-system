@@ -1,38 +1,9 @@
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  HomeOutlined
-} from "@ant-design/icons";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import Routers, { addRouterApi } from "client/router";
+import { Skeleton } from "antd";
+import Layout from "client/component/Layout";
+import { mapRedux } from "client/redux";
 import "./index.less";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  useCallback,
-  Children,
-  useEffect,
-  memo
-} from "react";
-import Routers, {
-  routePaths,
-  historyPush,
-  getHistory,
-  addRouterApi
-} from "client/router";
-import {
-  // Layout,
-  //  Menu,
-  Select,
-  Input,
-  Skeleton
-} from "antd";
-import Layout, { layout } from "client/component/Layout";
-import Store, { mapRedux } from "client/redux";
 const Index = (props) => {
   const { routesComponent, history } = props;
   const [loading, setLoading] = useState(true);

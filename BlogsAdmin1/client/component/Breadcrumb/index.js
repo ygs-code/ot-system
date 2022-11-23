@@ -6,30 +6,14 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/component/Breadcrumb/index.js
  */
-import React, { memo, useCallback, forwardRef, useState } from "react";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  HomeOutlined
-} from "@ant-design/icons";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {
-  routePaths,
-  historyPush,
-  getHistory,
-  pathComponent
-} from "client/router";
-import { Layout, Menu, Select, Dropdown, Avatar, Breadcrumb } from "antd";
-import "./index.less";
+import React, { memo, forwardRef } from "react";
 
-const { Option } = Select;
-const { Header, Sider, Content } = Layout;
+import { historyPush } from "client/router";
+import { Breadcrumb } from "antd";
+import "./index.less";
 const { Item } = Breadcrumb;
 export default memo(
-  forwardRef((props, ref) => {
+  forwardRef((props) => {
     const { data = [] } = props;
 
     return (

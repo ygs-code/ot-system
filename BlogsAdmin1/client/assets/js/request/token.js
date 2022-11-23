@@ -19,14 +19,14 @@ class Token {
   }
   publishQueue(token) {
     this.queue.forEach((item) => {
-      const { resolve, reject } = item;
+      const { resolve } = item;
       resolve(token);
     });
     this.queue = [];
   }
   clearQueue() {
     this.queue.forEach((item) => {
-      const { resolve, reject } = item;
+      const { reject } = item;
       reject(null);
     });
     this.queue = [];

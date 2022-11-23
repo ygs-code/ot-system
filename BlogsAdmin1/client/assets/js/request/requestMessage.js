@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/js/request/requestMessage.js
  */
-import { message, Button, Space } from "antd";
+import { message } from "antd";
 
 export const error = (msg) => {
   message.error(msg);

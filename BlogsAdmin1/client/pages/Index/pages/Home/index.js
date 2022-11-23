@@ -1,40 +1,15 @@
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  HomeOutlined
-} from "@ant-design/icons";
-import { connect } from "react-redux";
 import "./index.less";
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  useCallback,
-  Children,
-  useEffect,
-  memo
-} from "react";
-import {
-  routePaths,
-  historyPush,
-  getHistory,
-  addRouterApi
-} from "client/router";
+import React from "react";
+import { addRouterApi } from "client/router";
 import {
   // Layout,
   //  Menu,
-  Select,
   Input
 } from "antd";
-import Layout, { layout } from "client/component/Layout";
-import Header from "client/component/Header";
-import Store, { mapRedux } from "client/redux";
-import SetBreadcrumbAndTitle from "client/component/SetBreadcrumbAndTitle";
+
+import { mapRedux } from "client/redux";
+import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
-import { set } from "core-js/core/dict";
 
 class Index extends TablePage {
   constructor(props) {
@@ -47,10 +22,10 @@ class Index extends TablePage {
     };
   }
   componentDidMount() {
-    const {
-      pushRoute,
-      routePaths: { accountManagement }
-    } = this.props;
+    // const {
+    //   pushRoute,
+    //   routePaths: { accountManagement }
+    // } = this.props;
     console.log("home");
   }
 
@@ -199,7 +174,7 @@ class Index extends TablePage {
   /**
    * 定义表格的数据加载功能
    */
-  tableDataLoader = async (searchParams = {}) => {
+  tableDataLoader = async () => {
     return {};
   };
 
@@ -226,7 +201,7 @@ class Index extends TablePage {
 
 export default mapRedux()(
   // 权限控制
-  SetBreadcrumbAndTitle({
+  setBreadcrumbAndTitle({
     //设置面包屑和标题
     breadcrumb: [
       {

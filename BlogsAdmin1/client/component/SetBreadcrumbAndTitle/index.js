@@ -7,7 +7,7 @@
  * @FilePath: /error-sytem/client/src/common/component/Breadcrumb/index.js
  */
 import React, { PureComponent } from "react";
-import Store, { mapRedux } from "client/redux";
+import { mapRedux } from "client/redux";
 
 const Index = (options) => {
   const { title, breadcrumb } = options;

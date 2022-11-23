@@ -1,22 +1,14 @@
-import React, { memo, useCallback, forwardRef, useState } from "react";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  HomeOutlined
-} from "@ant-design/icons";
-import { Layout, Menu, Select, Dropdown, Avatar } from "antd";
+import React, { memo, useCallback, forwardRef } from "react";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { Layout, Menu, Dropdown, Avatar } from "antd";
 import Breadcrumb from "client/component/Breadcrumb";
 
 import "./index.less";
 
-const { Option } = Select;
-const { Header, Sider, Content } = Layout;
+const { Header } = Layout;
 
 export default memo(
-  forwardRef((props, ref) => {
+  forwardRef((props) => {
     const {
       collapsed,
       onChangeCollapsed = () => {},

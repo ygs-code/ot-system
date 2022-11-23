@@ -33,7 +33,7 @@ import {
 import Layout, { layout } from "client/component/Layout";
 import Header from "client/component/Header";
 import Store, { mapRedux } from "client/redux";
-import SetBreadcrumbAndTitle from "client/component/SetBreadcrumbAndTitle";
+import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
 
 
@@ -222,7 +222,7 @@ class Index extends TablePage {
 
 export default mapRedux()(
   // 权限控制
-  SetBreadcrumbAndTitle({
+  setBreadcrumbAndTitle({
     //设置面包屑和标题
     // breadcrumb: [
     //   {

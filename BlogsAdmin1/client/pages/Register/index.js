@@ -1,15 +1,10 @@
 import React from "react";
 import { register } from "client/assets/js/request/index";
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { checkPhone, checkUser, checkPassword, checkEmail } from "client/utils";
 import VerificationCode from "client/component/VerificationCode";
-import {
-  routePaths,
-  historyPush,
-  getHistory,
-  addRouterApi
-} from "client/router";
-import Store, { mapRedux } from "client/redux";
+import { addRouterApi } from "client/router";
+import { mapRedux } from "client/redux";
 import "client/assets/css/base.less";
 import "./index.less";
 const layout = {
@@ -21,9 +16,9 @@ const tailLayout = {
 };
 
 const Index = (props) => {
-  const { history, pushRoute, routePaths } = props;
+  const { pushRoute, routePaths } = props;
   const onFinish = async (values) => {
-    const data = await register({
+    await register({
       type: 1,
       ...values
     });
@@ -33,7 +28,7 @@ const Index = (props) => {
     }, 1500);
   };
 
-  const onFinishFailed = (errorInfo) => {};
+  const onFinishFailed = () => {};
 
   return (
     <div className="center log-in">
@@ -53,7 +48,7 @@ const Index = (props) => {
               required: true,
               message: "请输入用户名!"
             },
-            ({ getFieldValue }) => ({
+            () => ({
               validator(rule, value) {
                 if (checkUser(value)) {
                   return Promise.resolve();
@@ -73,7 +68,7 @@ const Index = (props) => {
               required: true,
               message: "请输入手机号！"
             },
-            ({ getFieldValue }) => ({
+            () => ({
               validator(rule, value) {
                 if (checkPhone(value)) {
                   return Promise.resolve();
@@ -94,7 +89,7 @@ const Index = (props) => {
               required: true,
               message: "请输入邮箱！"
             },
-            ({ getFieldValue }) => ({
+            () => ({
               validator(rule, value) {
                 if (checkEmail(value)) {
                   return Promise.resolve();
@@ -115,7 +110,7 @@ const Index = (props) => {
               required: true,
               message: "请输入密码!"
             },
-            ({ getFieldValue }) => ({
+            () => ({
               validator(rule, value) {
                 if (!checkPassword(value)) {
                   return Promise.reject(

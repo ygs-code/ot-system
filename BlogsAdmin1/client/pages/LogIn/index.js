@@ -1,21 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "client/assets/css/base.less";
 import "./index.less";
-import { Form, Input, Button, message, Checkbox } from "antd";
-import {
-  routePaths,
-  historyPush,
-  getHistory,
-  addRouterApi
-} from "client/router";
-import {
-  login,
-  createUser,
-  getVerifyCode
-} from "client/assets/js/request/index";
+import { Form, Input, Button, message } from "antd";
+import { addRouterApi } from "client/router";
+import { login } from "client/assets/js/request/index";
 import VerificationCode from "client/component/VerificationCode";
 import { checkPhone, checkUser, checkPassword, checkEmail } from "client/utils";
-import Store, { mapRedux } from "client/redux";
+import { mapRedux } from "client/redux";
 
 const layout = {
   labelCol: { span: 8 },
@@ -26,18 +17,17 @@ const tailLayout = {
 };
 
 const Index = (props) => {
-  const { history, pushRoute, routePaths } = props;
-  const [verifyCodeData, setVerifyCodeData] = useState({});
+  const { pushRoute, routePaths } = props;
 
   const onFinish = async (values) => {
     const {
       dispatch: {
-        user: { setUserInfo, fetchUser, getUserInfo }
+        user: { setUserInfo }
       }
     } = props;
 
     const data = await login(values);
-    console.log("data===", data);
+
     const {
       data: { token, userInfo }
     } = data;
@@ -77,7 +67,7 @@ const Index = (props) => {
               required: true,
               message: "请输入用户名或手机号或邮箱"
             },
-            ({ getFieldValue }) => ({
+            () => ({
               validator(rule, value) {
                 if (
                   checkUser(value) ||
@@ -102,8 +92,8 @@ const Index = (props) => {
               required: true,
               message: "请输入密码!"
             },
-            ({ getFieldValue }) => ({
-              validator(rule, value) {
+            () => ({
+              validator(value) {
                 if (!checkPassword(value)) {
                   return Promise.reject(
                     "密码最少为8位，并且最少含有字母和数字组成"

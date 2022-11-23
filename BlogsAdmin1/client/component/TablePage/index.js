@@ -8,16 +8,7 @@
  */
 
 import "./index.less";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  useCallback,
-  Children,
-  PureComponent
-} from "react";
-import { Layout, Select } from "antd";
+import React, { PureComponent } from "react";
 import Table from "client/component/Table";
 import { SearchForm } from "client/component/Form";
 export default class extends PureComponent {
@@ -55,12 +46,12 @@ export default class extends PureComponent {
   /**
    * 定义表格的数据加载功能
    */
-  tableDataLoader = async (searchParams = {}) => {
+  tableDataLoader = async () => {
     return {};
   };
 
   loadTableData = async (searchParams = {}) => {
-    const tableData = await this.tableDataLoader(searchParams);
+    await this.tableDataLoader(searchParams);
   };
 
   getDataSource = () => {

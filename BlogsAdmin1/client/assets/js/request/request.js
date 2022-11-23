@@ -3,11 +3,7 @@ import baseUrl from "./baseUrl";
 import { codeMap } from "./redirect";
 import token from "./token";
 import filterGraphqlData from "./filterGraphqlData";
-import {
-  error as errorMessage,
-  warning as warningMessage,
-  success as successMessage
-} from "./requestMessage";
+import { error as errorMessage } from "./requestMessage";
 
 // 导出普通请求
 export default class Request {
@@ -18,7 +14,7 @@ export default class Request {
   // 默认请求头设置
   static defaultHeaders = {};
   //错误拦截
-  static error(errorInfo) {}
+  static error() {}
   //请求拦截器
   static interceptors = {
     request: (config) => {
@@ -30,7 +26,9 @@ export default class Request {
   }; //
   // 去除 // 地址
   static transformUrl(baseUrl, url) {
+    /* eslint-disable   */
     const urlHpptReg = /^(http\:\/\/)|^(https\:\/\/)/gi;
+    /* eslint-enable   */
     const urlReg = /(\/\/)+/gi;
     return {
       urlSuffix: url,
@@ -44,13 +42,13 @@ export default class Request {
       /[xy]/g,
       function (c) {
         var r = (Math.random() * 16) | 0,
-          v = c == "x" ? r : (r & 0x3) | 0x8;
+          v = c === "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
       }
     );
   }
   static setLoad(options) {
-    const { isLoad = true, url, requestId = "", parameter } = options;
+    const { isLoad = true } = options;
     if (isLoad) {
       this.requestQueue.push(options);
       // 开始加载数据
@@ -105,7 +103,7 @@ export default class Request {
     return this.request(url, parameter, options);
   }
   static options(url, parameter, options = {}) {
-    const data = {
+    options = {
       method: "OPTIONS",
       ...options
     };
@@ -207,11 +205,11 @@ export default class Request {
   }
   static uploadFile(url, parameter, options) {
     const urls = this.transformUrl(this.baseUrl, url);
-    const data = {
+    options = {
       ...urls,
       parameter,
-      method: "POST"
-      // ...options,
+      method: "POST",
+      ...options
     };
 
     let {
@@ -313,7 +311,6 @@ Request.error = (errorInfo) => {
 Request.interceptors = {
   // 请求拦截
   request: async (config) => {
-    const { urlSuffix } = config;
     config = {
       ...config,
       headers: {
@@ -330,7 +327,7 @@ Request.interceptors = {
   //响应拦截
   response: (response) => {
     const { code } = response[0] || {};
-    if (code != 200) {
+    if (code !== 200) {
       Request.error(response);
       return Promise.reject(response);
     }
@@ -351,7 +348,7 @@ export class Graphql {
       ...this.options,
       ...options
     };
-    const { error = () => {} } = this.options;
+
     return Request.get(this.url, parameter, this.options);
     // return Request.post(this.url, parameter, this.options);
   }
@@ -361,7 +358,7 @@ export class Graphql {
       ...this.options,
       ...options
     };
-    const { error = () => {} } = this.options;
+
     return Request.post(this.url, parameter, this.options);
   }
   static gql(/* arguments */) {
@@ -424,16 +421,18 @@ Graphql.error = (errorInfo) => {
 Graphql.interceptors.response = (response) => {
   const data = response[0] || {};
   const options = response[2] || {};
-  const { code, message } = data;
+  const { code } = data;
   if (code && code !== 200) {
     Graphql.error(response);
     return Promise.reject(response);
   }
   for (let key in data) {
-    const { code, data: newData } = data[key];
-    if (code != 200) {
-      Graphql.error([data[key]]);
-      return Promise.reject(response);
+    if (data.hasOwnProperty(key)) {
+      const { code } = data[key];
+      if (code !== 200) {
+        Graphql.error([data[key]]);
+        return Promise.reject(response);
+      }
     }
   }
   const { filterData } = options;

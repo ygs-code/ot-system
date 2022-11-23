@@ -14,7 +14,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 }
 };
 
-const Index = (props) => {
+const Index = () => {
   const [verifyCodeData, setVerifyCodeData] = useState({});
 
   const verifyCode = useCallback(async () => {
@@ -42,7 +42,7 @@ const Index = (props) => {
             required: true,
             message: "请输入验证码!"
           },
-          ({ getFieldValue }) => ({
+          () => ({
             validator(rule, value) {
               if (!checkVerificationCode(value)) {
                 return Promise.reject("验证码5位，由字母和数字组成");

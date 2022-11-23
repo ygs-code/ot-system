@@ -6,15 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/component/Form/index.js
  */
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  useCallback,
-  Children,
-  PureComponent,
-  useEffect
-} from "react";
+import React, { useState, useCallback, Children, useEffect } from "react";
 import {
   Form,
   Input,
@@ -98,7 +90,7 @@ const BaseForm = (props) => {
         {...formProps}>
         {fields.map((item, index) => {
           const { type, title, items = [] } = item;
-          return type != "section" ? (
+          return type !== "section" ? (
             <Form.Item {...item} key={index}>
               <ItemChild {...item}></ItemChild>
             </Form.Item>
@@ -119,7 +111,7 @@ const BaseForm = (props) => {
         {/* 子节点 */}
         {Children.map(
           CheckDataType.isFunction(children) ? children() : children,
-          (child, index) => {
+          (child) => {
             return <> {child}</>;
           }
         )}
@@ -158,7 +150,7 @@ const SearchForm = (props) => {
     let fieldsVonde = [];
     for (let index = 0; index < length; index++) {
       const item = fields[index];
-      const { type, title, items = [], span = 1 } = item;
+      const { span = 1 } = item;
       fieldsVonde.push(
         <div key={index} className={`span span-${span}`}>
           <Form.Item {...item}>
@@ -215,7 +207,7 @@ const SearchForm = (props) => {
         {/* 子节点 */}
         {Children.map(
           CheckDataType.isFunction(children) ? children() : children,
-          (child, index) => {
+          (child) => {
             return <> {child}</>;
           }
         )}
