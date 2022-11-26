@@ -7,6 +7,7 @@ import {
 } from "antd";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
+// import { toComponent } from "client/component/ToComponent";
 import { mapRedux } from "client/redux";
 import { addRouterApi } from "client/router";
 import React from "react";
@@ -27,6 +28,7 @@ class Index extends TablePage {
     //   routePaths: { accountManagement }
     // } = this.props;
     console.log("home");
+    console.log("this.props==", this.props);
   }
 
   // 获取默认搜索参数

@@ -7,6 +7,7 @@
  * @Description:
  */
 import Loading from "client/component/Loading";
+import { toComponent } from "client/component/ToComponent";
 import {
   Route,
   Router,
@@ -50,7 +51,7 @@ const Routers = (props) => {
               />
             );
           })}
-        <Route path="*" exact={true} component={NoPages} />
+        <Route path="*" exact={true} component={toComponent(NoPages)} />
       </Routes>
     </Router>
   );

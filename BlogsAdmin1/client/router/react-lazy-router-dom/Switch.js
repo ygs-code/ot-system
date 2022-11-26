@@ -3,8 +3,10 @@ import React, {
   Children,
   Component,
   createContext
+  // isValidElement
   // createElement
 } from "react";
+// import { isContextConsumer, isValidElementType } from "react-is";
 import invariant from "tiny-invariant";
 
 import { matchPath } from "./matchPath";
@@ -18,6 +20,7 @@ var createNamedContext = function createNamedContext(name) {
 const MatchContext = createNamedContext("Router-Match");
 
 const isValidElement = (object) => {
+  // return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
   return typeof object === "object" && object !== null && object.$$typeof;
 };
 
@@ -84,7 +87,7 @@ class Switch extends Component {
       // });
       /* eslint-enable   */
       component = await component;
-      component = this.resolveComponent(component, callback);
+      component = await this.resolveComponent(component, callback);
     } else {
       component = this.getSyncComponent(component, callback);
     }

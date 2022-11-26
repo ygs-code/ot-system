@@ -24,7 +24,13 @@ import {
   Transfer
 } from "antd";
 import { CheckDataType } from "client/utils";
-import React, { Children, useCallback, useEffect, useState } from "react";
+import React, {
+  Children,
+  cloneElement,
+  useCallback,
+  useEffect,
+  useState
+} from "react";
 const { Password } = Input;
 const ItemChild = (props) => {
   let { type = "", itemChildProps = {}, component, render } = props;
@@ -112,7 +118,7 @@ const BaseForm = (props) => {
         {Children.map(
           CheckDataType.isFunction(children) ? children() : children,
           (child) => {
-            return <> {child}</>;
+            return cloneElement(child, props);
           }
         )}
       </Form>
@@ -208,7 +214,7 @@ const SearchForm = (props) => {
         {Children.map(
           CheckDataType.isFunction(children) ? children() : children,
           (child) => {
-            return <> {child}</>;
+            return cloneElement(child, props);
           }
         )}
       </Form>

@@ -10,7 +10,14 @@ import Header from "client/component/Header";
 import Menu from "client/component/Menu";
 import { mapRedux } from "client/redux";
 import { addRouterApi } from "client/router";
-import React, { Children, memo, useCallback, useEffect, useState } from "react";
+import React, {
+  Children,
+  cloneElement,
+  memo,
+  useCallback,
+  useEffect,
+  useState
+} from "react";
 // import token from "@/common/js/request/token";
 const { Sider } = Layout;
 
@@ -87,7 +94,8 @@ const Index = memo((props) => {
         {/*中间子页面*/}
         <div className="children-page">
           {Children.map(children, (child) => {
-            return <>{child}</>;
+            return cloneElement(child, props);
+            // return child;
           })}
         </div>
       </Layout>

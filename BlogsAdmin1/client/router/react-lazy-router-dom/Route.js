@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import React, { Children } from "react";
+import { Children, cloneElement } from "react";
 const Route = (props) => {
   const { children } = props;
   return children
     ? Children.map(children, (child) => {
-        return <>{child} </>;
+        return cloneElement(child, props);
       })
     : null;
 };

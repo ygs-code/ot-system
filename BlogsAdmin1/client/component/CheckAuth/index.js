@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: /error-sytem/client/src/common/component/CheckPermission/index.js
  */
-import React, { Children, Component, createElement } from "react";
+import React, { Children, Component, cloneElement } from "react";
 import { CheckDataType } from "client/utils";
 import Store, { mapRedux } from "client/redux";
 export const authKeys = [1, 2, 3, 4, 5];
@@ -44,7 +44,7 @@ const CheckAuth = (props) => {
   const { authKey, children } = props;
   return checkAuthKey(authKey)
     ? Children.map(children, (child, index) => {
-        return <> {child}</>;
+      return cloneElement(child, props);
       })
     : null;
 };
