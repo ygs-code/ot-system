@@ -122,7 +122,7 @@ export const login = (parameter) => {
                 authKey 
                 parentAuthKey 
               }
-              userInfo {
+              user {
                   name
                   phone
                   id
@@ -176,6 +176,44 @@ export const setUserInfo = () => {
   });
 };
 
+export const getUserList = (parameter = {}) => {
+  // const { type = "" } = parameter;
+
+  const { type, pageName = 1, pageSize = 10 } = parameter;
+
+  return query(
+    "getUserList",
+    `
+    query($parameter: UserListInfoInput!){
+      getUserList(parameter: $parameter) {
+          code
+          data {
+            hasNextPage
+            pageNum
+            pageSize
+            pages
+            total
+            list{
+              name
+              phone
+              id
+              type
+              email
+            }
+          }
+          message
+        } 
+    }
+  `,
+    {
+      parameter
+    },
+    {
+      filterData: true
+    }
+  );
+};
+
 // 查询
 export const getUserInfo = (parameter = {}) => {
   const { id = "" } = parameter;
@@ -200,7 +238,7 @@ export const getUserInfo = (parameter = {}) => {
                 authKey 
                 parentAuthKey 
               }
-              userInfo {
+              user {
                   name
                   phone
                   id

@@ -5,12 +5,37 @@ import {
   //  Menu,
   Input
 } from "antd";
+import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
 import { mapRedux } from "client/redux";
 import { addRouterApi } from "client/router";
 import React from "react";
-
+// 权限控制
+@setBreadcrumbAndTitle({
+  //设置面包屑和标题
+  breadcrumb: [
+    {
+      label: "账号管理"
+      // href: "http://localhost:3000/index",
+      // path: "xxxx",
+    }
+    // {
+    //   label: "菜单2",
+    //   // href: "http://localhost:3000/index",
+    //   path: "/",
+    //   component: ""
+    // }
+    // {
+    //   label: "菜单3",
+    //   // href: "http://localhost:3000/index",
+    //   // path: "/",
+    //   component: "",
+    // },
+  ],
+  title: "账号管理"
+})
+@addRouterApi
 class Index extends TablePage {
   constructor(props) {
     super(props);
@@ -25,6 +50,7 @@ class Index extends TablePage {
   componentDidMount() {
     console.log("AccountManagement");
     // console.log('this.props=======',this.props)
+    getUserList();
   }
 
   // 获取默认搜索参数
@@ -196,30 +222,4 @@ class Index extends TablePage {
     );
   }
 }
-
-export default mapRedux()(
-  // 权限控制
-  setBreadcrumbAndTitle({
-    //设置面包屑和标题
-    breadcrumb: [
-      {
-        label: "账号管理"
-        // href: "http://localhost:3000/index",
-        // path: "xxxx",
-      },
-      {
-        label: "菜单2",
-        // href: "http://localhost:3000/index",
-        path: "/",
-        component: ""
-      }
-      // {
-      //   label: "菜单3",
-      //   // href: "http://localhost:3000/index",
-      //   // path: "/",
-      //   component: "",
-      // },
-    ],
-    title: "主页"
-  })(addRouterApi(Index))
-);
+export default Index;

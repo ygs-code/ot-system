@@ -12,33 +12,31 @@ import { Breadcrumb } from "antd";
 import { historyPush } from "client/router";
 import React, { forwardRef, memo } from "react";
 const { Item } = Breadcrumb;
-export default memo(
-  forwardRef((props) => {
-    const { data = [] } = props;
+export default memo((props) => {
+  const { data = [] } = props;
 
-    return (
-      <Breadcrumb className="breadcrumb">
-        {data.map((item, index) => {
-          const { label, href, path, component } = item;
-          return href || path ? (
-            <Item
-              key={index}
-              className="has-link"
-              href={href || null}
-              onClick={() => {
-                path && historyPush(path);
-              }}>
-              {component ? component : null}
-              {label ? label : null}
-            </Item>
-          ) : (
-            <Item key={index}>
-              {component ? component : null}
-              {label ? label : null}
-            </Item>
-          );
-        })}
-      </Breadcrumb>
-    );
-  })
-);
+  return (
+    <Breadcrumb className="breadcrumb">
+      {data.map((item, index) => {
+        const { label, href, path, component } = item;
+        return href || path ? (
+          <Item
+            key={index}
+            className="has-link"
+            href={href || null}
+            onClick={() => {
+              path && historyPush(path);
+            }}>
+            {component ? component : null}
+            {label ? label : null}
+          </Item>
+        ) : (
+          <Item key={index}>
+            {component ? component : null}
+            {label ? label : null}
+          </Item>
+        );
+      })}
+    </Breadcrumb>
+  );
+});

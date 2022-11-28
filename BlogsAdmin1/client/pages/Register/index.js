@@ -4,8 +4,7 @@ import "./index.less";
 import { Button, Form, Input, message } from "antd";
 import { register } from "client/assets/js/request/index";
 import VerificationCode from "client/component/VerificationCode";
-import { mapRedux } from "client/redux";
-import { addRouterApi } from "client/router";
+import { addRouterApi, toComponent } from "client/router";
 import { checkEmail, checkPassword, checkPhone, checkUser } from "client/utils";
 import React from "react";
 const layout = {
@@ -182,4 +181,4 @@ const Index = (props) => {
   );
 };
 
-export default mapRedux()(addRouterApi(Index));
+export default toComponent(addRouterApi(Index));

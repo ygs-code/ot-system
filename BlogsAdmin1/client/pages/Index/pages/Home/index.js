@@ -5,11 +5,11 @@ import {
   //  Menu,
   Input
 } from "antd";
+import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
-// import { toComponent } from "client/component/ToComponent";
 import { mapRedux } from "client/redux";
-import { addRouterApi } from "client/router";
+import { addRouterApi, toComponent } from "client/router";
 import React from "react";
 
 class Index extends TablePage {
@@ -29,6 +29,9 @@ class Index extends TablePage {
     // } = this.props;
     console.log("home");
     console.log("this.props==", this.props);
+
+    // debugger;
+    getUserList();
   }
 
   // 获取默认搜索参数

@@ -3,9 +3,9 @@ import "./index.less";
 
 import { Button, Form, Input, message } from "antd";
 import { login } from "client/assets/js/request/index";
-import { toComponent } from "client/component/ToComponent";
 import VerificationCode from "client/component/VerificationCode";
-import { addRouterApi } from "client/router";
+import { mapRedux } from "client/redux";
+import { addRouterApi, toComponent } from "client/router";
 import { checkEmail, checkPassword, checkPhone, checkUser } from "client/utils";
 import React, { useEffect } from "react";
 
@@ -27,15 +27,13 @@ const Index = (props) => {
       }
     } = props;
 
-    const data = await login(values);
+    const { data } = await login(values);
 
-    const {
-      data: { token, userInfo }
-    } = data;
+    const { token, userInfo } = data;
 
     localStorage.setItem("token", token);
 
-    setUserInfo(userInfo);
+    setUserInfo(data);
 
     message.success("登录成功");
     setTimeout(() => {
@@ -129,4 +127,4 @@ const Index = (props) => {
   );
 };
 
-export default toComponent(addRouterApi(Index));
+export default mapRedux()(addRouterApi(Index));

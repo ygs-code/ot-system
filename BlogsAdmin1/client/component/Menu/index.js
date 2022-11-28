@@ -51,395 +51,394 @@ const { SubMenu } = Menu;
 //   })
 // );
 // const PerformanceIcon = () => <Icon component={Performance} />;
-export default memo(
-  forwardRef((props) => {
-    const {
-      match: { path, params: { id } = {} } = {},
-      routePaths = {},
-      pushRoute
-    } = props;
-    console.log("Menu props=====", props);
+export default memo((props) => {
+  const {
+    match: { path, params: { id } = {} } = {},
+    routePaths = {},
+    pushRoute
+  } = props;
+  console.log("Menu props=====", props);
 
-    const [selectedKeys, setSelectedKeys] = useState("-1");
-    const [openKeys, setOpenKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState("-1");
+  const [openKeys, setOpenKeys] = useState([]);
 
-    const goTo = useCallback((menu) => {
-      pushRoute(menu.url);
-    }, []);
+  const goTo = useCallback((menu) => {
+    pushRoute(menu.url);
+  }, []);
 
-    const menuData = useMemo(() => {
-      return [
-        // {
-        //   // title: "项目列表",
-        //   // url: "/index", // 路由地址
-        //   // iconComponent: <ProjectOutlined />,
-        //   // key: "1",
-        //   // children: [
-        //   //   {
-        //   //     title: "脚本异常",
-        //   //     url: "http:xxxxx", // 路由地址
-        //   //     // iconComponent: <WarningOutlined/>,
-        //   //     key: "1-1",
-        //   //     children: [
-        //   //       // 子菜单
-        //   //     ],
-        //   //   },
-        //   //   {
-        //   //     title: "资源下载",
-        //   //     url: "http:xxxxx", // 路由地址
-        //   //     // iconComponent: <WarningOutlined/>,
-        //   //     key: "1-2",
-        //   //     children: [
-        //   //       // 子菜单
-        //   //     ],
-        //   //   },
-        //   //   {
-        //   //     title: "网络请求",
-        //   //     url: "http:xxxxx", // 路由地址
-        //   //     // iconComponent: <WarningOutlined/>,
-        //   //     key: "1-3",
-        //   //     children: [
-        //   //       // 子菜单
-        //   //     ],
-        //   //   },
-        //   // ],
-        // },
-        {
-          title: "系统设置",
-          url: "http:xxxxx", // 路由地址
-          iconComponent: <SettingOutlined />,
-          key: "1",
-          children: [
-            {
-              title: "账号权限",
-              url: "http:xxxxx", // 路由地址
-              // iconComponent: <SettingOutlined />,
-              key: "2",
-              children: [
-                {
-                  title: "账号管理",
-                  url: routePaths.accountManagement, // 路由地址
-                  // iconComponent: <HomeOutlined/>,
-                  key: "5",
-                  children: [
-                    // 子菜单
-                  ]
-                },
-                {
-                  title: "角色管理",
-                  url: "http:xxxxx", // 路由地址
-                  // iconComponent: <HomeOutlined/>,
-                  key: "3",
-                  children: [
-                    // 子菜单
-                  ]
-                },
-                {
-                  title: "权限管理",
-                  url: "http:xxxxx", // 路由地址
-                  // iconComponent: <HomeOutlined/>,
-                  key: "4",
-                  children: [
-                    // 子菜单
-                  ]
-                }
-                // {
-                //   title: "页面(URL)",
-                //   url: "http:xxxxx", // 路由地址
-                //   iconComponent: <HomeOutlined/>,
-                //   key: "2-3",
-                //   children: [
-                //     // 子菜单
-                //   ],
-                // },
-                // {
-                //   title: "页面(路由)",
-                //   url: "http:xxxxx", // 路由地址
-                //   iconComponent: <HomeOutlined/>,
-                //   key: "2-4",
-                //   children: [
-                //     // 子菜单
-                //   ],
-                // },
-              ]
-            }
-          ]
-        }
-      ];
-    }, []);
-    // const [menuData, setMenuData] = useState([
-    //   // {
-    //   //   // title: "项目列表",
-    //   //   // url: "/index", // 路由地址
-    //   //   // iconComponent: <ProjectOutlined />,
-    //   //   // key: "1",
-    //   //   // children: [
-    //   //   //   {
-    //   //   //     title: "脚本异常",
-    //   //   //     url: "http:xxxxx", // 路由地址
-    //   //   //     // iconComponent: <WarningOutlined/>,
-    //   //   //     key: "1-1",
-    //   //   //     children: [
-    //   //   //       // 子菜单
-    //   //   //     ],
-    //   //   //   },
-    //   //   //   {
-    //   //   //     title: "资源下载",
-    //   //   //     url: "http:xxxxx", // 路由地址
-    //   //   //     // iconComponent: <WarningOutlined/>,
-    //   //   //     key: "1-2",
-    //   //   //     children: [
-    //   //   //       // 子菜单
-    //   //   //     ],
-    //   //   //   },
-    //   //   //   {
-    //   //   //     title: "网络请求",
-    //   //   //     url: "http:xxxxx", // 路由地址
-    //   //   //     // iconComponent: <WarningOutlined/>,
-    //   //   //     key: "1-3",
-    //   //   //     children: [
-    //   //   //       // 子菜单
-    //   //   //     ],
-    //   //   //   },
-    //   //   // ],
-    //   // },
-    //   {
-    //     title: "系统设置",
-    //     url: "http:xxxxx", // 路由地址
-    //     iconComponent: <SettingOutlined />,
-    //     key: "1",
-    //     children: [
-    //       {
-    //         title: "账号权限",
-    //         url: "http:xxxxx", // 路由地址
-    //         // iconComponent: <SettingOutlined />,
-    //         key: "2",
-    //         children: [
-    //           {
-    //             title: "账号管理",
-    //             url: routePaths.accountManagement, // 路由地址
-    //             // iconComponent: <HomeOutlined/>,
-    //             key: "5",
-    //             children: [
-    //               // 子菜单
-    //             ]
-    //           },
-    //           {
-    //             title: "角色管理",
-    //             url: "http:xxxxx", // 路由地址
-    //             // iconComponent: <HomeOutlined/>,
-    //             key: "3",
-    //             children: [
-    //               // 子菜单
-    //             ]
-    //           },
-    //           {
-    //             title: "权限管理",
-    //             url: "http:xxxxx", // 路由地址
-    //             // iconComponent: <HomeOutlined/>,
-    //             key: "4",
-    //             children: [
-    //               // 子菜单
-    //             ]
-    //           }
-    //           // {
-    //           //   title: "页面(URL)",
-    //           //   url: "http:xxxxx", // 路由地址
-    //           //   iconComponent: <HomeOutlined/>,
-    //           //   key: "2-3",
-    //           //   children: [
-    //           //     // 子菜单
-    //           //   ],
-    //           // },
-    //           // {
-    //           //   title: "页面(路由)",
-    //           //   url: "http:xxxxx", // 路由地址
-    //           //   iconComponent: <HomeOutlined/>,
-    //           //   key: "2-4",
-    //           //   children: [
-    //           //     // 子菜单
-    //           //   ],
-    //           // },
-    //         ]
-    //       }
-    //     ]
-    //   }
-    // ]);
-    // const isProjectPage = () => {
-    //   let reg = /^\/index\/\:id\?$/gi;
-    //   return reg.test(path) && id;
-    // };
-    // const getMenuData = () => {
-    //   let reg = /^\/index\/\:id\?$/gi;
+  const menuData = useMemo(() => {
+    return [
+      // {
+      //   // title: "项目列表",
+      //   // url: "/index", // 路由地址
+      //   // iconComponent: <ProjectOutlined />,
+      //   // key: "1",
+      //   // children: [
+      //   //   {
+      //   //     title: "脚本异常",
+      //   //     url: "http:xxxxx", // 路由地址
+      //   //     // iconComponent: <WarningOutlined/>,
+      //   //     key: "1-1",
+      //   //     children: [
+      //   //       // 子菜单
+      //   //     ],
+      //   //   },
+      //   //   {
+      //   //     title: "资源下载",
+      //   //     url: "http:xxxxx", // 路由地址
+      //   //     // iconComponent: <WarningOutlined/>,
+      //   //     key: "1-2",
+      //   //     children: [
+      //   //       // 子菜单
+      //   //     ],
+      //   //   },
+      //   //   {
+      //   //     title: "网络请求",
+      //   //     url: "http:xxxxx", // 路由地址
+      //   //     // iconComponent: <WarningOutlined/>,
+      //   //     key: "1-3",
+      //   //     children: [
+      //   //       // 子菜单
+      //   //     ],
+      //   //   },
+      //   // ],
+      // },
+      {
+        title: "系统设置",
+        url: "http:xxxxx", // 路由地址
+        iconComponent: <SettingOutlined />,
+        key: "1",
+        children: [
+          {
+            title: "账号权限",
+            url: "http:xxxxx", // 路由地址
+            // iconComponent: <SettingOutlined />,
+            key: "2",
+            children: [
+              {
+                title: "账号管理",
+                url: routePaths.accountManagement, // 路由地址
+                // iconComponent: <HomeOutlined/>,
+                key: "5",
+                children: [
+                  // 子菜单
+                ]
+              },
+              {
+                title: "角色管理",
+                url: "http:xxxxx", // 路由地址
+                // iconComponent: <HomeOutlined/>,
+                key: "3",
+                children: [
+                  // 子菜单
+                ]
+              },
+              {
+                title: "权限管理",
+                url: "http:xxxxx", // 路由地址
+                // iconComponent: <HomeOutlined/>,
+                key: "4",
+                children: [
+                  // 子菜单
+                ]
+              }
+              // {
+              //   title: "页面(URL)",
+              //   url: "http:xxxxx", // 路由地址
+              //   iconComponent: <HomeOutlined/>,
+              //   key: "2-3",
+              //   children: [
+              //     // 子菜单
+              //   ],
+              // },
+              // {
+              //   title: "页面(路由)",
+              //   url: "http:xxxxx", // 路由地址
+              //   iconComponent: <HomeOutlined/>,
+              //   key: "2-4",
+              //   children: [
+              //     // 子菜单
+              //   ],
+              // },
+            ]
+          }
+        ]
+      }
+    ];
+  }, []);
+  // const [menuData, setMenuData] = useState([
+  //   // {
+  //   //   // title: "项目列表",
+  //   //   // url: "/index", // 路由地址
+  //   //   // iconComponent: <ProjectOutlined />,
+  //   //   // key: "1",
+  //   //   // children: [
+  //   //   //   {
+  //   //   //     title: "脚本异常",
+  //   //   //     url: "http:xxxxx", // 路由地址
+  //   //   //     // iconComponent: <WarningOutlined/>,
+  //   //   //     key: "1-1",
+  //   //   //     children: [
+  //   //   //       // 子菜单
+  //   //   //     ],
+  //   //   //   },
+  //   //   //   {
+  //   //   //     title: "资源下载",
+  //   //   //     url: "http:xxxxx", // 路由地址
+  //   //   //     // iconComponent: <WarningOutlined/>,
+  //   //   //     key: "1-2",
+  //   //   //     children: [
+  //   //   //       // 子菜单
+  //   //   //     ],
+  //   //   //   },
+  //   //   //   {
+  //   //   //     title: "网络请求",
+  //   //   //     url: "http:xxxxx", // 路由地址
+  //   //   //     // iconComponent: <WarningOutlined/>,
+  //   //   //     key: "1-3",
+  //   //   //     children: [
+  //   //   //       // 子菜单
+  //   //   //     ],
+  //   //   //   },
+  //   //   // ],
+  //   // },
+  //   {
+  //     title: "系统设置",
+  //     url: "http:xxxxx", // 路由地址
+  //     iconComponent: <SettingOutlined />,
+  //     key: "1",
+  //     children: [
+  //       {
+  //         title: "账号权限",
+  //         url: "http:xxxxx", // 路由地址
+  //         // iconComponent: <SettingOutlined />,
+  //         key: "2",
+  //         children: [
+  //           {
+  //             title: "账号管理",
+  //             url: routePaths.accountManagement, // 路由地址
+  //             // iconComponent: <HomeOutlined/>,
+  //             key: "5",
+  //             children: [
+  //               // 子菜单
+  //             ]
+  //           },
+  //           {
+  //             title: "角色管理",
+  //             url: "http:xxxxx", // 路由地址
+  //             // iconComponent: <HomeOutlined/>,
+  //             key: "3",
+  //             children: [
+  //               // 子菜单
+  //             ]
+  //           },
+  //           {
+  //             title: "权限管理",
+  //             url: "http:xxxxx", // 路由地址
+  //             // iconComponent: <HomeOutlined/>,
+  //             key: "4",
+  //             children: [
+  //               // 子菜单
+  //             ]
+  //           }
+  //           // {
+  //           //   title: "页面(URL)",
+  //           //   url: "http:xxxxx", // 路由地址
+  //           //   iconComponent: <HomeOutlined/>,
+  //           //   key: "2-3",
+  //           //   children: [
+  //           //     // 子菜单
+  //           //   ],
+  //           // },
+  //           // {
+  //           //   title: "页面(路由)",
+  //           //   url: "http:xxxxx", // 路由地址
+  //           //   iconComponent: <HomeOutlined/>,
+  //           //   key: "2-4",
+  //           //   children: [
+  //           //     // 子菜单
+  //           //   ],
+  //           // },
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // ]);
+  // const isProjectPage = () => {
+  //   let reg = /^\/index\/\:id\?$/gi;
+  //   return reg.test(path) && id;
+  // };
+  // const getMenuData = () => {
+  //   let reg = /^\/index\/\:id\?$/gi;
 
-    //   setMenuData([
-    //     // {
-    //     //   // title: "项目列表",
-    //     //   // url: "/index", // 路由地址
-    //     //   // iconComponent: <ProjectOutlined />,
-    //     //   // key: "1",
-    //     //   // children: [
-    //     //   //   {
-    //     //   //     title: "脚本异常",
-    //     //   //     url: "http:xxxxx", // 路由地址
-    //     //   //     // iconComponent: <WarningOutlined/>,
-    //     //   //     key: "1-1",
-    //     //   //     children: [
-    //     //   //       // 子菜单
-    //     //   //     ],
-    //     //   //   },
-    //     //   //   {
-    //     //   //     title: "资源下载",
-    //     //   //     url: "http:xxxxx", // 路由地址
-    //     //   //     // iconComponent: <WarningOutlined/>,
-    //     //   //     key: "1-2",
-    //     //   //     children: [
-    //     //   //       // 子菜单
-    //     //   //     ],
-    //     //   //   },
-    //     //   //   {
-    //     //   //     title: "网络请求",
-    //     //   //     url: "http:xxxxx", // 路由地址
-    //     //   //     // iconComponent: <WarningOutlined/>,
-    //     //   //     key: "1-3",
-    //     //   //     children: [
-    //     //   //       // 子菜单
-    //     //   //     ],
-    //     //   //   },
-    //     //   // ],
-    //     // },
-    //     {
-    //       title: "系统设置",
-    //       url: "http:xxxxx", // 路由地址
-    //       iconComponent: <SettingOutlined />,
-    //       key: "1",
-    //       children: [
-    //         {
-    //           title: "账号权限",
-    //           url: "http:xxxxx", // 路由地址
-    //           // iconComponent: <SettingOutlined />,
-    //           key: "2",
-    //           children: [
-    //             {
-    //               title: "账号管理",
-    //               url: routePaths.accountManagement, // 路由地址
-    //               // iconComponent: <HomeOutlined/>,
-    //               key: "5",
-    //               children: [
-    //                 // 子菜单
-    //               ]
-    //             },
-    //             {
-    //               title: "角色管理",
-    //               url: "http:xxxxx", // 路由地址
-    //               // iconComponent: <HomeOutlined/>,
-    //               key: "3",
-    //               children: [
-    //                 // 子菜单
-    //               ]
-    //             },
-    //             {
-    //               title: "权限管理",
-    //               url: "http:xxxxx", // 路由地址
-    //               // iconComponent: <HomeOutlined/>,
-    //               key: "4",
-    //               children: [
-    //                 // 子菜单
-    //               ]
-    //             }
-    //             // {
-    //             //   title: "页面(URL)",
-    //             //   url: "http:xxxxx", // 路由地址
-    //             //   iconComponent: <HomeOutlined/>,
-    //             //   key: "2-3",
-    //             //   children: [
-    //             //     // 子菜单
-    //             //   ],
-    //             // },
-    //             // {
-    //             //   title: "页面(路由)",
-    //             //   url: "http:xxxxx", // 路由地址
-    //             //   iconComponent: <HomeOutlined/>,
-    //             //   key: "2-4",
-    //             //   children: [
-    //             //     // 子菜单
-    //             //   ],
-    //             // },
-    //           ]
-    //         }
-    //       ]
-    //     }
-    //   ]);
-    //   setSelectedKeys("0");
-    // };
-    useEffect(() => {
-      const menuSelectedKeys =
-        sessionStorage.getItem("adminMenuSelectedKeys") || "";
-      let menuOpenKeys = sessionStorage.getItem("adminMenuOpenKeys") || "[]";
-      menuOpenKeys = JSON.parse(menuOpenKeys);
+  //   setMenuData([
+  //     // {
+  //     //   // title: "项目列表",
+  //     //   // url: "/index", // 路由地址
+  //     //   // iconComponent: <ProjectOutlined />,
+  //     //   // key: "1",
+  //     //   // children: [
+  //     //   //   {
+  //     //   //     title: "脚本异常",
+  //     //   //     url: "http:xxxxx", // 路由地址
+  //     //   //     // iconComponent: <WarningOutlined/>,
+  //     //   //     key: "1-1",
+  //     //   //     children: [
+  //     //   //       // 子菜单
+  //     //   //     ],
+  //     //   //   },
+  //     //   //   {
+  //     //   //     title: "资源下载",
+  //     //   //     url: "http:xxxxx", // 路由地址
+  //     //   //     // iconComponent: <WarningOutlined/>,
+  //     //   //     key: "1-2",
+  //     //   //     children: [
+  //     //   //       // 子菜单
+  //     //   //     ],
+  //     //   //   },
+  //     //   //   {
+  //     //   //     title: "网络请求",
+  //     //   //     url: "http:xxxxx", // 路由地址
+  //     //   //     // iconComponent: <WarningOutlined/>,
+  //     //   //     key: "1-3",
+  //     //   //     children: [
+  //     //   //       // 子菜单
+  //     //   //     ],
+  //     //   //   },
+  //     //   // ],
+  //     // },
+  //     {
+  //       title: "系统设置",
+  //       url: "http:xxxxx", // 路由地址
+  //       iconComponent: <SettingOutlined />,
+  //       key: "1",
+  //       children: [
+  //         {
+  //           title: "账号权限",
+  //           url: "http:xxxxx", // 路由地址
+  //           // iconComponent: <SettingOutlined />,
+  //           key: "2",
+  //           children: [
+  //             {
+  //               title: "账号管理",
+  //               url: routePaths.accountManagement, // 路由地址
+  //               // iconComponent: <HomeOutlined/>,
+  //               key: "5",
+  //               children: [
+  //                 // 子菜单
+  //               ]
+  //             },
+  //             {
+  //               title: "角色管理",
+  //               url: "http:xxxxx", // 路由地址
+  //               // iconComponent: <HomeOutlined/>,
+  //               key: "3",
+  //               children: [
+  //                 // 子菜单
+  //               ]
+  //             },
+  //             {
+  //               title: "权限管理",
+  //               url: "http:xxxxx", // 路由地址
+  //               // iconComponent: <HomeOutlined/>,
+  //               key: "4",
+  //               children: [
+  //                 // 子菜单
+  //               ]
+  //             }
+  //             // {
+  //             //   title: "页面(URL)",
+  //             //   url: "http:xxxxx", // 路由地址
+  //             //   iconComponent: <HomeOutlined/>,
+  //             //   key: "2-3",
+  //             //   children: [
+  //             //     // 子菜单
+  //             //   ],
+  //             // },
+  //             // {
+  //             //   title: "页面(路由)",
+  //             //   url: "http:xxxxx", // 路由地址
+  //             //   iconComponent: <HomeOutlined/>,
+  //             //   key: "2-4",
+  //             //   children: [
+  //             //     // 子菜单
+  //             //   ],
+  //             // },
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   ]);
+  //   setSelectedKeys("0");
+  // };
+  useEffect(() => {
+    const menuSelectedKeys =
+      sessionStorage.getItem("adminMenuSelectedKeys") || "";
+    let menuOpenKeys = sessionStorage.getItem("adminMenuOpenKeys") || "[]";
+    menuOpenKeys = JSON.parse(menuOpenKeys);
 
-      setSelectedKeys(menuSelectedKeys);
-      setOpenKeys(menuOpenKeys);
-      // defaultOpenKeys
-    }, [id, path]);
+    setSelectedKeys(menuSelectedKeys);
+    setOpenKeys(menuOpenKeys);
+    // defaultOpenKeys
+  }, [id, path]);
 
-    // const mapIconComponent = useCallback((key) => {
-    //   const ionComponent = {
-    //     PieChartOutlined: <PieChartOutlined />,
-    //     DesktopOutlined: <DesktopOutlined />,
-    //     ContainerOutlined: <ContainerOutlined />,
-    //     WarningOutlined: <WarningOutlined />,
-    //     PerformanceIcon: <PerformanceIcon />
-    //   };
-    //   return (key in ionComponent && ionComponent[key]) || null;
-    // }, []);
-    const getMenu = useCallback((menuData = [], index = null) => {
-      return menuData.map((item, _index) => {
-        const menuKey = index === null ? _index : `${index}_${_index}`;
-        return item.children && item.children.length ? (
-          <SubMenu key={menuKey} icon={item.iconComponent} title={item.title}>
-            {getMenu(item.children, menuKey)}
-          </SubMenu>
-        ) : (
-          <Menu.Item
-            key={menuKey}
-            icon={item.iconComponent}
-            onClick={() => {
-              goTo(item);
-            }}>
-            {item.title}
-          </Menu.Item>
-        );
-      });
-    }, []);
+  // const mapIconComponent = useCallback((key) => {
+  //   const ionComponent = {
+  //     PieChartOutlined: <PieChartOutlined />,
+  //     DesktopOutlined: <DesktopOutlined />,
+  //     ContainerOutlined: <ContainerOutlined />,
+  //     WarningOutlined: <WarningOutlined />,
+  //     PerformanceIcon: <PerformanceIcon />
+  //   };
+  //   return (key in ionComponent && ionComponent[key]) || null;
+  // }, []);
+  const getMenu = useCallback((menuData = [], index = null) => {
+    return menuData.map((item, _index) => {
+      const menuKey = index === null ? _index : `${index}_${_index}`;
+      return item.children && item.children.length ? (
+        <SubMenu key={menuKey} icon={item.iconComponent} title={item.title}>
+          {getMenu(item.children, menuKey)}
+        </SubMenu>
+      ) : (
+        <Menu.Item
+          key={menuKey}
+          icon={item.iconComponent}
+          onClick={() => {
+            goTo(item);
+          }}>
+          {item.title}
+        </Menu.Item>
+      );
+    });
+  }, []);
 
-    // const onChange = useCallback((value) => {});
+  // const onChange = useCallback((value) => {});
 
-    // const onBlur = useCallback(() => {});
+  // const onBlur = useCallback(() => {});
 
-    // const onFocus = useCallback(() => {});
+  // const onFocus = useCallback(() => {});
 
-    // const onSearch = useCallback((val) => {});
+  // const onSearch = useCallback((val) => {});
 
-    return (
-      <Menu
-        theme="dark"
-        mode="inline"
-        selectedKeys={[selectedKeys]}
-        openKeys={openKeys}
-        onOpenChange={(keyPath) => {
-          sessionStorage.setItem("adminMenuOpenKeys", JSON.stringify(keyPath));
-          setOpenKeys(keyPath);
-        }}
-        onSelect={(value) => {
-          const { key: selectedKeys, keyPath } = value;
-          sessionStorage.setItem("adminMenuSelectedKeys", selectedKeys);
-          sessionStorage.setItem("adminMenuOpenKeys", JSON.stringify(keyPath));
-          setSelectedKeys(selectedKeys);
-          setOpenKeys(keyPath);
-        }}
-        defaultSelectedKeys={[selectedKeys]}>
-        {/*
+  return (
+    <Menu
+      theme="dark"
+      mode="inline"
+      selectedKeys={[selectedKeys]}
+      openKeys={openKeys}
+      onOpenChange={(keyPath) => {
+        sessionStorage.setItem("adminMenuOpenKeys", JSON.stringify(keyPath));
+        setOpenKeys(keyPath);
+      }}
+      onSelect={(value) => {
+        const { key: selectedKeys, keyPath } = value;
+        sessionStorage.setItem("adminMenuSelectedKeys", selectedKeys);
+        sessionStorage.setItem("adminMenuOpenKeys", JSON.stringify(keyPath));
+        setSelectedKeys(selectedKeys);
+        setOpenKeys(keyPath);
+      }}
+      defaultSelectedKeys={[selectedKeys]}>
+      {/*
         //   isProjectPage() ? (
         //   <Menu.Item key="-1" icon={<HomeOutlined />}>
         //     <Select
@@ -464,8 +463,7 @@ export default memo(
         // ) : null}
         */}
 
-        {getMenu(menuData)}
-      </Menu>
-    );
-  })
-);
+      {getMenu(menuData)}
+    </Menu>
+  );
+});

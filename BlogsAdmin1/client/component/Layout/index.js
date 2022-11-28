@@ -26,10 +26,11 @@ const Index = memo((props) => {
   const {
     state: {
       breadcrumb: { items = [] } = {},
-      user: { userInfo: { name, phone } = {} } = {}
+      user: { userInfo: { user: { name, phone } = {} } = {} } = {}
     } = {},
     children
   } = props;
+  console.log("props=", props);
 
   // useEffect(() => {
   //   // 登录拦截
@@ -44,16 +45,10 @@ const Index = memo((props) => {
 
   const [collapsed, setCollapsed] = useState(false);
 
-  const getUser = useCallback(async () => {
-    let data = await getUserInfo({});
-    console.log("data=========", data);
-  }, []);
-
   useEffect(() => {
     const adminCollapsed = sessionStorage.getItem("adminCollapsed");
 
     setCollapsed(adminCollapsed === 1 ? true : false);
-    getUser();
 
     return () => {};
   }, []);
@@ -109,7 +104,7 @@ export const layout = (Component) => {
     render() {
       return (
         <Index {...this.props}>
-          <Component {...this.props} />
+          <Component />
         </Index>
       );
     }

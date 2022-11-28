@@ -12,45 +12,24 @@ import { getPropsState } from "../index";
 export default (global) => ({
   name: "user",
   state: {
-    breadcrumb: [],
     userInfo: getPropsState(global, "user", "userInfo")
   },
   reducers: {
-    setBreadcrumb(state, { payload }) {
-      return {
-        ...state,
-        breadcrumb: [
-          // ...state.breadcrumb,
-          ...payload
-        ]
-      };
-    },
     setUserInfo(state, payload) {
-      console.log("payload======", payload);
-      debugger;
+      // console.log("payload======", payload);
       return {
         ...state,
         userInfo: {
-          ...state.userInfo,
           ...payload
         }
       };
     }
-
-    // setCurrentUser(state, { payload }) {
-    //   return {
-    //     ...state,
-    //     currentUser: {
-    //       ...state.currentUser,
-    //       ...payload,
-    //     },
-    //   };
-    // },
   },
   effects: (dispatch) => {
     return {
       async getUserInfo(state, { payload: param = {} }) {
         const { data } = await getUserInfo(param);
+        // debugger;
 
         dispatch({
           modelsName: "user",

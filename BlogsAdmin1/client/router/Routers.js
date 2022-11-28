@@ -7,7 +7,7 @@
  * @Description:
  */
 import Loading from "client/component/Loading";
-import { toComponent } from "client/component/ToComponent";
+import { toComponent } from "client/router";
 import {
   Route,
   Router,

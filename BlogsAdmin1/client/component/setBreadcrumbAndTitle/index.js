@@ -7,27 +7,30 @@
  * @FilePath: /error-sytem/client/src/common/component/Breadcrumb/index.js
  */
 import { mapRedux } from "client/redux";
-import React, { PureComponent } from "react";
+import React, {
+  Children,
+  cloneElement,
+  memo,
+  PureComponent,
+  useEffect
+} from "react";
 
 const Index = (options) => {
   const { title, breadcrumb } = options;
   return (C) => {
-    class A extends PureComponent {
-      componentDidMount() {
-        const { dispatch: { breadcrumb: { setBreadcrumb } = {} } = {} } =
-          this.props;
+    return mapRedux()((props) => {
+      const { dispatch: { breadcrumb: { setBreadcrumb } = {} } = {} } = props;
+      useEffect(() => {
         if (title) {
           document.title = title;
         }
         if (breadcrumb) {
           setBreadcrumb(breadcrumb);
         }
-      }
-      render() {
-        return <C {...this.props} />;
-      }
-    }
-    return mapRedux()(A);
+      }, []);
+
+      return <C {...props} />;
+    });
   };
 };
 
