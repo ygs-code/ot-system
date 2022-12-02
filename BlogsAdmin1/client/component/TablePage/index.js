@@ -9,6 +9,7 @@
 
 import "./index.less";
 
+import { Pagination } from "antd";
 import { SearchForm } from "client/component/Form";
 import Table from "client/component/Table";
 import React, { PureComponent } from "react";
@@ -41,7 +42,23 @@ export default class extends PureComponent {
 
   // 定义表头字段
   getTableColumns = () => {
-    return [];
+    return [
+      {
+        title: "姓名",
+        dataIndex: "name",
+        key: "name"
+      },
+      {
+        title: "年龄",
+        dataIndex: "age",
+        key: "age"
+      },
+      {
+        title: "住址",
+        dataIndex: "address",
+        key: "address"
+      }
+    ];
   };
 
   /**
@@ -56,7 +73,20 @@ export default class extends PureComponent {
   };
 
   getDataSource = () => {
-    return [];
+    return [
+      {
+        key: "1",
+        name: "胡彦斌",
+        age: 32,
+        address: "西湖区湖底公园1号"
+      },
+      {
+        key: "2",
+        name: "胡彦祖",
+        age: 42,
+        address: "西湖区湖底公园1号"
+      }
+    ];
   };
 
   getTableProps = () => {
@@ -84,10 +114,19 @@ export default class extends PureComponent {
         // footer={() => "Footer"}
         {...this.getTableProps()}
         {...props}
+        pagination={{
+          showSizeChanger: true,
+          showQuickJumper: true,
+          total: 85
+        }}
       />
     );
   };
   render() {
-    return <>this.renderSearch() this.renderTable();</>;
+    return (
+      <>
+        {this.renderSearch()} {this.renderTable()}
+      </>
+    );
   }
 }

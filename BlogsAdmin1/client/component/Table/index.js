@@ -1,47 +1,76 @@
 /*
- * @Date: 2022-08-11 09:41:40
- * @Author: Yao guan shou
- * @LastEditors: Yao guan shou
- * @LastEditTime: 2022-08-15 13:02:13
- * @FilePath: /react-ssr-lazy-loading/client/component/Table/index.js
- * @Description:
+ * @Author: your name
+ * @Date: 2021-08-23 19:39:29
+ * @LastEditTime: 2021-08-26 11:33:11
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /error-sytem/client/src/common/component/Table/index.js
  */
+
 import "./index.less";
 
-import React from "react";
+import { Pagination, Table } from "antd";
+import { getStyle } from "client/utils";
+import React, {
+  Children,
+  lazy,
+  PureComponent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 
 const Index = (props) => {
-  const { columns = [], dataSource = [], rowKey } = props;
+  const { dataSource = [], columns, tableProps = {}, siblingHight = 0 } = props;
+  const [height, setHeight] = useState(0);
+  const tableBoxRef = useRef(null);
+  const tableRef = useRef(null);
+
+  const $setHeight = useCallback(() => {
+    // console.log("tableRef=", parseInt(getStyle(tableRef.current, "height")));
+    let height =
+      parseInt(getStyle(tableBoxRef.current.parentNode, "height")) -
+      parseInt(siblingHight);
+    setHeight(height);
+  }, [tableBoxRef.current, dataSource.length]);
+
+  useEffect(() => {
+    $setHeight();
+    window.addEventListener("resize", $setHeight);
+    return () => {
+      window.removeEventListener("resize", $setHeight);
+    };
+  }, [tableBoxRef.current, dataSource.length]);
 
   return (
-    <div className="table">
-      <dl>
-        <dt>
-          <ul>
-            {columns.map((item, index) => {
-              const { title } = item;
-              return <li key={`${index}_${rowKey || ""}`}>{title}</li>;
-            })}
-          </ul>
-        </dt>
-        <dd>
-          {dataSource.map((item, index) => {
-            return (
-              <ul key={`${index}_${rowKey || ""}`}>
-                {columns.map(($item, $index) => {
-                  const { key, render } = $item;
-                  return (
-                    <li key={`${index}_${$index}_${rowKey || ""}`}>
-                      {render ? render(item[key], item, index) : item[key]}
-                    </li>
-                  );
-                })}
-              </ul>
-            );
-          })}
-        </dd>
-      </dl>
-    </div>
+    <>
+      <div
+        className="table-box"
+        ref={tableBoxRef}
+        style={{
+          height: height + "px"
+        }}>
+        <Table
+          scroll={{
+            y: height - 50 + "px"
+          }}
+          ref={tableRef}
+          {...props}
+          pagination={false}
+        />
+      </div>
+      <div className="table-ant-pagination">
+        <Pagination
+          className="ant-pagination ant-table-pagination ant-table-pagination-right"
+          showQuickJumper
+          defaultCurrent={2}
+          total={500}
+          onChange={() => {}}
+        />
+      </div>
+    </>
   );
 };
 
