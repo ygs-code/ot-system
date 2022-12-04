@@ -7,6 +7,7 @@
  * @Description:
  */
 import { getPropsState } from "../index";
+
 export default (global) => ({
   state: {
     menuActive: getPropsState(global, "nav", "menuActive")

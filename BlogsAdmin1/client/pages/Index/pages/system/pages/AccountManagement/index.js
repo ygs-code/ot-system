@@ -1,5 +1,3 @@
-import "./index.less";
-
 import {
   // Layout,
   //  Menu,

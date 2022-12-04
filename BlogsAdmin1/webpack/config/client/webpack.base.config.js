@@ -14,7 +14,7 @@ const HappyPack = require("happypack");
 const os = require("os");
 const WebpackBar = require("webpackbar");
 const ReactLoadableSSRAddon = require("react-loadable-ssr-addon");
-const { ESBuildPlugin, ESBuildMinifyPlugin } = require("esbuild-loader");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { stringToObject, alias } = require("../../utils");
 
@@ -355,8 +355,18 @@ module.exports = {
       }
     ]),
 
-
     new webpack.HashedModuleIdsPlugin(), // 确保 hash 不被意外改变
+    // stylelint 插件
+    // new StylelintPlugin({
+    //   emitError: true, //发现的错误将始终被触发，将禁用设置为false。
+    //   emitWarning: true, //如果将disable设置为false，则发现的警告将始终被发出。
+    //   failOnError: true, //如果有任何错误，将导致模块构建失败，禁用设置为false。
+    //   failOnWarning: false, //如果有任何警告，如果设置为true，将导致模块构建失败。
+    //   quiet: false, //如果设置为true，将只处理和报告错误，而忽略警告。
+    //   fix: true //自动修复
+    //   // stylelintPath:'',
+    //   // extensions: ["dist/server/static/css/*.css"] // 排除目录检查
+    // }),
     // eslint 插件
     new ESLintPlugin({
       emitError: true, //发现的错误将始终被触发，将禁用设置为false。
@@ -386,7 +396,7 @@ module.exports = {
       // dependencies: false, // 默认true，显示正在进行的依赖项计数消息。
       // dependenciesCount: 10000, // 默认10000，开始时的最小依赖项计数。PS:dependencies启用属性时生效。
     }),
-    new ESBuildPlugin(),
+
     // ts
     new HappyPack({
       id: "jsx",

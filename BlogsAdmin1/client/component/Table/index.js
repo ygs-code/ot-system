@@ -28,11 +28,20 @@ const Index = (props) => {
   const tableBoxRef = useRef(null);
   const tableRef = useRef(null);
 
+  const getChildrenPage = useCallback((node) => {
+    while (node && node.getAttribute("id") != "childrenPage") {
+      node = node.parentNode;
+    }
+    return node;
+  }, []);
+
   const $setHeight = useCallback(() => {
+    console.log(1);
     // console.log("tableRef=", parseInt(getStyle(tableRef.current, "height")));
     let height =
-      parseInt(getStyle(tableBoxRef.current.parentNode, "height")) -
+      parseInt(getStyle(getChildrenPage(tableBoxRef.current), "height")) -
       parseInt(siblingHight);
+    console.log("height==", height);
     setHeight(height);
   }, [tableBoxRef.current, dataSource.length]);
 

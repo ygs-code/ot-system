@@ -11,6 +11,7 @@ import invariant from "tiny-invariant";
 
 import { matchPath } from "./matchPath";
 import { __RouterContext as RouterContext } from "./Router";
+
 var createNamedContext = function createNamedContext(name) {
   var context = createContext();
   context.displayName = name;

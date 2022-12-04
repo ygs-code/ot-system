@@ -9,6 +9,7 @@
 import { getUserInfo } from "client/assets/js/request";
 
 import { getPropsState } from "../index";
+
 export default (global) => ({
   name: "user",
   state: {

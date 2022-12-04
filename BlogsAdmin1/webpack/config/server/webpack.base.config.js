@@ -19,7 +19,6 @@ const HelloWorldCheckerPlugin = require("../../definePlugin/HelloWorldCheckerPlu
 const HappyPack = require("happypack");
 const os = require("os");
 const WebpackBar = require("webpackbar");
-const { ESBuildPlugin, ESBuildMinifyPlugin } = require("esbuild-loader");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { stringToObject, alias } = require("../../utils");
 let {
@@ -475,7 +474,7 @@ module.exports = {
       // dependencies: false, // 默认true，显示正在进行的依赖项计数消息。
       // dependenciesCount: 10000, // 默认10000，开始时的最小依赖项计数。PS:dependencies启用属性时生效。
     }),
-    new ESBuildPlugin(),
+
     // ts
     new HappyPack({
       id: "jsx",

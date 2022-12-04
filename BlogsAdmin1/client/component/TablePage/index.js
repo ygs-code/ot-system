@@ -13,6 +13,7 @@ import { Pagination } from "antd";
 import { SearchForm } from "client/component/Form";
 import Table from "client/component/Table";
 import React, { PureComponent } from "react";
+
 export default class extends PureComponent {
   constructor(props) {
     super(props);

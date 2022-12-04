@@ -31,6 +31,7 @@ import React, {
   useEffect,
   useState
 } from "react";
+
 const { Password } = Input;
 const ItemChild = (props) => {
   let { type = "", itemChildProps = {}, component, render } = props;

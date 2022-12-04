@@ -7,6 +7,7 @@ import VerificationCode from "client/component/VerificationCode";
 import { addRouterApi, toComponent } from "client/router";
 import { checkEmail, checkPassword, checkPhone, checkUser } from "client/utils";
 import React from "react";
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 }

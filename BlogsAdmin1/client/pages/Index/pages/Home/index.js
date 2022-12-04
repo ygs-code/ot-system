@@ -198,7 +198,9 @@ class Index extends TablePage {
           //   padding: "10px 0",
           // },
         })}
-        {this.renderTable()}
+        {this.renderTable({
+          siblingHight: "228px"
+        })}
       </div>
     );
   }
