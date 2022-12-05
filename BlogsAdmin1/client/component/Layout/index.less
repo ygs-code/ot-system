@@ -3,34 +3,37 @@
   height: 6px;
   opacity: 0.4;
 }
+
 ::-webkit-scrollbar-track {
   background-color: white;
   border-radius: 8px;
   opacity: 0.4;
 }
+
 ::-webkit-scrollbar-track-piece {
   width: 4px;
 }
+
 ::-webkit-scrollbar-thumb {
-  border-radius: 8px;
   background-color: gray;
+  border-radius: 8px;
   opacity: 0.4;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
   padding: 0;
   margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .root-layout {
   width: 100%;
+  min-width: 1400px;
   padding: 0;
   margin: 0;
-  min-width: 1400px;
   overflow: scroll;
 
   .sider-layout {
@@ -43,40 +46,40 @@
     .ant-layout-sider {
       height: 100;
       enable-background: 123px;
-
-
     }
   }
+
   .site-layout {
     .ant-layout-header {
-      
+
       // min-width: 1015px;
     }
+
     .site-layout-background {
       background: #fff;
     }
 
     .children-page {
-      background: red;
-      overflow: auto;
-      height: calc(~"100vh - 94px");
-      width: calc(~"100% - 30px");
       box-sizing: border-box;
-      margin: 15px;
-      background: #fff;
+      width: calc(~"100% - 30px");
+      height: calc(~"100vh - 94px");
       padding: 15px;
-      -moz-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*firefox*/
-      -webkit-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*webkit*/
-      box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /*opera或ie9*/
+      margin: 15px;
+      overflow: auto;
+      background: red;
+      background: #fff;
+      -moz-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /* firefox */
+      -webkit-box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /* webkit */
+      box-shadow: 2px 2px 8px rgba(1, 21, 40, 0.2); /* opera或ie9 */
     }
   }
 
   // overflow: hidden;
 
   .trigger {
+    padding: 0 24px;
     font-size: 18px;
     line-height: 64px;
-    padding: 0 24px;
     cursor: pointer;
     transition: color 0.3s;
   }
@@ -87,8 +90,8 @@
 
   .logo {
     height: 32px;
-    background: rgba(255, 255, 255, 0.3);
     margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
   }
 
   .menu-select {
@@ -98,6 +101,6 @@
 
 .ant-layout.ant-layout-has-sider > .ant-layout,
 .ant-layout.ant-layout-has-sider > .ant-layout-content {
-  overflow-x: visible !important;
   box-sizing: border-box;
+  overflow-x: visible !important;
 }
