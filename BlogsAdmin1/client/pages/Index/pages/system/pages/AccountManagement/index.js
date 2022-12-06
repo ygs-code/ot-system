@@ -168,7 +168,7 @@ class Index extends Component {
     // console.log("this.renderSearch=", this.renderSearch);
     // console.log("this.renderTable=", this.renderTable);
     return (
-      <>
+      <div className="table-page">
         {this.renderSearch({
           shrinkLength: 5
           // style: {
@@ -178,7 +178,7 @@ class Index extends Component {
         {this.renderTable({
           siblingHight: "282px"
         })}
-      </>
+      </div>
     );
   }
 }
