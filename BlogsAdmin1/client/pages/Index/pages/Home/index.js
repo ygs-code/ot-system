@@ -5,12 +5,13 @@ import {
 } from "antd";
 import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
-import TablePage from "client/component/TablePage";
+import { tablePage } from "client/component/TablePage";
 import { mapRedux } from "client/redux";
 import { addRouterApi } from "client/router";
-import React from "react";
+import React, { Component } from "react";
 
-class Index extends TablePage {
+@tablePage
+class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {

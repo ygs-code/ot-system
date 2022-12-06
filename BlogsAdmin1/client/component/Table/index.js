@@ -14,42 +14,20 @@ import { getStyle } from "client/utils";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const Index = (props) => {
-  const { dataSource = [], columns, tableProps = {}, siblingHight = 0 } = props;
-  // const [height, setHeight] = useState(0);
-  // const tableBoxRef = useRef(null);
-  // const tableRef = useRef(null);
-
-  // const getChildrenPage = useCallback((node) => {
-  //   while (node && node.getAttribute("id") !== "childrenPage") {
-  //     node = node.parentNode;
-  //   }
-  //   return node;
-  // }, []);
-
-  // const $setHeight = useCallback(() => {
-  //   console.log(1);
-  //   // console.log("tableRef=", parseInt(getStyle(tableRef.current, "height")));
-  //   let height =
-  //     parseInt(getStyle(getChildrenPage(tableBoxRef.current), "height")) -
-  //     parseInt(siblingHight);
-
-  //   setHeight(height);
-  // }, [tableBoxRef.current, dataSource.length]);
-
-  // useEffect(() => {
-  //   $setHeight();
-  //   window.addEventListener("resize", $setHeight);
-  //   return () => {
-  //     window.removeEventListener("resize", $setHeight);
-  //   };
-  // }, [tableBoxRef.current, dataSource.length]);
-
+  const {
+    columns,
+    tableProps = {},
+    paginationProps = {},
+    data: { list = [], pageNum, pageSize, pages, total } = {},
+    onChange = () => {}
+  } = props;
+  console.log("tableProps==", tableProps);
   return (
     <div className="table-box">
       <div className="table">
         <Table
           columns={columns}
-          dataSource={dataSource}
+          dataSource={list}
           {...tableProps}
           pagination={false}
         />
@@ -58,10 +36,15 @@ const Index = (props) => {
       <div className="pagination-box">
         <Pagination
           className="ant-pagination ant-table-pagination ant-table-pagination-right ant-table-pagination-right"
-          showQuickJumper
-          defaultCurrent={2}
-          total={500}
-          onChange={() => {}}
+          showQuickJumper={true}
+          defaultCurrent={pageNum}
+          total={total}
+          onChange={(pageNum) => {
+            onChange({
+              pageNum
+            });
+          }}
+          {...paginationProps}
         />
       </div>
     </div>

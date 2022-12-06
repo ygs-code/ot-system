@@ -13,98 +13,98 @@ import { SearchForm } from "client/component/Form";
 import Table from "client/component/Table";
 import React, { memo, PureComponent } from "react";
 
-class TablePage extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tableData: {
-        list: [{ title: "你好" }]
-      },
-      dataSource: []
-    };
-  }
-  // 获取默认搜索参数
-  getDefaultSearchParams = () => {
-    return {
-      // status: ""
-    };
-  };
+// class TablePage extends PureComponent {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       tableData: {
+//         list: [{ title: "你好" }]
+//       },
+//       dataSource: []
+//     };
+//   }
+//   // 获取默认搜索参数
+//   getDefaultSearchParams = () => {
+//     return {
+//       // status: ""
+//     };
+//   };
 
-  // 定义搜索栏字段
-  getSearchFields = () => {
-    return [];
-  };
+//   // 定义搜索栏字段
+//   getSearchFields = () => {
+//     return [];
+//   };
 
-  // 定义Tab字段
-  getTabFilterItems = () => {
-    return [];
-  };
+//   // 定义Tab字段
+//   getTabFilterItems = () => {
+//     return [];
+//   };
 
-  // 定义表头字段
-  getTableColumns = () => {
-    return [];
-  };
+//   // 定义表头字段
+//   // getTableColumns = () => {
+//   //   return [];
+//   // };
 
-  /**
-   * 定义表格的数据加载功能
-   */
-  tableDataLoader = async () => {
-    return {};
-  };
+//   /**
+//    * 定义表格的数据加载功能
+//    */
+//   tableDataLoader = async () => {
+//     return {};
+//   };
 
-  loadTableData = async (searchParams = {}) => {
-    await this.tableDataLoader(searchParams);
-  };
+//   loadTableData = async (searchParams = {}) => {
+//     return await this.tableDataLoader(searchParams);
+//   };
 
-  getDataSource = () => {
-    return [];
-  };
+//   getDataSource = () => {
+//     return [];
+//   };
 
-  getTableProps = () => {
-    return {};
-  };
+//   getTableProps = () => {
+//     return {};
+//   };
 
-  componentDidMount() {
-    // console.log(" this.searchForm = form;==", this.searchForm);
-    // debugger;
-  }
+//   componentDidMount() {
+//     // console.log(" this.searchForm = form;==", this.searchForm);
+//     // debugger;
+//   }
 
-  renderSearch = (props = {}) => {
-    const { shrinkLength = 5 } = props;
-    return (
-      <SearchForm
-        // shrinkLength={2}
-        {...props}
-        shrinkLength={shrinkLength}
-        fields={this.getSearchFields()}
-        type="search"
-        onReady={(form) => {
-          this.searchForm = form;
-        }}
-      />
-    );
-  };
+//   renderSearch = (props = {}) => {
+//     const { shrinkLength = 5 } = props;
+//     return (
+//       <SearchForm
+//         // shrinkLength={2}
+//         {...props}
+//         shrinkLength={shrinkLength}
+//         fields={this.getSearchFields()}
+//         type="search"
+//         onReady={(form) => {
+//           this.searchForm = form;
+//         }}
+//       />
+//     );
+//   };
 
-  renderTable = (props = {}) => {
-    return (
-      <Table
-        columns={this.getTableColumns()}
-        dataSource={this.getDataSource()}
-        // title={() => "Header"}
-        // footer={() => "Footer"}
-        {...this.getTableProps()}
-        {...props}
-      />
-    );
-  };
-  render() {
-    return (
-      <>
-        {this.renderSearch()} {this.renderTable()}
-      </>
-    );
-  }
-}
+//   renderTable = (props = {}) => {
+//     return (
+//       <Table
+//         columns={this.getTableColumns ? this.getTableColumns() : []}
+//         dataSource={this.getDataSource()}
+//         // title={() => "Header"}
+//         // footer={() => "Footer"}
+//         {...this.getTableProps()}
+//         {...props}
+//       />
+//     );
+//   };
+//   render() {
+//     return (
+//       <>
+//         {this.renderSearch()} {this.renderTable()}
+//       </>
+//     );
+//   }
+// }
 
 const tablePage = (Component) => {
   class TablePage extends Component {
@@ -118,7 +118,8 @@ const tablePage = (Component) => {
         searchParams: {
           pageNum: 1,
           pageSize: 10
-        }
+        },
+        tableData: {}
       };
     }
 
@@ -151,15 +152,72 @@ const tablePage = (Component) => {
     //   return {};
     // };
 
+    checkTabelData = (data) => {
+      let mapKey = [
+        "hasNextPage",
+        "list",
+        "pageNum",
+        "pageSize",
+        "pages",
+        "total"
+      ];
+      let index = -1;
+      for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+          index = mapKey.indexOf(key);
+          if (index !== -1) {
+            mapKey.splice(index, 1);
+          }
+        }
+      }
+
+      if (mapKey.length) {
+        return `列表表格数据数据缺少${mapKey.join(",")}字段`;
+      }
+      return null;
+    };
+
+    checkAbstractFunction = () => {
+      let checkFunction = [
+        {
+          name: "tableDataLoader",
+          message: "tableDataLoader是抽象方法需要实现,请设置ajax请求列表"
+        },
+
+        {
+          name: "getTableColumns",
+          message: "getTableColumns是抽象方法需要实现,请配置表格columns"
+        }
+      ];
+
+      for (let item of checkFunction) {
+        const { name, message } = item;
+        if (!this[name]) {
+          return message;
+        }
+      }
+      return null;
+    };
     loadTableData = async (searchParams = {}) => {
       const { getFieldsValue } = this.searchForm;
       if (this.getDefaultSearchParams) {
         searchParams = {
           ...this.state.searchParams,
-          ...searchParams,
-          ...this.getDefaultSearchParams()
+          ...this.getDefaultSearchParams(),
+          ...searchParams
         };
       }
+
+      // this.setState({
+      //   searchParams
+      // });
+
+      this.setState(() => {
+        return {
+          searchParams
+        };
+      });
+
       const searchFormValue = getFieldsValue();
 
       if (Object.keys(searchFormValue).length) {
@@ -169,21 +227,37 @@ const tablePage = (Component) => {
         };
       }
 
+      let errprMessage = this.checkAbstractFunction();
+      if (errprMessage) {
+        console.error(errprMessage);
+        debugger;
+        return;
+      }
+
       if (!this.tableDataLoader) {
         console.error("tableDataLoader抽象方法需要实现");
         return;
       }
 
-      await this.tableDataLoader(searchParams);
+      console.log("searchParams===", searchParams);
+      const data = await this.tableDataLoader(searchParams);
+      errprMessage = this.checkTabelData(data);
+      if (errprMessage) {
+        console.error(errprMessage);
+        debugger;
+        return;
+      }
+      this.setState({ tableData: data });
+      return data;
     };
 
     getDataSource = () => {
       return [];
     };
 
-    getTableProps = () => {
-      return {};
-    };
+    // getTableProps = () => {
+    //   return {};
+    // };
 
     componentDidMount() {
       console.log("searchParams==", this.state);
@@ -204,7 +278,7 @@ const tablePage = (Component) => {
           fields={this.getSearchFields()}
           type="search"
           onReady={(form) => {
-            console.log("form====", form);
+            // console.log("form====", form);
 
             this.searchForm = form;
           }}
@@ -213,14 +287,24 @@ const tablePage = (Component) => {
     };
 
     renderTable = (props = {}) => {
+      const { tableData } = this.state;
+      let { tableProps = {}, paginationProps = {} } = props;
+
+      tableProps = {
+        ...tableProps,
+        ...props,
+        ...(this.getTableProps ? this.getTableProps() : {})
+      };
+
       return (
         <Table
-          columns={this.getTableColumns()}
-          dataSource={this.getDataSource()}
-          // title={() => "Header"}
-          // footer={() => "Footer"}
-          {...this.getTableProps()}
-          {...props}
+          columns={this.getTableColumns ? this.getTableColumns() : []}
+          tableProps={tableProps}
+          data={tableData}
+          paginationProps={paginationProps}
+          onChange={(searchParams) => {
+            this.loadTableData(searchParams);
+          }}
         />
       );
     };
@@ -236,6 +320,6 @@ const tablePage = (Component) => {
   return TablePage;
 };
 
-export default TablePage;
+// export default TablePage;
 
 export { tablePage };

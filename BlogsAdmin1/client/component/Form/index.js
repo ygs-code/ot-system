@@ -34,20 +34,62 @@ import React, {
 
 const { Password } = Input;
 const ItemChild = (props) => {
-  let { type = "", itemChildProps = {}, component, render } = props;
+  let {
+    type = "",
+    itemChildProps = {},
+    component,
+    render,
+    onChange = () => {},
+    value
+  } = props;
   type = type.toLowerCase();
   const mapTpye = {
-    input: <Input {...itemChildProps}></Input>,
-    inputnumber: <InputNumber {...itemChildProps}></InputNumber>,
-    radio: <Radio {...itemChildProps}></Radio>,
-    rate: <Rate {...itemChildProps}></Rate>,
-    select: <Select {...itemChildProps}></Select>,
-    switch: <Switch {...itemChildProps}></Switch>,
-    slider: <Slider {...itemChildProps}></Slider>,
-    timepicker: <TimePicker {...itemChildProps}></TimePicker>,
-    transfer: <Transfer {...itemChildProps}></Transfer>,
-    checkbox: <Checkbox {...itemChildProps}></Checkbox>,
-    password: <Password {...itemChildProps}></Password>
+    input: (
+      <Input {...itemChildProps} value={value} onChange={onChange}></Input>
+    ),
+    inputnumber: (
+      <InputNumber
+        {...itemChildProps}
+        value={value}
+        onChange={onChange}></InputNumber>
+    ),
+    radio: (
+      <Radio {...itemChildProps} value={value} onChange={onChange}></Radio>
+    ),
+    rate: <Rate {...itemChildProps} value={value} onChange={onChange}></Rate>,
+    select: (
+      <Select {...itemChildProps} value={value} onChange={onChange}></Select>
+    ),
+    switch: (
+      <Switch {...itemChildProps} value={value} onChange={onChange}></Switch>
+    ),
+    slider: (
+      <Slider {...itemChildProps} value={value} onChange={onChange}></Slider>
+    ),
+    timepicker: (
+      <TimePicker
+        {...itemChildProps}
+        value={value}
+        onChange={onChange}></TimePicker>
+    ),
+    transfer: (
+      <Transfer
+        {...itemChildProps}
+        value={value}
+        onChange={onChange}></Transfer>
+    ),
+    checkbox: (
+      <Checkbox
+        {...itemChildProps}
+        value={value}
+        onChange={onChange}></Checkbox>
+    ),
+    password: (
+      <Password
+        {...itemChildProps}
+        value={value}
+        onChange={onChange}></Password>
+    )
   };
   return render
     ? render(props)
@@ -97,6 +139,7 @@ const BaseForm = (props) => {
         {...formProps}>
         {fields.map((item, index) => {
           const { type, title, items = [] } = item;
+          console.log("item===", item);
           return type !== "section" ? (
             <Form.Item {...item} key={index}>
               <ItemChild {...item}></ItemChild>
@@ -160,6 +203,12 @@ const SearchForm = (props) => {
     let fieldsVonde = [];
     for (let index = 0; index < length; index++) {
       const item = fields[index];
+
+      // label: "用户名称",
+      // name: "name",
+      // type: "input",
+      // span: 1
+
       const { span = 1 } = item;
       fieldsVonde.push(
         <div key={index} className={`span span-${span}`}>

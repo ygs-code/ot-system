@@ -132,19 +132,24 @@ class Index extends Component {
   getTableColumns = () => {
     return [
       {
-        title: "姓名",
+        title: "用户ID",
+        dataIndex: "id",
+        key: "id"
+      },
+      {
+        title: "用户名称",
         dataIndex: "name",
         key: "name"
       },
       {
-        title: "年龄",
-        dataIndex: "age",
-        key: "age"
+        title: "Email",
+        dataIndex: "email",
+        key: "email"
       },
       {
-        title: "住址",
-        dataIndex: "address",
-        key: "address"
+        title: "手机",
+        dataIndex: "phone",
+        key: "phone"
       }
     ];
   };
@@ -153,11 +158,9 @@ class Index extends Component {
    * 定义表格的数据加载功能
    */
   tableDataLoader = async (searchParams = {}) => {
-    console.log("searchParams===", searchParams);
-    debugger;
-    const data = await getUserList(searchParams);
-    console.log("data====", data);
-    return {};
+    const { data } = await getUserList(searchParams);
+
+    return data;
   };
 
   getTableProps = () => {
@@ -176,7 +179,7 @@ class Index extends Component {
           // },
         })}
         {this.renderTable({
-          siblingHight: "282px"
+          rowKey: "id"
         })}
       </div>
     );
