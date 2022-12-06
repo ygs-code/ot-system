@@ -5,7 +5,7 @@ import { Button, Form, Input, message } from "antd";
 import { login } from "client/assets/js/request/index";
 import VerificationCode from "client/component/VerificationCode";
 import { mapRedux } from "client/redux";
-import { addRouterApi, toComponent } from "client/router";
+import { addRouterApi } from "client/router";
 import { checkEmail, checkPassword, checkPhone, checkUser } from "client/utils";
 import React, { useEffect } from "react";
 
@@ -29,7 +29,7 @@ const Index = (props) => {
 
     const { data } = await login(values);
 
-    const { token, userInfo } = data;
+    const { token } = data;
 
     localStorage.setItem("token", token);
 

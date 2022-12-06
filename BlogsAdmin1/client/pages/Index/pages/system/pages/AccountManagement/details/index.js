@@ -1,42 +1,9 @@
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  HomeOutlined
-} from "@ant-design/icons";
-import { connect } from "react-redux";
-import "./index.less";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
-import React, {
-  Suspense,
-  lazy,
-  useState,
-  useCallback,
-  Children,
-  useEffect,
-  memo
-} from "react";
-import {
-  routePaths,
-  historyPush,
-  getHistory,
-  addRouterApi
-} from "client/router";
-import {
-  // Layout,
-  //  Menu,
-  Select,
-  Input
-} from "antd";
-import Layout, { layout } from "client/component/Layout";
-import Header from "client/component/Header";
-import Store, { mapRedux } from "client/redux";
+import { Input } from "antd";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
-
-
+import { mapRedux } from "client/redux";
+import { addRouterApi } from "client/router";
+import React from "react";
 
 class Index extends TablePage {
   constructor(props) {
@@ -54,8 +21,8 @@ class Index extends TablePage {
       status: ""
     };
   };
-  componentDidMount(){
-    debugger
+  componentDidMount() {
+    debugger;
   }
   // 定义搜索栏字段
   getSearchFields = () => {
@@ -195,7 +162,7 @@ class Index extends TablePage {
   /**
    * 定义表格的数据加载功能
    */
-  tableDataLoader = async (searchParams = {}) => {
+  tableDataLoader = async () => {
     return {};
   };
 
@@ -224,25 +191,25 @@ export default mapRedux()(
   // 权限控制
   setBreadcrumbAndTitle({
     //设置面包屑和标题
-    // breadcrumb: [
-    //   {
-    //     label: "角色管理" 
-    //     // href: "http://localhost:3000/index",
-    //     // path: "xxxx",
-    //   },
-    //   {
-    //     label: "菜单2",
-    //     // href: "http://localhost:3000/index",
-    //     path: "/",
-    //     component: ""
-    //   }
-    //   // {
-    //   //   label: "菜单3",
-    //   //   // href: "http://localhost:3000/index",
-    //   //   // path: "/",
-    //   //   component: "",
-    //   // },
-    // ],
+    breadcrumb: [
+      {
+        label: "角色管理"
+        // href: "http://localhost:3000/index",
+        // path: "xxxx",
+      },
+      {
+        label: "详情",
+        // href: "http://localhost:3000/index",
+        path: "/",
+        component: ""
+      }
+      // {
+      //   label: "菜单3",
+      //   // href: "http://localhost:3000/index",
+      //   // path: "/",
+      //   component: "",
+      // },
+    ]
     // title: "主页"
-  })(addRouterApi(layout(Index)))
+  })(addRouterApi(Index))
 );

@@ -16,7 +16,8 @@ export default [
           {
             path: "/details/:action/:id?",
             name: "accountManagementDetails",
-            entry: "/pages/Index/pages/system/pages/AccountManagement/index.js",
+            entry:
+              "/pages/Index/pages/system/pages/AccountManagement/details/index.js",
             level: 2,
             children: []
           }

@@ -10,7 +10,7 @@ import "./index.less";
 
 import { Breadcrumb } from "antd";
 import { historyPush } from "client/router";
-import React, { forwardRef, memo } from "react";
+import React, { memo } from "react";
 
 const { Item } = Breadcrumb;
 export default memo((props) => {

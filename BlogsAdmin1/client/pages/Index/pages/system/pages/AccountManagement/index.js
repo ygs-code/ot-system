@@ -6,7 +6,6 @@ import {
 import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
-import { mapRedux } from "client/redux";
 import { addRouterApi } from "client/router";
 import React from "react";
 // 权限控制

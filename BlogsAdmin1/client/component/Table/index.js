@@ -11,16 +11,7 @@ import "./index.less";
 
 import { Pagination, Table } from "antd";
 import { getStyle } from "client/utils";
-import React, {
-  Children,
-  lazy,
-  PureComponent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const Index = (props) => {
   const { dataSource = [], columns, tableProps = {}, siblingHight = 0 } = props;
@@ -29,7 +20,7 @@ const Index = (props) => {
   const tableRef = useRef(null);
 
   const getChildrenPage = useCallback((node) => {
-    while (node && node.getAttribute("id") != "childrenPage") {
+    while (node && node.getAttribute("id") !== "childrenPage") {
       node = node.parentNode;
     }
     return node;
@@ -41,7 +32,7 @@ const Index = (props) => {
     let height =
       parseInt(getStyle(getChildrenPage(tableBoxRef.current), "height")) -
       parseInt(siblingHight);
-    console.log("height==", height);
+
     setHeight(height);
   }, [tableBoxRef.current, dataSource.length]);
 
@@ -66,7 +57,8 @@ const Index = (props) => {
             y: height - 50 + "px"
           }}
           ref={tableRef}
-          {...props}
+          columns={columns}
+          {...tableProps}
           pagination={false}
         />
       </div>

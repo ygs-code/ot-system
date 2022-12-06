@@ -1,9 +1,9 @@
 import "./index.less";
 
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Avatar, Dropdown, Layout, Menu } from "antd";
+import { Avatar, Dropdown, Layout } from "antd";
 import Breadcrumb from "client/component/Breadcrumb";
-import React, { forwardRef, memo, useCallback } from "react";
+import React, { memo } from "react";
 
 const { Header } = Layout;
 

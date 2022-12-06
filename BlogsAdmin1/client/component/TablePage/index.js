@@ -7,9 +7,6 @@
  * @FilePath: /error-sytem/client/src/common/component/Table/index.js
  */
 
-import "./index.less";
-
-import { Pagination } from "antd";
 import { SearchForm } from "client/component/Form";
 import Table from "client/component/Table";
 import React, { PureComponent } from "react";

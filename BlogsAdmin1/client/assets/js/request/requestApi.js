@@ -179,7 +179,7 @@ export const setUserInfo = () => {
 export const getUserList = (parameter = {}) => {
   // const { type = "" } = parameter;
 
-  const { type, pageName = 1, pageSize = 10 } = parameter;
+  // const { type, pageName = 1, pageSize = 10 } = parameter;
 
   return query(
     "getUserList",

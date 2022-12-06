@@ -1,5 +1,3 @@
-import "./index.less";
-
 import { Skeleton } from "antd";
 import { getUserInfo } from "client/assets/js/request";
 import Layout from "client/component/Layout";
@@ -22,7 +20,7 @@ const Index = (props) => {
   }, []);
 
   useEffect(() => {
-    getUser().then((data) => {
+    getUser().then(() => {
       setLoading(false);
     });
   }, []);

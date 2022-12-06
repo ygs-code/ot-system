@@ -5,7 +5,6 @@ import {
   //  Menu,
   // Select
 } from "antd";
-import { getUserInfo } from "client/assets/js/request";
 import Header from "client/component/Header";
 import Menu from "client/component/Menu";
 import { mapRedux } from "client/redux";

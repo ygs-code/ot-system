@@ -1,5 +1,3 @@
-import "./index.less";
-
 import {
   // Layout,
   //  Menu,
@@ -9,7 +7,7 @@ import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
 import TablePage from "client/component/TablePage";
 import { mapRedux } from "client/redux";
-import { addRouterApi, toComponent } from "client/router";
+import { addRouterApi } from "client/router";
 import React from "react";
 
 class Index extends TablePage {
