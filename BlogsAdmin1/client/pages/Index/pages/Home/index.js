@@ -189,17 +189,15 @@ class Index extends TablePage {
     // console.log("this.renderSearch=", this.renderSearch);
     // console.log("this.renderTable=", this.renderTable);
     return (
-      <div>
+      <>
         {this.renderSearch({
           shrinkLength: 2
           // style: {
           //   padding: "10px 0",
           // },
         })}
-        {this.renderTable({
-          siblingHight: "228px"
-        })}
-      </div>
+        {this.renderTable({})}
+      </>
     );
   }
 }

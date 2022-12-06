@@ -9,9 +9,9 @@
 
 import { SearchForm } from "client/component/Form";
 import Table from "client/component/Table";
-import React, { PureComponent } from "react";
+import React, { memo, PureComponent } from "react";
 
-export default class extends PureComponent {
+class TablePage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +24,7 @@ export default class extends PureComponent {
   // 获取默认搜索参数
   getDefaultSearchParams = () => {
     return {
-      status: ""
+      // status: ""
     };
   };
 
@@ -40,23 +40,7 @@ export default class extends PureComponent {
 
   // 定义表头字段
   getTableColumns = () => {
-    return [
-      {
-        title: "姓名",
-        dataIndex: "name",
-        key: "name"
-      },
-      {
-        title: "年龄",
-        dataIndex: "age",
-        key: "age"
-      },
-      {
-        title: "住址",
-        dataIndex: "address",
-        key: "address"
-      }
-    ];
+    return [];
   };
 
   /**
@@ -71,33 +55,30 @@ export default class extends PureComponent {
   };
 
   getDataSource = () => {
-    return [
-      {
-        key: "1",
-        name: "胡彦斌",
-        age: 32,
-        address: "西湖区湖底公园1号"
-      },
-      {
-        key: "2",
-        name: "胡彦祖",
-        age: 42,
-        address: "西湖区湖底公园1号"
-      }
-    ];
+    return [];
   };
 
   getTableProps = () => {
     return {};
   };
 
+  componentDidMount() {
+    // console.log(" this.searchForm = form;==", this.searchForm);
+    // debugger;
+  }
+
   renderSearch = (props = {}) => {
+    const { shrinkLength = 5 } = props;
     return (
       <SearchForm
         // shrinkLength={2}
         {...props}
+        shrinkLength={shrinkLength}
         fields={this.getSearchFields()}
         type="search"
+        onReady={(form) => {
+          this.searchForm = form;
+        }}
       />
     );
   };
@@ -107,16 +88,10 @@ export default class extends PureComponent {
       <Table
         columns={this.getTableColumns()}
         dataSource={this.getDataSource()}
-        bordered
         // title={() => "Header"}
         // footer={() => "Footer"}
         {...this.getTableProps()}
         {...props}
-        pagination={{
-          showSizeChanger: true,
-          showQuickJumper: true,
-          total: 85
-        }}
       />
     );
   };
@@ -128,3 +103,137 @@ export default class extends PureComponent {
     );
   }
 }
+
+const tablePage = (Component) => {
+  class TablePage extends Component {
+    // state = {
+    //   searchParams: {}
+    // };
+    constructor(props) {
+      super(props);
+      this.state = {
+        ...this.state,
+        searchParams: {
+          pageNum: 1,
+          pageSize: 10
+        }
+      };
+    }
+
+    // // 获取默认搜索参数
+    getDefaultSearchParams = () => {
+      return {
+        // status: ""
+      };
+    };
+
+    // // 定义搜索栏字段
+    // getSearchFields = () => {
+    //   return [];
+    // };
+
+    // 定义Tab字段
+    getTabFilterItems = () => {
+      return [];
+    };
+
+    // // 定义表头字段
+    // getTableColumns = () => {
+    //   return [];
+    // };
+
+    /**
+     * 定义表格的数据加载功能
+     */
+    // tableDataLoader = async () => {
+    //   return {};
+    // };
+
+    loadTableData = async (searchParams = {}) => {
+      const { getFieldsValue } = this.searchForm;
+      if (this.getDefaultSearchParams) {
+        searchParams = {
+          ...this.state.searchParams,
+          ...searchParams,
+          ...this.getDefaultSearchParams()
+        };
+      }
+      const searchFormValue = getFieldsValue();
+
+      if (Object.keys(searchFormValue).length) {
+        searchParams = {
+          ...searchParams,
+          ...searchFormValue
+        };
+      }
+
+      if (!this.tableDataLoader) {
+        console.error("tableDataLoader抽象方法需要实现");
+        return;
+      }
+
+      await this.tableDataLoader(searchParams);
+    };
+
+    getDataSource = () => {
+      return [];
+    };
+
+    getTableProps = () => {
+      return {};
+    };
+
+    componentDidMount() {
+      console.log("searchParams==", this.state);
+      this.$timer = setTimeout(() => {
+        this.loadTableData();
+      }, 0);
+    }
+
+    componentWillUnmount() {
+      window.clearTimeout(this.$timer);
+    }
+    renderSearch = (props = {}) => {
+      const { shrinkLength = 5 } = props;
+      return (
+        <SearchForm
+          {...props}
+          shrinkLength={shrinkLength}
+          fields={this.getSearchFields()}
+          type="search"
+          onReady={(form) => {
+            console.log("form====", form);
+
+            this.searchForm = form;
+          }}
+        />
+      );
+    };
+
+    renderTable = (props = {}) => {
+      return (
+        <Table
+          columns={this.getTableColumns()}
+          dataSource={this.getDataSource()}
+          // title={() => "Header"}
+          // footer={() => "Footer"}
+          {...this.getTableProps()}
+          {...props}
+        />
+      );
+    };
+    // render() {
+    //   return (
+    //     <>
+    //       {this.renderSearch()} {this.renderTable()}
+    //     </>
+    //   );
+    // }
+  }
+
+  return TablePage;
+};
+
+export default TablePage;
+
+export { tablePage };

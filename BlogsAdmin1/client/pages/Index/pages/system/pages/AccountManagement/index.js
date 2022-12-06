@@ -5,9 +5,9 @@ import {
 } from "antd";
 import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
-import TablePage from "client/component/TablePage";
+import TablePage, { tablePage } from "client/component/TablePage";
 import { addRouterApi } from "client/router";
-import React from "react";
+import React, { Component } from "react";
 // 权限控制
 @setBreadcrumbAndTitle({
   //设置面包屑和标题
@@ -33,7 +33,8 @@ import React from "react";
   title: "账号管理"
 })
 @addRouterApi
-class Index extends TablePage {
+@tablePage
+class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,22 +48,22 @@ class Index extends TablePage {
   componentDidMount() {
     console.log("AccountManagement");
     // console.log('this.props=======',this.props)
-    getUserList();
+    // getUserList();
   }
 
-  // 获取默认搜索参数
-  getDefaultSearchParams = () => {
-    return {
-      status: ""
-    };
-  };
+  // // 获取默认搜索参数
+  // getDefaultSearchParams = () => {
+  //   return {
+  //     status: ""
+  //   };
+  // };
 
   // 定义搜索栏字段
   getSearchFields = () => {
     return [
       {
-        label: "Username1",
-        name: "username1",
+        label: "用户名称",
+        name: "name",
         type: "input",
         span: 1
         // labelCol: { span: 5 },
@@ -75,13 +76,12 @@ class Index extends TablePage {
         // ],
       },
       {
-        label: "Username2",
-        name: "username2",
-        type: "input",
-        component: <div>123</div>,
-        span: 2,
-        labelCol: { span: 5 },
-        wrapperCol: { span: 10 }
+        label: "用户ID",
+        name: "id",
+        type: "input"
+        // span: 2
+        // labelCol: { span: 5 },
+        // wrapperCol: { span: 10 }
         // rules: [
         //   {
         //     required: true,
@@ -90,12 +90,12 @@ class Index extends TablePage {
         // ],
       },
       {
-        label: "Username3",
-        name: "username3",
+        label: "用户Email",
+        name: "email",
         type: "input",
-        span: 3,
-        labelCol: { span: 3 },
-        wrapperCol: { span: 25 },
+        // span: 3,
+        // labelCol: { span: 3 },
+        // wrapperCol: { span: 25 },
         render: (props) => {
           return <Input {...props}></Input>;
         }
@@ -107,52 +107,9 @@ class Index extends TablePage {
         // ],
       },
       {
-        label: "Username3",
-        name: "username3",
+        label: "用户手机",
+        name: "phone",
         type: "input",
-        render: (props) => {
-          return <Input {...props}></Input>;
-        }
-        // rules: [
-        //   {
-        //     required: true,
-        //     message: "Please input your username3",
-        //   },
-        // ],
-      },
-      {
-        label: "Username4",
-        name: "Username4",
-        type: "input",
-        render: (props) => {
-          return <Input {...props}></Input>;
-        }
-        // rules: [
-        //   {
-        //     required: true,
-        //     message: "Please input your username3",
-        //   },
-        // ],
-      },
-      {
-        label: "Username5",
-        name: "Username5",
-        type: "input",
-        render: (props) => {
-          return <Input {...props}></Input>;
-        }
-        // rules: [
-        //   {
-        //     required: true,
-        //     message: "Please input your username3",
-        //   },
-        // ],
-      },
-      {
-        label: "Username6",
-        name: "Username6",
-        type: "input",
-
         render: (props) => {
           return <Input {...props}></Input>;
         }
@@ -195,7 +152,11 @@ class Index extends TablePage {
   /**
    * 定义表格的数据加载功能
    */
-  tableDataLoader = async () => {
+  tableDataLoader = async (searchParams = {}) => {
+    console.log("searchParams===", searchParams);
+    debugger;
+    const data = await getUserList(searchParams);
+    console.log("data====", data);
     return {};
   };
 
@@ -209,7 +170,7 @@ class Index extends TablePage {
     return (
       <>
         {this.renderSearch({
-          shrinkLength: 3
+          shrinkLength: 5
           // style: {
           //   padding: "10px 0",
           // },

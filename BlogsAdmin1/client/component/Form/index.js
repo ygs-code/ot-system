@@ -137,6 +137,7 @@ const SearchForm = (props) => {
   } = props;
   const [form] = Form.useForm();
   const [expand, setExpand] = useState(false);
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -151,6 +152,8 @@ const SearchForm = (props) => {
   const renderFields = useCallback(() => {
     let length = shrinkLength
       ? expand
+        ? fields.length
+        : shrinkLength > fields.length
         ? fields.length
         : shrinkLength
       : fields.length;
@@ -189,22 +192,24 @@ const SearchForm = (props) => {
         {...formProps}>
         {renderFields()}
         <div className={`buttons`}>
-          <a
-            style={{ fontSize: 12 }}
-            onClick={() => {
-              setExpand(!expand);
-            }}>
-            {expand ? (
-              <>
-                <UpOutlined />
-                收起
-              </>
-            ) : (
-              <>
-                <DownOutlined /> 展开
-              </>
-            )}
-          </a>
+          {shrinkLength >= fields.length ? null : (
+            <a
+              style={{ fontSize: 12 }}
+              onClick={() => {
+                setExpand(!expand);
+              }}>
+              {expand ? (
+                <>
+                  <UpOutlined />
+                  收起
+                </>
+              ) : (
+                <>
+                  <DownOutlined /> 展开
+                </>
+              )}
+            </a>
+          )}
           <Button type="primary" htmlType="submit">
             搜索
           </Button>

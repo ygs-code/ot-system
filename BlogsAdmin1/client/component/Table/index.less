@@ -1,16 +1,14 @@
 .table-box {
   height: 100%;
-  //   overflow-y: auto;
-}
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: space-between;
+  align-content: space-between;
 
-.table-ant-pagination {
-  .ant-pagination {
-    .ant-pagination-item-link {
-      .anticon {
-        svg {
-          margin-top: -7px;
-        }
-      }
-    }
+  .table,
+  .pagination-box {
+    width: 100%;
   }
 }
