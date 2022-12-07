@@ -86,11 +86,13 @@ const Index = memo((props) => {
           breadcrumb={items}></Header>
 
         {/*中间子页面*/}
-        <div id="childrenPage" className="children-page">
-          {Children.map(children, (child) => {
-            return cloneElement(child, props);
-            // return child;
-          })}
+        <div className="children-page-box">
+          <div className="children-page">
+            {Children.map(children, (child) => {
+              return cloneElement(child, props);
+              // return child;
+            })}
+          </div>
         </div>
       </Layout>
     </Layout>

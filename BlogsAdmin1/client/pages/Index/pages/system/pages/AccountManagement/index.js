@@ -5,7 +5,8 @@ import {
 } from "antd";
 import { getUserList } from "client/assets/js/request";
 import setBreadcrumbAndTitle from "client/component/setBreadcrumbAndTitle";
-import TablePage, { tablePage } from "client/component/TablePage";
+import TableButton from "client/component/TableButton";
+import { tablePage } from "client/component/TablePage";
 import { addRouterApi } from "client/router";
 import React, { Component } from "react";
 // 权限控制
@@ -150,6 +151,33 @@ class Index extends Component {
         title: "手机",
         dataIndex: "phone",
         key: "phone"
+      },
+
+      {
+        title: "操作",
+        dataIndex: "actions",
+        key: "actions",
+        render: () => {
+          return (
+            <TableButton
+              render={[
+                {
+                  showPopconfirm: true, // 是否需要弹窗提示
+                  // confirmInfo: "你确定要发布该标签吗？", //弹窗信息
+                  label: "发布", // 按钮文字
+                  status: true, //权限控制
+                  props: {
+                    onClick: () => {
+                      // 事件
+
+                      this.publish(record);
+                    }
+                  }
+                }
+              ]}
+            />
+          );
+        }
       }
     ];
   };
