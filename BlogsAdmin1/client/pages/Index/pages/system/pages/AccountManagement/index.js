@@ -157,21 +157,36 @@ class Index extends Component {
         title: "操作",
         dataIndex: "actions",
         key: "actions",
+        width: 300,
         render: () => {
           return (
             <TableButton
               render={[
                 {
-                  showPopconfirm: true, // 是否需要弹窗提示
+                  // showPopconfirm: true, // 是否需要弹窗提示
                   // confirmInfo: "你确定要发布该标签吗？", //弹窗信息
-                  label: "发布", // 按钮文字
+                  label: "编辑", // 按钮文字
                   status: true, //权限控制
                   props: {
-                    onClick: () => {
-                      // 事件
-
-                      this.publish(record);
-                    }
+                    onClick: () => {}
+                  }
+                },
+                {
+                  // showPopconfirm: true, // 是否需要弹窗提示
+                  // confirmInfo: "你确定要发布该标签吗？", //弹窗信息
+                  label: "查看拥有角色", // 按钮文字
+                  status: true, //权限控制
+                  props: {
+                    onClick: () => {}
+                  }
+                },
+                {
+                  // showPopconfirm: true, // 是否需要弹窗提示
+                  // confirmInfo: "你确定要发布该标签吗？", //弹窗信息
+                  label: "查看拥有权限", // 按钮文字
+                  status: true, //权限控制
+                  props: {
+                    onClick: () => {}
                   }
                 }
               ]}
