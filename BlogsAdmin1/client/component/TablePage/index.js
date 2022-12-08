@@ -11,7 +11,7 @@ import "./index.less";
 
 import { SearchForm } from "client/component/Form";
 import Table from "client/component/Table";
-import React, { memo, PureComponent } from "react";
+import React from "react"; // , { memo, PureComponent }
 
 // class TablePage extends PureComponent {
 //   constructor(props) {

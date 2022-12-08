@@ -10,15 +10,20 @@
 import "./index.less";
 
 import { Pagination, Table } from "antd";
-import { getStyle } from "client/utils";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 
 const Index = (props) => {
   const {
     columns,
     tableProps = {},
     paginationProps = {},
-    data: { list = [], pageNum, pageSize, pages, total } = {},
+    data: {
+      list = [],
+      pageNum,
+      // pageSize,
+      // pages,
+      total
+    } = {},
     onChange = () => {}
   } = props;
   console.log("tableProps==", tableProps);
