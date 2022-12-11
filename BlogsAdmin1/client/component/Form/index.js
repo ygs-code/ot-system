@@ -105,12 +105,15 @@ const BaseForm = (props) => {
     fields = [],
     formProps = {},
     onReady = () => {},
-    children = []
+    children = [],
+    onConfirm = () => {},
+    onReset = () => {}
   } = props;
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    onConfirm(values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -176,18 +179,35 @@ const SearchForm = (props) => {
     formProps = {},
     onReady = () => {},
     children = [],
-    shrinkLength
+    shrinkLength,
+    onConfirm = () => {},
+    onReset = () => {}
   } = props;
   const [form] = Form.useForm();
   const [expand, setExpand] = useState(false);
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    onConfirm(values);
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const onFill = () => {
+    const values = form.getFieldsValue();
+    const restValues = Object.keys(values).reduce((acc, item) => {
+      return {
+        ...acc,
+        [item]: undefined
+      };
+    }, {});
+
+    form.setFieldsValue(restValues);
+    onReset(restValues);
+  };
+
   useEffect(() => {
     onReady(form);
   }, []);
@@ -262,7 +282,9 @@ const SearchForm = (props) => {
           <Button type="primary" htmlType="submit">
             搜索
           </Button>
-          <Button htmlType="button">重置</Button>
+          <Button htmlType="button" onClick={onFill}>
+            重置
+          </Button>
         </div>
 
         {/* 子节点 */}

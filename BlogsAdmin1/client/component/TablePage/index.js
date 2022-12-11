@@ -202,15 +202,11 @@ const tablePage = (Component) => {
       const { getFieldsValue } = this.searchForm;
       if (this.getDefaultSearchParams) {
         searchParams = {
-          ...this.state.searchParams,
           ...this.getDefaultSearchParams(),
+          ...this.state.searchParams,
           ...searchParams
         };
       }
-
-      // this.setState({
-      //   searchParams
-      // });
 
       this.setState(() => {
         return {
@@ -239,7 +235,6 @@ const tablePage = (Component) => {
         return;
       }
 
-      console.log("searchParams===", searchParams);
       const data = await this.tableDataLoader(searchParams);
       errprMessage = this.checkTabelData(data);
       if (errprMessage) {
@@ -259,14 +254,15 @@ const tablePage = (Component) => {
     //   return {};
     // };
 
-    componentDidMount() {
-      console.log("searchParams==", this.state);
+    componentDidMount(...ags) {
+      super.componentDidMount(...ags);
       this.$timer = setTimeout(() => {
         this.loadTableData();
       }, 0);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(...ags) {
+      super.componentDidMount(...ags);
       window.clearTimeout(this.$timer);
     }
     renderSearch = (props = {}) => {
@@ -274,12 +270,14 @@ const tablePage = (Component) => {
       return (
         <SearchForm
           {...props}
+          onConfirm={this.loadTableData}
+          onReset={(searchParams) => {
+            this.loadTableData(searchParams);
+          }}
           shrinkLength={shrinkLength}
           fields={this.getSearchFields()}
           type="search"
           onReady={(form) => {
-            // console.log("form====", form);
-
             this.searchForm = form;
           }}
         />

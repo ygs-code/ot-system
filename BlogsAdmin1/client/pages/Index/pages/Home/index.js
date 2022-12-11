@@ -30,7 +30,7 @@ class Index extends Component {
     console.log("this.props==", this.props);
 
     // debugger;
-    getUserList();
+    // getUserList();
   }
 
   // 获取默认搜索参数
@@ -187,8 +187,6 @@ class Index extends Component {
   };
 
   render() {
-    // console.log("this.renderSearch=", this.renderSearch);
-    // console.log("this.renderTable=", this.renderTable);
     return (
       <div className="table-page">
         {this.renderSearch({

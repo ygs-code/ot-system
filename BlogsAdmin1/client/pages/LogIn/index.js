@@ -93,9 +93,7 @@ const Index = (props) => {
             },
             () => ({
               validator(rule, value) {
-                console.log("value====", value);
                 if (!checkPassword(value)) {
-                  console.log(111111);
                   return Promise.reject(
                     "密码最少为8位，并且最少含有字母和数字组成"
                   );

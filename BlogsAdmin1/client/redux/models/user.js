@@ -17,7 +17,6 @@ export default (global) => ({
   },
   reducers: {
     setUserInfo(state, payload) {
-      // console.log("payload======", payload);
       return {
         ...state,
         userInfo: {

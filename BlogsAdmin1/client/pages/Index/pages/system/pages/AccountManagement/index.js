@@ -46,12 +46,6 @@ class Index extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("AccountManagement");
-    // console.log('this.props=======',this.props)
-    // getUserList();
-  }
-
   // // 获取默认搜索参数
   // getDefaultSearchParams = () => {
   //   return {
@@ -60,7 +54,7 @@ class Index extends Component {
   // };
 
   // 定义搜索栏字段
-  getSearchFields = () => {
+  getSearchFields() {
     return [
       {
         label: "用户名称",
@@ -122,7 +116,7 @@ class Index extends Component {
         // ],
       }
     ];
-  };
+  }
 
   // 定义Tab字段
   getTabFilterItems = () => {
@@ -153,6 +147,16 @@ class Index extends Component {
         key: "phone"
       },
 
+      {
+        title: "创建时间",
+        dataIndex: "createTime",
+        key: "createTime"
+      },
+      {
+        title: "更新时间",
+        dataIndex: "updateTime",
+        key: "updateTime"
+      },
       {
         title: "操作",
         dataIndex: "actions",
@@ -201,6 +205,8 @@ class Index extends Component {
    * 定义表格的数据加载功能
    */
   tableDataLoader = async (searchParams = {}) => {
+    console.log("searchParams==", searchParams);
+    debugger;
     const { data } = await getUserList(searchParams);
 
     return data;
@@ -209,10 +215,13 @@ class Index extends Component {
   getTableProps = () => {
     return {};
   };
-
+  componentDidMount() {
+    setTimeout(() => {
+      console.log(" this.searchForm==", this.searchForm);
+      debugger;
+    }, 1000);
+  }
   render() {
-    // console.log("this.renderSearch=", this.renderSearch);
-    // console.log("this.renderTable=", this.renderTable);
     return (
       <div className="table-page">
         {this.renderSearch({

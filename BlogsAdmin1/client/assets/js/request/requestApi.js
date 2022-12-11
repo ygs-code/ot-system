@@ -199,6 +199,8 @@ export const getUserList = (parameter = {}) => {
               id
               type
               email
+              createTime
+              updateTime
             }
           }
           message

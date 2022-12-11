@@ -23,7 +23,6 @@ const preloadReady = (onSuccess = () => {}, onError = () => {}) => {
       onSuccess();
     })
     .catch((error) => {
-      // console.log("error:", error);
       onError(error);
       throw new Error(error);
     });

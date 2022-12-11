@@ -171,8 +171,6 @@ class Index extends TablePage {
   };
 
   render() {
-    // console.log("this.renderSearch=", this.renderSearch);
-    // console.log("this.renderTable=", this.renderTable);
     return (
       <div>
         {this.renderSearch({
