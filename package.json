@@ -1,0 +1,25 @@
+{
+  "name": "bologs",
+  "version": "0.0.0",
+  "description": "博客code",
+  "main": "gitConfig.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "git": "node ./gitShell"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qq281113270/Blogs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qq281113270/Blogs/issues"
+  },
+  "homepage": "https://github.com/qq281113270/Blogs#readme",
+  "dependencies": {
+    "import-from": "^4.0.0",
+    "ora": "^6.1.0",
+    "webpack-cli-util": "^0.5.1"
+  }
+}
