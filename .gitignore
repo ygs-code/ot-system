@@ -1,17 +1,17 @@
-BlogsAdmin 
-BlogsAdmin/*
-BlogsAdmin/**
-BlogsAdmin/**/*
+ot-system-admin 
+ot-system-admin/*
+ot-system-admin/**
+ot-system-admin/**/*
 
-BlogsClient 
-BlogsClient/*
-BlogsClient/**
-BlogsClient/**/*
+ot-system-client 
+ot-system-client/*
+ot-system-client/**
+ot-system-client/**/*
 
-BlogsServer 
-BlogsServer/*
-BlogsServer/**
-BlogsServer/**/*
+ot-system-server 
+ot-system-server/*
+ot-system-server/**
+ot-system-server/**/*
 
 
 package-lock.json

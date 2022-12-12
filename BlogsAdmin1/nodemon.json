@@ -1,9 +1,0 @@
-{
-    "delay": 1000,
-    "watch": [
-        "dist/*",
-        "dist/**",
-        "dist/**/*"
-    ],
-    "ignore": []
-}

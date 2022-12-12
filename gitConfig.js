@@ -9,17 +9,17 @@
 module.exports = [
   {
     name: '后台管理系统',
-    dir: 'BlogsAdmin',
-    git: 'git@github.com:qq281113270/BlogsAdmin.git',
+    dir: 'ot-system-admin',
+    git: 'git@github.com:qq281113270/ot-system-admin.git',
   },
   {
     name: '客户端',
-    dir: 'BlogsClient',
-    git: 'git@github.com:qq281113270/BlogsClient.git',
+    dir: 'ot-system-client',
+    git: 'git@github.com:qq281113270/ot-system-client.git',
   },
   {
     name: '后台服务',
-    dir: 'BlogsServer',
-    git: 'git@github.com:qq281113270/BlogsServer.git',
+    dir: 'ot-system-server',
+    git: 'git@github.com:qq281113270/ot-system-server.git',
   },
 ]
