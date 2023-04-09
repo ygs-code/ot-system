@@ -7,6 +7,8 @@ const { execute } = require('./cmd'); // 与用户互动
 const path = require('path');
 const fs = require('fs');
 const { readdirSync, stat } = fs;
+const ora = require('ora');
+const chalk = require('chalk');
 
 /*
 process.cwd()返回执行命令的目录(而不是节点包的目录)(如果应用程序内部的'process.chdir'尚未更改命令)。
@@ -22,10 +24,10 @@ class Git {
         this.init();
     }
     async gitClonePull() {
-    
         for (let item of gitConfig) {
             let { name, dir, git } = item;
-
+            console.log('item==',item)
+            // process.chdir(__dirname);
             dir = path.join(__dirname, '../', dir);
             await new Promise((resolve, reject) => {
                 // console.log('dir=', path.join(__dirname,'../',dir));
@@ -53,19 +55,28 @@ class Git {
     }
 
     async gitClone({ name, dir, git }) {
-        console.log(`克隆:${name}\n  git源地址：${git}\n`);
-        await this.PromiseExec(`git clone ${git}`);
-        let { stdout: remote } = await this.PromiseExec(
-            `cd ${dir} && git remote -v`
-        );
-        remote = remote.split('\n')[1];
-        let { stdout: branch } = await this.PromiseExec(
-            `cd ${dir} && git branch`
-        );
-        branch = branch.toString().match(/(?<=\*)\s*\w+/)[0];
         console.log(
-            `克隆:${name}成功\n  git源地址：${remote}\n  git分支:${branch}`
+            chalk.rgb(17, 168, 203)(`\n开始克隆:${name}\n  git源地址：${git}\n`)
         );
+        // this.spinner = ora(chalk.rgb(17, 168, 203)('克隆代码中请稍后.....\n'));
+        // this.spinner.start();
+        process.chdir('../');
+        await this.PromiseExec(`git clone ${git}`);
+
+        console.log('克隆成功')
+        // process.chdir(dir);
+        // let { stdout: remote } = await this.PromiseExec(`git remote -v`);
+        // remote = remote.split('\n')[1];
+        // let { stdout: branch } = await this.PromiseExec(`git branch`);
+        // branch = branch.toString().match(/(?<=\*)\s*\w+/)[0];
+        // console.log(
+        //     chalk.rgb(
+        //         13,
+        //         188,
+        //         121
+        //     )(`克隆:${name}成功\n  git源地址：${remote}\n  git分支:${branch}`)
+        // );
+        // this.spinner.stop();
     }
     async gitPull({ name, dir, git }) {
         process.chdir(dir);
@@ -81,13 +92,8 @@ class Git {
         branch = branch.toString().match(/(?<=\*)\s*\w+/)[0];
         console.log(`更新:${name}\n git源地址：${remote}\n git分支:${branch}`);
 
-        await this.PromiseExec(`git pull`, {
-            stdio: null,
-            getStdout: (stdout) => {
-                console.log(stdout);
-                console.log(`更新:${name}成功\n\n`);
-            },
-        });
+        await this.PromiseExec(`git pull`);
+        console.log(`更新:${name}成功\n\n`);
     }
     async init() {
         await this.gitClonePull();
@@ -112,28 +118,9 @@ class Git {
                 },
                 callback: () => {
                     callback();
+                    reslove();
                 },
             });
-
-            // var workerProcess = exec(cmd, (err, stdout, stderr) => {
-            //     if (!err) {
-            //         reslove({
-            //             cmd,
-            //             stdout,
-            //             stderr,
-            //             code: 200,
-            //         });
-            //     } else {
-            //         reject({
-            //             code: 500,
-            //             err,
-            //             stderr,
-            //         });
-            //     }
-            // });
-            // workerProcess.on('exit', (code) => {
-            //     callback(code);
-            // });
         });
     }
 }

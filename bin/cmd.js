@@ -43,7 +43,7 @@ function formatDate(value = Date.now(), format = 'YY-MM-DD hh:mm:ss') {
     }
     return format;
 }
- 
+
 class Cmd {
     text = '';
 
@@ -132,6 +132,8 @@ class Cmd {
 const execute = (command, options = { stdio: 'inherit' }) => {
     options = {
         stdio: 'inherit',
+        // silent:true,
+        logPrefix: true,
         ...options,
     };
 
@@ -143,11 +145,10 @@ const execute = (command, options = { stdio: 'inherit' }) => {
     // }
 
     const proc = spawn(command[0], command.slice(1), options);
-    
 
     // 进程错误
     proc.on('error', (error) => {
-        // console.log('error')
+        console.log('error');
         if (error) {
             callback(error);
             console.error('process error:', error);
@@ -156,7 +157,7 @@ const execute = (command, options = { stdio: 'inherit' }) => {
 
     // 进程关闭
     proc.on('close', (code) => {
-        // console.log('close')
+        console.log('close');
         // callback(code);
         // console.log(`process closed with exit code: ${code}`)
         // process.exit(code);
@@ -164,14 +165,22 @@ const execute = (command, options = { stdio: 'inherit' }) => {
 
     // 退出
     proc.on('exit', (code, signal) => {
-        // console.log('exit')
+        console.log('exit');
         // console.log(`process exits`)
         callback(code, signal);
         // process.exit(code);
     });
 
+    if (proc.stderr) {
+        proc.stderr.on('data', (data) => {
+            // 不一定代表进程exitcode != 0，可能只是进程调用了console.error
+            //  data = String(data);
+            getStdout(String(data));
+        });
+    }
     if (proc.stdout) {
         proc.stdout.on('data', (data) => {
+            console.log('stdout==', data.toString());
             getStdout(data.toString());
         });
     }

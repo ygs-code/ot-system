@@ -18,5 +18,7 @@
   },
   "homepage": "https://github.com/qq281113270/Blogs#readme",
   "dependencies": {
+    "chalk": "4.1.2",
+    "ora": "4.1.1"
   }
 }
