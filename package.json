@@ -5,7 +5,7 @@
   "main": "gitConfig.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "git": "node ./gitShell"
+    "git": "node  ./bin/gitShell"
   },
   "repository": {
     "type": "git",
