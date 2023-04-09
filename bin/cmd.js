@@ -157,7 +157,6 @@ const execute = (command, options = { stdio: 'inherit' }) => {
 
     // 进程关闭
     proc.on('close', (code) => {
-        console.log('close');
         // callback(code);
         // console.log(`process closed with exit code: ${code}`)
         // process.exit(code);
@@ -165,8 +164,6 @@ const execute = (command, options = { stdio: 'inherit' }) => {
 
     // 退出
     proc.on('exit', (code, signal) => {
-        console.log('exit');
-        // console.log(`process exits`)
         callback(code, signal);
         // process.exit(code);
     });
@@ -174,13 +171,13 @@ const execute = (command, options = { stdio: 'inherit' }) => {
     if (proc.stderr) {
         proc.stderr.on('data', (data) => {
             // 不一定代表进程exitcode != 0，可能只是进程调用了console.error
-            //  data = String(data);
+            // console.log('stderr==', data.toString());
             getStdout(String(data));
         });
     }
     if (proc.stdout) {
         proc.stdout.on('data', (data) => {
-            console.log('stdout==', data.toString());
+            // console.log('stdout==', data.toString());
             getStdout(data.toString());
         });
     }

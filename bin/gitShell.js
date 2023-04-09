@@ -26,8 +26,8 @@ class Git {
     async gitClonePull() {
         for (let item of gitConfig) {
             let { name, dir, git } = item;
-            console.log('item==',item)
-            // process.chdir(__dirname);
+            // console.log('item==',item)
+            process.chdir(path.join(__dirname, '../'));
             dir = path.join(__dirname, '../', dir);
             await new Promise((resolve, reject) => {
                 // console.log('dir=', path.join(__dirname,'../',dir));
@@ -60,22 +60,26 @@ class Git {
         );
         // this.spinner = ora(chalk.rgb(17, 168, 203)('克隆代码中请稍后.....\n'));
         // this.spinner.start();
-        process.chdir('../');
+        // process.chdir('../');
         await this.PromiseExec(`git clone ${git}`);
 
-        console.log('克隆成功')
-        // process.chdir(dir);
-        // let { stdout: remote } = await this.PromiseExec(`git remote -v`);
-        // remote = remote.split('\n')[1];
-        // let { stdout: branch } = await this.PromiseExec(`git branch`);
-        // branch = branch.toString().match(/(?<=\*)\s*\w+/)[0];
-        // console.log(
-        //     chalk.rgb(
-        //         13,
-        //         188,
-        //         121
-        //     )(`克隆:${name}成功\n  git源地址：${remote}\n  git分支:${branch}`)
-        // );
+        // console.log('克隆成功')
+        process.chdir(dir);
+        let { stdout: remote } = await this.PromiseExec(`git remote -v`, {
+            stdio: null,
+        });
+        remote = remote.split('\n')[1];
+        let { stdout: branch } = await this.PromiseExec(`git branch`, {
+            stdio: null,
+        });
+        branch = branch.toString().match(/(?<=\*)\s*\w+/)[0];
+        console.log(
+            chalk.rgb(
+                13,
+                188,
+                121
+            )(`克隆:${name}成功\n  git源地址：${remote}\n  git分支:${branch}`)
+        );
         // this.spinner.stop();
     }
     async gitPull({ name, dir, git }) {

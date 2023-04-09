@@ -12,11 +12,11 @@
 
  
 module.exports = [
-  // {
-  //   name: '后台管理系统',
-  //   dir: 'ot-system-admin',
-  //   git: 'git@github.com:ygs-code/ot-system-admin.git',
-  // },
+  {
+    name: '后台管理系统',
+    dir: 'ot-system-admin',
+    git: 'git@github.com:ygs-code/ot-system-admin.git',
+  },
   {
     name: '后台服务',
     dir: 'ot-system-server',
