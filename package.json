@@ -5,7 +5,9 @@
   "main": "gitConfig.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "git": "node  ./bin/gitShell"
+    "updateCode": "node  ./bin/updateCode",
+    "bulidCode": "node  ./bin/bulidCode"
+
   },
   "repository": {
     "type": "git",

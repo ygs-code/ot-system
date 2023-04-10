@@ -10,22 +10,20 @@
   用http下载
  */
 
- 
 module.exports = [
   {
-    name: '后台管理系统',
-    dir: 'ot-system-admin',
-    git: 'git@github.com:ygs-code/ot-system-admin.git',
+    name: "后台管理系统",
+    dir: "ot-system-admin",
+    git: "git@github.com:ygs-code/ot-system-admin.git",
   },
   {
-    name: '后台服务',
-    dir: 'ot-system-server',
-    git: 'git@github.com:ygs-code/ot-system-server.git',
+    name: "后台服务",
+    dir: "ot-system-server",
+    git: "git@github.com:ygs-code/ot-system-server.git",
   },
   {
-    name: '客户端',
-    dir: 'ot-system-client',
-    git: 'git@github.com:ygs-code/ot-system-client.git',
+    name: "客户端",
+    dir: "ot-system-client",
+    git: "git@github.com:ygs-code/ot-system-client.git",
   },
-
-]
+];

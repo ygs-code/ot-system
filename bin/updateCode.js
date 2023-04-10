@@ -15,7 +15,7 @@ process.cwd()返回执行命令的目录(而不是节点包的目录)(如果应�
 __filename返回放置文件的绝对路径。
 __dirname返回__filename目录的绝对路径。
 */
-class Git {
+class UpdateCode {
     constructor() {
         this.addReg = /git add/gi;
         this.pushReg = /git push/gi;
@@ -129,4 +129,4 @@ class Git {
     }
 }
 
-new Git();
+new UpdateCode();
