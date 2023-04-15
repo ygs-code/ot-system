@@ -1,14 +1,12 @@
-FROM redis         #依赖centos镜像
+# 设置基础镜像
+FROM nginx
+# 定义作者
+MAINTAINER yao guan shou
+# 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
+# COPY dist/  /usr/share/nginx/html/
+# COPY nginx.conf /etc/nginx/nginx.conf
+# COPY nginx.conf /etc/nginx/conf/nginx.conf
+# 覆盖默认配置
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN echo 'echo init ok!!'
  
-MAINTAINER yao guan shou    #作者信息
- 
-RUN groupadd -r redis && useradd -r -g redis redis
-RUN mkdir /data && chown redis:redis /data
-VOLUME ["/data"]                            #将容器中的/data目录挂在到主机中
-ADD redis-3.2.8.tar.gz /data/               #拷贝源码包，并解压
-RUN yum install -y gcc gcc-c++ net-tools make
-WORKDIR /data/redis-3.2.8/src/              #切换目录
-RUN make && make install
-Copy redis-master.conf .                    #拷贝配置文件
-EXPOSE 6801                                 #指定监听端口
-CMD ["redis-server","redis-master.conf"]    #容器启动后，启动redis服务
