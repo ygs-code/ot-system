@@ -11,6 +11,8 @@ services:
       - '6379:6379'
     expose:
       - 6379 # 暴雷出端口 给links使用
+    # networks:
+    #   - app
     networks:
       app:
         #当前服务器使用哪个桥
@@ -29,6 +31,8 @@ services:
     expose:
       - 3306 # 暴雷出端口 给links使用 
     # network_mode: "host"   #https://juejin.cn/post/6844904056301830152 
+    # networks:
+    #   - app
     networks:
       app:
         #当前服务器使用哪个桥
@@ -54,6 +58,8 @@ services:
       - "3003:3003" # 容器外部导出端口号:容器内部端口号
     expose:
       - 3003 # 暴雷出端口 给links使用
+    # networks:
+    #   - app
     networks:
       app:
         #当前服务器使用哪个桥
@@ -64,7 +70,7 @@ services:
     depends_on:
       - redis # 优先构建redis 容器， 在构建 server容器
       - mysql
-    command: "npm run prd:n"
+    command: "npm run prd:n"  # 覆盖 Dockerfile 中的 cmd
       # environment:
       #   #代表了给当前容器指定环境 相当于 docker run -e  MYSQL_ROOT_PASSWORD: "123456"
       #   # MYSQL_USER: 'root' # mysql 用户名
