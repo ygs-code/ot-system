@@ -1,14 +1,20 @@
-version: '3.1' #  选择 docker-compose 项目版本号
+version: '3.2' #  选择 docker-compose 项目版本号
 services:
-  client-nginx:
+  redis:
     build:
-      context: ./nginx
+      context: ./DockerFiles/redis
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
-    container_name: nginx # 容器名字
+    container_name: redis # 容器名字
     restart: always # 开机自动重启
     ports:
-      - '8080:80'
+      - '6379:6379'
+    expose:
+      # 暴雷出端口 给links使用
+      - 6379
+    #  links:
+    #     - web1
+    #     - web2  
     networks:
       #当前服务器使用哪个桥
       - app
@@ -16,8 +22,86 @@ services:
         # - ./log:/var/log/nginx  ###这里面放置日志
         # - ./html:/html         ###这里面放置项目目录
 
+  # mysql:
+  #   image: "mysql:5.7" #获取mysql 镜像
+  #   container_name: mysql #mysql容器名称  docker run --name mysql
+  #   restart: always # docker启动，当前容器必启动
+  #   ports:
+  #     - "3306:3306" # 容器外部导出端口号:容器内部端口号
+  #   expose:
+  #     # 暴雷出端口 给links使用
+  #     - 3306
+  #   networks:
+  #     #当前服务器使用哪个桥
+  #     - app
+  #   environment:
+  #     #代表了给当前容器指定环境 相当于 docker run -e  MYSQL_ROOT_PASSWORD: "123456"
+  #     # MYSQL_USER: 'root' # mysql 用户名
+  #     # MYSQL_PASS: '123456' # mysql 密码
+  #     MYSQL_ROOT_PASSWORD: "123456" # mysql 密码
+  #   volumes:
+  #     # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
+  #     - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+  #     # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+
+  server:
+    # image: "node:14" #获取mysql日志
+    build:
+      context: ./ot-system-server
+      dockerfile: Dockerfile
+    container_name: server #mysql容器名称  docker run --name mysql
+    restart: always # docker启动，当前容器必启动
+    ports:
+      - "3003:3003" # 容器外部导出端口号:容器内部端口号
+    expose:
+      # 暴雷出端口 给links使用
+      - 3003
+    networks:
+      #当前服务器使用哪个桥
+      - app
+    links:
+      # 网络连接到redis中
+      - redis
+    depends_on:
+      # 优先构建redis 容器， 在构建 server容器
+      - redis
+      # environment:
+      #   #代表了给当前容器指定环境 相当于 docker run -e  MYSQL_ROOT_PASSWORD: "123456"
+      #   # MYSQL_USER: 'root' # mysql 用户名
+      #   # MYSQL_PASS: '123456' # mysql 密码
+      #   MYSQL_ROOT_PASSWORD: "123456" # mysql 密码
+      # volumes:
+      #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
+      #   - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+      #   # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+
+      #声明定义上面的网桥模式 默认创建的是bridge
 networks:
   app:
+    #声明定义上面的网桥模式 默认创建的是bridge
+    driver: bridge
+    # services:
+    #   client-nginx:
+    #     build:
+    #       context: ./nginx
+    #       dockerfile: Dockerfile
+    #     # image: nginx # 镜像名称
+    #     container_name: nginx # 容器名字
+    #     restart: always # 开机自动重启
+    #     ports:
+    #       - '8080:80'
+    #     networks:
+    #       #当前服务器使用哪个桥
+    #       - app
+    #         # - ./nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件
+    #         # - ./log:/var/log/nginx  ###这里面放置日志
+    #         # - ./html:/html         ###这里面放置项目目录
+
+    # networks:
+    #   app:
+
+
+
     #声明定义上面的网桥模式 默认创建的是bridge
     # vloumes:
     #     client_nginx_web:
