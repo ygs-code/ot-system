@@ -10,45 +10,49 @@ services:
     ports:
       - '6379:6379'
     expose:
-      - 6379 # 暴雷出端口 给links使用
-    # networks:
-    #   - app
+      - 6379 # 暴露出端口 给links使用
     networks:
-      app:
-        #当前服务器使用哪个桥
-        ipv4_address: 172.16.0.2 # 具体ip 
-        #当前服务器使用哪个桥
-        # - ./nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件
-        # - ./log:/var/log/nginx  ###这里面放置日志
-        # - ./html:/html         ###这里面放置项目目录
+      - app
+      # networks:
+      #   app:
+      #     #当前服务器使用哪个桥
+      #     ipv4_address: 172.16.0.2 # 具体ip 
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件
+      # - ./log:/var/log/nginx  ###这里面放置日志
+      # - ./html:/html         ###这里面放置项目目录
+
+      #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
 
   mysql:
-    image: "mysql:5.7" #获取mysql 镜像
+    # image: "mysql:5.7" #获取mysql 镜像
+    build:
+      context: ./DockerFiles/mysql
+      dockerfile: Dockerfile
     container_name: mysql #mysql容器名称  docker run --name mysql
     restart: always # docker启动，当前容器必启动
     ports:
       - "3306:3306" # 容器外部导出端口号:容器内部端口号
     expose:
-      - 3306 # 暴雷出端口 给links使用 
+      - 3306 # 暴露出端口 给links使用 
     # network_mode: "host"   #https://juejin.cn/post/6844904056301830152 
-    # networks:
-    #   - app
     networks:
-      app:
-        #当前服务器使用哪个桥
-        ipv4_address: 172.16.0.3 # 具体ip 
+      - app
+    # networks:
+    #   app:
+    #     #当前服务器使用哪个桥
+    #     ipv4_address: 172.16.0.3 # 具体ip 
     environment:
       #代表了给当前容器指定环境 相当于 docker run -e  MYSQL_ROOT_PASSWORD: "123456"
       # MYSQL_USER: 'root' # mysql 用户名
       # MYSQL_PASS: '123456' # mysql 密码
       MYSQL_ROOT_PASSWORD: "123456" # mysql 密码
-    volumes:
-      # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
-      - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+      # volumes:
+      #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
+      #   - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
       # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
 
   server:
-    # image: "node:14" #获取mysql日志
+    # image: "node:14" #获取node镜像
     build:
       context: ./ot-system-server
       dockerfile: Dockerfile
@@ -57,20 +61,22 @@ services:
     ports:
       - "3003:3003" # 容器外部导出端口号:容器内部端口号
     expose:
-      - 3003 # 暴雷出端口 给links使用
-    # networks:
-    #   - app
+      - 3003 # 暴露出端口 给links使用
     networks:
-      app:
-        #当前服务器使用哪个桥
-        ipv4_address: 172.16.0.4 # 具体ip 
+      - app
+    # networks:
+    #   app:
+    #     #当前服务器使用哪个桥
+    #     ipv4_address: 172.16.0.4 # 具体ip 
     links:
       - redis # 网络连接到redis中
       - mysql
     depends_on:
       - redis # 优先构建redis 容器， 在构建 server容器
       - mysql
-    command: "npm run prd:n"  # 覆盖 Dockerfile 中的 cmd
+      #启动服务
+    command: "npm run prd:n"
+      # 覆盖 Dockerfile 中的 cmd
       # environment:
       #   #代表了给当前容器指定环境 相当于 docker run -e  MYSQL_ROOT_PASSWORD: "123456"
       #   # MYSQL_USER: 'root' # mysql 用户名
@@ -83,9 +89,11 @@ services:
 
       #声明定义上面的网桥模式 默认创建的是bridge
 networks:
+  # app:
+  #   ipam:
+  #     config:
+  #       - subnet: 172.16.0.0/100
+  # ip_range: 172.28.5.0/24
+  #声明定义上面的网桥模式 默认创建的是bridge
   app:
-    ipam:
-      config:
-        - subnet: 172.16.0.0/100
-    #声明定义上面的网桥模式 默认创建的是bridge
-    # driver: bridge
+    driver: bridge
