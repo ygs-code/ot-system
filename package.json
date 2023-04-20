@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "updateCode": "node  ./bin/updateCode",
-    "bulidCode": "node  ./bin/bulidCode"
-
+    "bulidCode": "node  ./bin/bulidCode",
+    "updateBulidCode": "npm run updateCode & npm run bulidCode",
+    "docker":"docker-compose stop & docker-compose rm -f & docker-compose build & docker-compose start",
+    "publish":"npm run updateBulidCode & npm run docker"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   "homepage": "https://github.com/qq281113270/Blogs#readme",
   "dependencies": {
     "chalk": "4.1.2",
-    "ora": "4.1.1"
+    "ora": "4.1.1",
+    "rimraf": "^5.0.0"
   }
 }

@@ -20,6 +20,7 @@ module.exports = [
     name: "后台服务",
     dir: "ot-system-server",
     git: "git@github.com:ygs-code/ot-system-server.git",
+    isDockerBuild:true,
   },
   {
     name: "客户端",

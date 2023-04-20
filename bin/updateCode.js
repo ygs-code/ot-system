@@ -7,7 +7,6 @@ const { execute } = require('./cmd'); // 与用户互动
 const path = require('path');
 const fs = require('fs');
 const { readdirSync, stat } = fs;
-const ora = require('ora');
 const chalk = require('chalk');
 
 /*

@@ -69,11 +69,11 @@ services:
     #     #当前服务器使用哪个桥
     #     ipv4_address: 172.16.0.4 # 具体ip 
     links:
+      - mysql
       - redis # 网络连接到redis中
-      - mysql
     depends_on:
-      - redis # 优先构建redis 容器， 在构建 server容器
       - mysql
+      - redis # 优先构建redis 容器， 在构建 server容器
       #启动服务
     command: "npm run prd:n"
       # 覆盖 Dockerfile 中的 cmd
@@ -88,6 +88,60 @@ services:
       #   # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
 
       #声明定义上面的网桥模式 默认创建的是bridge
+
+  client-nginx:
+    build:
+      context: ./ot-system-client
+      dockerfile: Dockerfile
+    # image: nginx # 镜像名称
+    container_name: client-nginx # 容器名字
+    restart: always # 开机自动重启
+    ports:
+      - '3002:80' #   主机端口:容器端口
+    expose:
+      - 3002 # 暴露出端口 给links使用
+    networks:
+      - app
+      # networks:
+      #   app:
+      #     #当前服务器使用哪个桥
+      #     ipv4_address: 172.16.0.2 # 具体ip 
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件
+      # - ./log:/var/log/nginx  ###这里面放置日志
+      # - ./html:/html         ###这里面放置项目目录
+    links:
+      - server # 网络连接到server中
+    depends_on:
+      - server
+        # 优先构建redis 容器， 在构建 server容器
+        #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+  admin-nginx:
+    build:
+      context: ./ot-system-admin
+      dockerfile: Dockerfile
+    # image: nginx # 镜像名称
+    container_name: admin-nginx # 容器名字
+    restart: always # 开机自动重启
+    ports:
+      - '3001:80' #   主机端口:容器端口
+    expose:
+      - 3001 # 暴露出端口 给links使用
+    networks:
+      - app
+      # networks:
+      #   app:
+      #     #当前服务器使用哪个桥
+      #     ipv4_address: 172.16.0.2 # 具体ip 
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件
+      # - ./log:/var/log/nginx  ###这里面放置日志
+      # - ./html:/html         ###这里面放置项目目录
+    links:
+      - server # 网络连接到server中
+    depends_on:
+      - server
+        # 优先构建redis 容器， 在构建 server容器
+        #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+
 networks:
   # app:
   #   ipam:
