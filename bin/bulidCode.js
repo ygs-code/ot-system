@@ -11,6 +11,11 @@ const os = require('os');
 const chalk = require('chalk');
 var { rimrafSync } = require('rimraf');
 
+const {
+    env: { publish },
+} = process;
+console.log('publish1==', publish);
+
 /*
 process.cwd()返回执行命令的目录(而不是节点包的目录)(如果应用程序内部的'process.chdir'尚未更改命令)。
 __filename返回放置文件的绝对路径。
@@ -35,11 +40,12 @@ class BulidCode {
     }
     async gitBuild() {
         for (let item of gitConfig) {
-            let { name, dir, git, isDockerBuild } = item;
-            if (isDockerBuild) {
+            let { name, dir, git, isDockerBuild, container_name } = item;
+            // 如果有配置单独发布则不会更新其他模块 , 如果是容器打包也不需要本地打包
+            if ((publish && publish != container_name) || isDockerBuild) {
                 continue;
             }
-            // console.log('item==',item)
+
             process.chdir(path.join(__dirname, '../'));
             dir = path.join(__dirname, '../', dir);
             await new Promise((resolve, reject) => {
@@ -65,7 +71,12 @@ class BulidCode {
         const yarn = os.type() === 'Windows_NT' ? 'yarn.cmd' : 'yarn';
         let cmd = '';
 
-        console.log(`开始模块为${name},清理${dir} dist , node_modules 目录下所有文件，以及清理缓存`);
+        console.log(
+            `编译打包${name}\n`
+        );
+        console.log(
+            `开始模块为${name},清理${dir} dist , node_modules 目录下所有文件，以及清理缓存`
+        );
         await this.removeDrf(path.join(dir, '/node_modules'));
         await this.removeDrf(path.join(dir, '/dist'));
         await this.removeDrf(path.join(dir, '/package-lock.json'));

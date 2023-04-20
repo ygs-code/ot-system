@@ -8,8 +8,14 @@
     "updateCode": "node  ./bin/updateCode",
     "bulidCode": "node  ./bin/bulidCode",
     "updateBulidCode": "npm run updateCode & npm run bulidCode",
-    "docker":"docker-compose stop & docker-compose rm -f & docker-compose build & docker-compose start",
-    "publish":"npm run updateBulidCode & npm run docker"
+    "docker:all": "docker-compose stop redis mysql server client-nginx admin-nginx  & docker-compose rm -f redis mysql server client-nginx admin-nginx & docker rmi  ot-system-redis  ot-system-mysql  ot-system-server  ot-system-client-nginx  ot-system-admin-nginx & docker-compose build & docker-compose up -d",
+    "publish:all": "npm run updateBulidCode & npm run docker:all",
+    "publish:redis": "docker-compose stop redis & docker-compose rm -f redis & docker rmi ot-system-redis & docker-compose build redis & docker-compose up -d redis",
+    "publish:mysql": "docker-compose stop mysql & docker-compose rm -f mysql & docker rmi ot-system-mysql &  docker-compose build mysql & docker-compose up -d mysql",
+    "publish:server": "docker-compose stop server & docker-compose rm -f server & docker rmi ot-system-server & docker-compose build server & docker-compose up -d server",
+    "publish:client-nginx": "cross-env publish=client-nginx  npm run updateCode & cross-env publish=client-nginx npm run bulidCode & docker-compose stop client-nginx & docker-compose rm -f client-nginx & docker rmi ot-system-client-nginx & docker-compose build client-nginx & docker-compose up -d client-nginx",
+    "publish:admin-nginx": "cross-env publish=admin-nginx  npm run updateCode & cross-env publish=admin-nginx npm run bulidCode & docker-compose stop admin-nginx & docker-compose rm -f admin-nginx & docker rmi ot-system-admin-nginx & docker-compose build admin-nginx & docker-compose up -d admin-nginx",
+    "publish:entry-nginx": "docker-compose stop entry-nginx & docker-compose rm -f entry-nginx & docker rmi ot-system-entry-nginx & docker-compose build entry-nginx & docker-compose up -d entry-nginx"
   },
   "repository": {
     "type": "git",
@@ -24,6 +30,7 @@
   "dependencies": {
     "chalk": "4.1.2",
     "ora": "4.1.1",
-    "rimraf": "^5.0.0"
+    "rimraf": "^5.0.0",
+    "cross-env": "^7.0.3"
   }
 }

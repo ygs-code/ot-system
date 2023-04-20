@@ -9,6 +9,10 @@ const fs = require('fs');
 const { readdirSync, stat } = fs;
 const chalk = require('chalk');
 
+const {
+    env: { publish },
+} = process;
+
 /*
 process.cwd()返回执行命令的目录(而不是节点包的目录)(如果应用程序内部的'process.chdir'尚未更改命令)。
 __filename返回放置文件的绝对路径。
@@ -24,7 +28,11 @@ class UpdateCode {
     }
     async gitClonePull() {
         for (let item of gitConfig) {
-            let { name, dir, git } = item;
+            let { name, dir, git, container_name } = item;
+            // 如果有配置单独发布则不会更新其他模块
+            if (publish && publish != container_name) {
+                continue;
+            }
             // console.log('item==',item)
             process.chdir(path.join(__dirname, '../'));
             dir = path.join(__dirname, '../', dir);

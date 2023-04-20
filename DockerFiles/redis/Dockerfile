@@ -16,7 +16,7 @@ EXPOSE 6379
 #步骤：添加内容
 # ADD   
 
-RUN echo '启动redis'
+# RUN echo '启动redis'
 #指定这个容器启动时候要运行的命令，Dockerfile里有多个CMD指令的话，只有最后一个CMD指令会生效，可被替代 
 CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
-RUN echo 'redis启动成功'
+RUN echo 'redis容器打包成功'
