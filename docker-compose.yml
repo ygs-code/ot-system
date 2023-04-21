@@ -8,9 +8,9 @@ services:
     container_name: redis # 容器名字
     restart: always # 开机自动重启
     ports:
-      - '6379:6379'
+      - '${REDIS_PORT}:6379'
     expose:
-      - 6379 # 暴露出端口 给links使用
+      - ${REDIS_PORT} # 暴露出端口 给links使用
     networks:
       - app
       # networks:
@@ -22,6 +22,8 @@ services:
       # - ./html:/html         ###这里面放置项目目录
 
       #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+    env_file:
+      - .env
 
   mysql:
     # image: "mysql:5.7" #获取mysql 镜像
@@ -31,9 +33,9 @@ services:
     container_name: mysql #mysql容器名称  docker run --name mysql
     restart: always # docker启动，当前容器必启动
     ports:
-      - "3306:3306" # 容器外部导出端口号:容器内部端口号
+      - "${MYSQL_PORT}:3306" # 容器外部导出端口号:容器内部端口号
     expose:
-      - 3306 # 暴露出端口 给links使用 
+      - ${MYSQL_PORT} # 暴露出端口 给links使用 
     # network_mode: "host"   #https://juejin.cn/post/6844904056301830152 
     networks:
       - app
@@ -45,11 +47,13 @@ services:
       #代表了给当前容器指定环境 相当于 docker run -e  MYSQL_ROOT_PASSWORD: "123456"
       # MYSQL_USER: 'root' # mysql 用户名
       # MYSQL_PASS: '123456' # mysql 密码
-      MYSQL_ROOT_PASSWORD: "123456" # mysql 密码
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # mysql 密码
       # volumes:
       #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
       #   - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
       # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+    env_file:
+      - .env
 
   server:
     # image: "node:14" #获取node镜像
@@ -59,9 +63,9 @@ services:
     container_name: server #mysql容器名称  docker run --name mysql
     restart: always # docker启动，当前容器必启动
     ports:
-      - "3003:3003" # 容器外部导出端口号:容器内部端口号
+      - "${SERVER_PORT}:${SERVER_PORT}" # 容器外部导出端口号:容器内部端口号
     expose:
-      - 3003 # 暴露出端口 给links使用
+      - ${SERVER_PORT} # 暴露出端口 给links使用
     networks:
       - app
     # networks:
@@ -86,8 +90,8 @@ services:
       #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
       #   - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
       #   # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
-
-      #声明定义上面的网桥模式 默认创建的是bridge
+    env_file:
+      - .env
 
   client-nginx:
     build:
@@ -97,9 +101,9 @@ services:
     container_name: client-nginx # 容器名字
     restart: always # 开机自动重启
     ports:
-      - '3002:80' #   主机端口:容器端口
+      - '${CLIENT_PORT}:80' #   主机端口:容器端口
     expose:
-      - 3002 # 暴露出端口 给links使用
+      - ${CLIENT_PORT} # 暴露出端口 给links使用
     networks:
       - app
       # networks:
@@ -115,6 +119,9 @@ services:
       - server
         # 优先构建redis 容器， 在构建 server容器
         #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+    env_file:
+      - .env
+
   admin-nginx:
     build:
       context: ./ot-system-admin
@@ -123,9 +130,9 @@ services:
     container_name: admin-nginx # 容器名字
     restart: always # 开机自动重启
     ports:
-      - '3001:80' #   主机端口:容器端口
+      - '${ADMIN_PORT}:80' #   主机端口:容器端口
     expose:
-      - 3001 # 暴露出端口 给links使用
+      - ${ADMIN_PORT} # 暴露出端口 给links使用
     networks:
       - app
       # networks:
@@ -141,6 +148,8 @@ services:
       - server
         # 优先构建redis 容器， 在构建 server容器
         #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+    env_file:
+      - .env
 
 networks:
   # app:
