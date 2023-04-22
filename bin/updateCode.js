@@ -27,9 +27,9 @@ class UpdateCode {
     for (let item of gitConfig) {
       let { name, dir, git, container_name } = item;
       // 如果有配置单独发布则不会更新其他模块
-      if (type && type !== "publish_all" && type != container_name) {
-        continue;
-      }
+      // if (type && type !== "publish_all" && type != container_name) {
+      //   continue;
+      // }
       // console.log('item==',item)
       process.chdir(path.join(__dirname, "../"));
       dir = path.join(__dirname, "../", dir);
