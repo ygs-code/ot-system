@@ -5,7 +5,7 @@
   "main": "gitConfig.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "updateCode1": "node  ./bin/updateCode",
+    "updateCode1": "node cross-env type=publish_all ./bin/updateCode",
     "bulidCode1": "node  ./bin/bulidCode",
     "updateBulidCode": "npm run updateCode & npm run bulidCode",
     "docker:all": "docker-compose stop redis mysql server client-nginx admin-nginx  & docker-compose rm -f redis mysql server client-nginx admin-nginx & docker rmi  ot-system-redis  ot-system-mysql  ot-system-server  ot-system-client-nginx  ot-system-admin-nginx & docker-compose build & docker-compose up -d",
