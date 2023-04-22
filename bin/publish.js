@@ -103,8 +103,8 @@ class Publish {
       await this.killPort(port);
     }
 
-    console.log(`删除镜像\n docker rmi  ${rmiImage}`);
-    await this.PromiseExec(`docker rmi  ${rmiImage}`);
+    console.log(`删除镜像\n docker rmi -f ${rmiImage}`);
+    await this.PromiseExec(`docker rmi -f ${rmiImage}`);
 
     console.log(`build编译镜像\n docker-compose build ${buildImage}`);
     await this.PromiseExec(`docker-compose build ${buildImage}`);
@@ -128,7 +128,7 @@ class Publish {
   async publishClientNginx() {
     await this.updateCode("client-nginx");
 
-    await this.bulidCode("client-nginx");
+    // await this.bulidCode("client-nginx");
 
     this.runDocker({
       stopContainer: "client-nginx",
@@ -142,7 +142,7 @@ class Publish {
   async publishAdminNginx() {
     await this.updateCode("admin-nginx");
 
-    await this.bulidCode("admin-nginx");
+    // await this.bulidCode("admin-nginx");
 
     this.runDocker({
       stopContainer: "admin-nginx",
@@ -204,7 +204,7 @@ class Publish {
 
     await this.updateCode();
 
-    await this.bulidCode();
+    // await this.bulidCode();
 
     this.runDocker({
       stopContainer: "redis mysql server client-nginx admin-nginx",

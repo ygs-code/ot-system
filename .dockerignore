@@ -7,3 +7,4 @@ README.md
 .gitignore
 package-lock.json
 yarn.lock
+yarn-error.log

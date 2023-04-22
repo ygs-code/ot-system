@@ -37,12 +37,12 @@ class BulidCode {
     for (let item of gitConfig) {
       let { name, dir, git, isDockerBuild, container_name } = item;
       // 如果有配置单独发布则不会更新其他模块 , 如果是容器打包也不需要本地打包
-      if (
-        (type && type !== "publish_all" && type != container_name) ||
-        isDockerBuild
-      ) {
-        continue;
-      }
+      // if (
+      //   (type && type !== "publish_all" && type != container_name) ||
+      //   isDockerBuild
+      // ) {
+      //   continue;
+      // }
       process.chdir(path.join(__dirname, "../"));
       dir = path.join(__dirname, "../", dir);
       await new Promise((resolve, reject) => {

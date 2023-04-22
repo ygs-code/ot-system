@@ -7,7 +7,7 @@ ot-system-admin/**/*
 */**/ot-system-admin
 **/ot-system-admin
 */ot-system-admin
- 
+
  
  
 
@@ -36,7 +36,8 @@ ot-system-server/**/*
 
 package-lock.json
 yarn.lock
-
+yarn-error.log
+ 
 node_modules/ 
 node_modules/* 
 node_modules/**/* 

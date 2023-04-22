@@ -115,10 +115,14 @@ services:
       # - ./html:/html         ###这里面放置项目目录
     links:
       - server # 网络连接到server中
-    depends_on:
-      - server
-        # 优先构建redis 容器， 在构建 server容器
-        #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+      # depends_on:
+      # - server
+      # 优先构建redis 容器， 在构建 server容器
+      #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+    volumes:
+      # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
+      - client-nginx:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+      # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用    
     env_file:
       - .env
 
@@ -144,10 +148,10 @@ services:
       # - ./html:/html         ###这里面放置项目目录
     links:
       - server # 网络连接到server中
-    depends_on:
-      - server
-        # 优先构建redis 容器， 在构建 server容器
-        #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+      # depends_on:
+      # - server
+      # 优先构建redis 容器， 在构建 server容器
+      #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
     env_file:
       - .env
 
@@ -160,3 +164,6 @@ networks:
   #声明定义上面的网桥模式 默认创建的是bridge
   app:
     driver: bridge
+
+volumes:
+  client-nginx:
