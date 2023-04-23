@@ -22,9 +22,9 @@ class Publish {
       publish_redis: () => this.publisRedis(),
       publish_mysql: () => this.publisMysql(),
       publish_server: () => this.publisServer(),
-      publish_client_nginx: () => this.publishClientNginx(),
-      publish_admin_nginx: () => this.publishAdminNginx(),
-      publish_entry_nginx: () => this.publishEntryNginx(),
+      publish_client: () => this.publishClient(),
+      publish_admin: () => this.publishAdmin(),
+      publish_entry: () => this.publishEntry(),
     };
     mapTypes[type] && mapTypes[type]();
   }
@@ -125,41 +125,41 @@ class Publish {
     console.log("代码打包成功\n");
   }
 
-  async publishClientNginx() {
-    await this.updateCode("client-nginx");
+  async publishClient() {
+    await this.updateCode("client");
 
-    // await this.bulidCode("client-nginx");
+    // await this.bulidCode("client");
 
     this.runDocker({
-      stopContainer: "client-nginx",
-      rmContainer: "client-nginx ",
-      rmiImage: "ot-system-client-nginx",
-      buildImage: "client-nginx",
-      upContainer: "client-nginx",
+      stopContainer: "client",
+      rmContainer: "client ",
+      rmiImage: "ot-system-client",
+      buildImage: "client",
+      upContainer: "client",
       port: CLIENT_PORT,
     });
   }
-  async publishAdminNginx() {
-    await this.updateCode("admin-nginx");
+  async publishAdmin() {
+    await this.updateCode("admin");
 
-    // await this.bulidCode("admin-nginx");
+    // await this.bulidCode("admin");
 
     this.runDocker({
-      stopContainer: "admin-nginx",
-      rmContainer: "admin-nginx",
-      rmiImage: "ot-system-admin-nginx",
-      buildImage: "admin-nginx",
-      upContainer: "admin-nginx",
+      stopContainer: "admin",
+      rmContainer: "admin",
+      rmiImage: "ot-system-admin",
+      buildImage: "admin",
+      upContainer: "admin",
       port: ADMIN_PORT,
     });
   }
-  async publishEntryNginx() {
+  async publishEntry() {
     this.runDocker({
-      stopContainer: "entry-nginx",
-      rmContainer: "entry-nginx ",
-      rmiImage: "ot-system-entry-nginx",
-      buildImage: "entry-nginx ",
-      upContainer: "entry-nginx ",
+      stopContainer: "entry",
+      rmContainer: "entry ",
+      rmiImage: "ot-system-entry",
+      buildImage: "entry ",
+      upContainer: "entry ",
       // port:ADMIN_PORT,
     });
   }
@@ -207,10 +207,10 @@ class Publish {
     // await this.bulidCode();
 
     this.runDocker({
-      stopContainer: "redis mysql server client-nginx admin-nginx",
-      rmContainer: "redis mysql server client-nginx admin-nginx",
+      stopContainer: "redis mysql server client admin",
+      rmContainer: "redis mysql server client admin",
       rmiImage:
-        "ot-system-redis  ot-system-mysql  ot-system-server  ot-system-client-nginx  ot-system-admin-nginx",
+        "ot-system-redis  ot-system-mysql  ot-system-server  ot-system-client  ot-system-admin",
       buildImage: "",
       upContainer: "",
       port: "all",

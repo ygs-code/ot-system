@@ -93,12 +93,12 @@ services:
     env_file:
       - .env
 
-  client-nginx:
+  client:
     build:
       context: ./ot-system-client
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
-    container_name: client-nginx # 容器名字
+    container_name: client # 容器名字
     restart: always # 开机自动重启
     ports:
       - '${CLIENT_PORT}:80' #   主机端口:容器端口
@@ -116,22 +116,22 @@ services:
     links:
       - server # 网络连接到server中
       # depends_on:
-      # - server
+      #   - server
       # 优先构建redis 容器， 在构建 server容器
       #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
     volumes:
       # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
-      - client-nginx:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+      - client:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
       # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用    
     env_file:
       - .env
 
-  admin-nginx:
+  admin:
     build:
       context: ./ot-system-admin
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
-    container_name: admin-nginx # 容器名字
+    container_name: admin # 容器名字
     restart: always # 开机自动重启
     ports:
       - '${ADMIN_PORT}:80' #   主机端口:容器端口
@@ -148,22 +148,77 @@ services:
       # - ./html:/html         ###这里面放置项目目录
     links:
       - server # 网络连接到server中
-      # depends_on:
-      # - server
-      # 优先构建redis 容器， 在构建 server容器
-      #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+    # depends_on:
+    #   - server
+    # 优先构建redis 容器， 在构建 server容器
+    #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
     env_file:
       - .env
+    volumes:
+      # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
+      - admin:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+      # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用      
+
+  entry:
+    build:
+      context: ./DockerFiles/nginx
+      dockerfile: Dockerfile
+    # image: nginx # 镜像名称
+    container_name: entry # 容器名字
+    restart: always # 开机自动重启
+    ports:
+      - '${ENTRY_PORT}:80' #   主机端口:容器端口
+    expose:
+      - ${ENTRY_PORT} # 暴露出端口 给links使用
+    networks:
+      - app
+      # networks:
+      #   app:
+      #     #当前服务器使用哪个桥
+      #     ipv4_address: 172.16.0.2 # 具体ip 
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件
+      # - ./log:/var/log/nginx  ###这里面放置日志
+      # - ./html:/html         ###这里面放置项目目录
+    links:
+      - client # 网络连接到client中
+      # - admin # 网络连接到admin中
+    depends_on:
+      - client
+      # - admin
+    # 优先构建redis 容器， 在构建 server容器
+    #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
+    env_file:
+      - .env
+    # environment:
+    #   - NGINX_HOST=foobar.com
+    #   - NGINX_PORT=80
+    #   - CLIENT=client
+
+    # volumes:
+    #   #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
+    #   - ./DockerFiles/nginx/templates:/etc/nginx/templates
+    #   - ./DockerFiles/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    # #   - admin:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
+    # # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用      
+    # # '$$PORT' \ # 这里的PORT是容器内的PORT环境变量
+    # command:
+    #   - /bin/bash
+    #   - -c
+    #   - "envsubst '$${CLIENT}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
 
 networks:
+  # 固定ip设置
   # app:
   #   ipam:
   #     config:
   #       - subnet: 172.16.0.0/100
   # ip_range: 172.28.5.0/24
   #声明定义上面的网桥模式 默认创建的是bridge
+  # 动态ip设置
   app:
     driver: bridge
 
+# 容器和宿主机宗卷
 volumes:
-  client-nginx:
+  client:
+  admin:

@@ -13,7 +13,7 @@
 module.exports = [
     {
         name: '后台管理系统',
-        container_name: 'admin-nginx',
+        container_name: 'admin',
         dir: 'ot-system-admin',
         git: 'git@github.com:ygs-code/ot-system-admin.git',
     },
@@ -26,7 +26,7 @@ module.exports = [
     },
     {
         name: '客户端',
-        container_name: 'client-nginx',
+        container_name: 'client',
         dir: 'ot-system-client',
         git: 'git@github.com:ygs-code/ot-system-client.git',
     },

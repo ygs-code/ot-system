@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const gitConfig = require("./gitConfig"); // 
-const { execute } = require("./cmd"); // 
+const gitConfig = require("./gitConfig"); //
+const { execute } = require("./cmd"); //
 const path = require("path");
 const fs = require("fs");
 const { readdirSync, stat } = fs;
@@ -69,9 +69,7 @@ class BulidCode {
     let cmd = "";
 
     console.log(`编译打包${name}\n`);
-    console.log(
-      `清理${dir} dist , node_modules 目录下所有文件，以及清理缓存`
-    );
+    console.log(`清理${dir} dist , node_modules 目录下所有文件，以及清理缓存`);
     await this.removeDrf(path.join(dir, "/node_modules"));
     await this.removeDrf(path.join(dir, "/dist"));
     await this.removeDrf(path.join(dir, "/package-lock.json"));
