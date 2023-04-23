@@ -1,5 +1,5 @@
 # 设置基础镜像
-FROM redis
+FROM redis:alpine
 
 # 定义作者
 MAINTAINER yao guan shou

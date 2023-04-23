@@ -1,5 +1,5 @@
 # 设置基础镜像
-FROM nginx
+FROM nginx:alpine
 # 定义作者
 MAINTAINER yao guan shou
 
