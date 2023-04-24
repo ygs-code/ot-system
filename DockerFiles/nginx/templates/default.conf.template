@@ -7,7 +7,7 @@ server {
 
     
     location / {
-        proxy_pass http://client;
+        proxy_pass http://client1;
     }
 
     # location / {
