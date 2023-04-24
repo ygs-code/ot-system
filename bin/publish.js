@@ -109,8 +109,8 @@ class Publish {
     console.log(`build编译镜像\n docker-compose build ${buildImage}`);
     await this.PromiseExec(`docker-compose build ${buildImage}`);
 
-    console.log(`启动容器\n docker-compose up -d ${upContainer}`);
-    await this.PromiseExec(`docker-compose up -d ${upContainer}`);
+    console.log(`启动容器\n docker-compose up -d`);
+    await this.PromiseExec(`docker-compose up -d `);
 
     console.log("启动成功\n");
   }

@@ -1,13 +1,10 @@
 server {
-    listen       80;
-    server_name  localhost;
-
+    listen       ${ENTRY_PORT};
+    server_name  ${ENTRY_SERVER_NAME};
     #access_log  /var/log/nginx/host.access.log  main;
 
-
-    
     location / {
-        proxy_pass http://client1;
+        proxy_pass http://${CLIENT_IP}:${CLIENT_PORT};
     }
 
     # location / {
