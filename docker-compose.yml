@@ -5,7 +5,7 @@ services:
       context: ./DockerFiles/redis
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
-    container_name: redis # 容器名字
+    container_name: redis_container # 容器名字
     restart: always # 开机自动重启
     ports:
       - '${REDIS_PORT}:${REDIS_PORT}'
@@ -30,7 +30,7 @@ services:
     build:
       context: ./DockerFiles/mysql
       dockerfile: Dockerfile
-    container_name: mysql #mysql容器名称  docker run --name mysql
+    container_name: mysql_container #mysql容器名称  docker run --name mysql
     restart: always # docker启动，当前容器必启动
     ports:
       - "${MYSQL_PORT}:${MYSQL_PORT}" # 容器外部导出端口号:容器内部端口号
@@ -60,7 +60,7 @@ services:
     build:
       context: ./ot-system-server
       dockerfile: Dockerfile
-    container_name: server #mysql容器名称  docker run --name mysql
+    container_name: server_container #mysql容器名称  docker run --name mysql
     restart: always # docker启动，当前容器必启动
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}" # 容器外部导出端口号:容器内部端口号
@@ -73,11 +73,11 @@ services:
     #     #当前服务器使用哪个桥
     #     ipv4_address: 172.16.0.4 # 具体ip 
     links:
-      - mysql
-      - redis # 网络连接到redis中
-    depends_on:
-      - mysql
-      - redis # 优先构建redis 容器， 在构建 server容器
+      - mysql # 这里是 services 名称而不是容器名称  可以不用 links参数也是可以的
+      - redis # 网络连接到redis services中
+    depends_on: #优先启动mysql和redis
+      - mysql  # 这里是 services 名称而 不是容器名称
+      - redis # 这里是 services 名称而 不是容器名称
       #启动服务
     command: "npm run prd:n"
       # 覆盖 Dockerfile 中的 cmd
@@ -98,7 +98,7 @@ services:
       context: ./ot-system-client
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
-    container_name: client # 容器名字
+    container_name: client_container # 容器名字
     restart: always # 开机自动重启
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT} #   主机端口:容器端口
@@ -119,15 +119,15 @@ services:
       # - ./html:/html         ###这里面放置项目目录
     links:
       - server # 网络连接到server中
-      # depends_on:
-      #   - server
+    depends_on:
+        - server
 
     environment:
       # 是环境变量
-      - CLIENT_IP=${CLIENT_IP} # client ip  
+      - CLIENT_ADDRESS=${CLIENT_ADDRESS} # client ip  
       - CLIENT_PORT=${CLIENT_PORT} # client 端口
       - CLIENT_SERVER_NAME=${CLIENT_SERVER_NAME} # client  SERVER
-      - ADMIN_IP=${ADMIN_IP} # admin ip  
+      - ADMIN_ADDRESS=${ADMIN_ADDRESS} # admin ip  
       - ADMIN_PORT=${ADMIN_PORT} # admin 端口
       - ENTRY_PORT=${ENTRY_PORT} #nginx 端口号
       - ENTRY_SERVER_NAME=${ENTRY_SERVER_NAME}
@@ -139,18 +139,17 @@ services:
     #   - admin:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
     # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用      
     # envsubst 文档 https://www.baeldung.com/linux/envsubst-command
-
     command:
       - /bin/bash
       - -c
-      - "envsubst '$$CLIENT_IP,$${CLIENT_PORT},$${CLIENT_SERVER_NAME},$${ADMIN_IP},$${ADMIN_PORT},$${ENTRY_PORT},$${ENTRY_SERVER_NAME}'  <  /etc/nginx/templates/default.conf.template  >  /etc/nginx/conf.d/default.conf  &&  exec nginx -g 'daemon off;'"
+      - "envsubst '$$CLIENT_ADDRESS,$${CLIENT_PORT},$${CLIENT_SERVER_NAME},$${ADMIN_ADDRESS},$${ADMIN_PORT},$${ENTRY_PORT},$${ENTRY_SERVER_NAME}'  <  /etc/nginx/templates/default.conf.template  >  /etc/nginx/conf.d/default.conf  &&  exec nginx -g 'daemon off;'"
 
   admin:
     build:
       context: ot-system-admin
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
-    container_name: admin # 容器名字
+    container_name: admin_container # 容器名字
     restart: always # 开机自动重启
     # env_file:
     #   - ot-system-admin/.env.production  
@@ -173,15 +172,15 @@ services:
       # - ./html:/html         ###这里面放置项目目录
     links:
       - server # 网络连接到server中
-    # depends_on:
-    #   - server
+    depends_on:
+      - server
 
     environment:
       # 是环境变量
-      - CLIENT_IP=${CLIENT_IP} # client ip  
+      - CLIENT_ADDRESS=${CLIENT_ADDRESS} # client ip  
       - CLIENT_PORT=${CLIENT_PORT} # client 端口
       - CLIENT_SERVER_NAME=${CLIENT_SERVER_NAME} # client  SERVER
-      - ADMIN_IP=${ADMIN_IP} # admin ip  
+      - ADMIN_ADDRESS=${ADMIN_ADDRESS} # admin ip  
       - ADMIN_PORT=${ADMIN_PORT} # admin 端口
       - ADMIN_SERVER_NAME=${ADMIN_SERVER_NAME} # admin  server
       - ENTRY_PORT=${ENTRY_PORT} #nginx 端口号
@@ -198,7 +197,7 @@ services:
     command:
       - /bin/bash
       - -c
-      - "envsubst '$$CLIENT_IP,$$CLIENT_PORT,$$CLIENT_SERVER_NAME,$$ADMIN_IP,$$ADMIN_PORT,$$ADMIN_SERVER_NAME,$$ENTRY_PORT,$$ENTRY_SERVER_NAME'  <  /etc/nginx/templates/default.conf.template  >  /etc/nginx/conf.d/default.conf  &&  exec nginx -g 'daemon off;'"
+      - "envsubst '$$CLIENT_ADDRESS,$$CLIENT_PORT,$$CLIENT_SERVER_NAME,$$ADMIN_ADDRESS,$$ADMIN_PORT,$$ADMIN_SERVER_NAME,$$ENTRY_PORT,$$ENTRY_SERVER_NAME'  <  /etc/nginx/templates/default.conf.template  >  /etc/nginx/conf.d/default.conf  &&  exec nginx -g 'daemon off;'"
 
   entry:
     build:
@@ -207,7 +206,7 @@ services:
       # args:   #传递参数给buid
       #   - NGINX_HOST=${NGINX_HOST}
       # image: nginx # 镜像名称
-    container_name: entry # 容器名字
+    container_name: entry_container # 容器名字
     restart: always # 开机自动重启
     ports:
       - '${ENTRY_PORT}:${ENTRY_PORT}' #   主机端口:容器端口
@@ -234,9 +233,9 @@ services:
       #   - .env
     environment:
       # 是环境变量
-      - CLIENT_IP=${CLIENT_IP} # client ip  
+      - CLIENT_ADDRESS=${CLIENT_ADDRESS} # client ip  
       - CLIENT_PORT=${CLIENT_PORT} # client 端口
-      - ADMIN_IP=${ADMIN_IP} # admin ip  
+      - ADMIN_ADDRESS=${ADMIN_ADDRESS} # admin ip  
       - ADMIN_PORT=${ADMIN_PORT} # admin 端口
       - ENTRY_PORT=${ENTRY_PORT} #nginx 端口号
       - ENTRY_SERVER_NAME=${ENTRY_SERVER_NAME}
@@ -244,13 +243,15 @@ services:
       #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
       - ./DockerFiles/nginx/templates:/etc/nginx/templates
       - ./DockerFiles/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+
+
     #   - admin:/usr/share/nginx/html # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
     # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用      
     # envsubst 文档 https://www.baeldung.com/linux/envsubst-command
     command:
       - /bin/bash
       - -c
-      - "envsubst '$$CLIENT_IP,$${CLIENT_PORT},$${ADMIN_IP},$${ADMIN_PORT},$${ENTRY_PORT},$${ENTRY_SERVER_NAME}'  <  /etc/nginx/templates/default.conf.template  >  /etc/nginx/conf.d/default.conf  &&  exec nginx -g 'daemon off;'"
+      - "envsubst '$$CLIENT_ADDRESS,$${CLIENT_PORT},$${ADMIN_ADDRESS},$${ADMIN_PORT},$${ENTRY_PORT},$${ENTRY_SERVER_NAME}'  <  /etc/nginx/templates/default.conf.template  >  /etc/nginx/conf.d/default.conf  &&  exec nginx -g 'daemon off;'"
 
 networks:
   # 固定ip设置
