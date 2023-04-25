@@ -3,9 +3,15 @@ server {
     server_name  ${ENTRY_SERVER_NAME};
     #access_log  /var/log/nginx/host.access.log  main;
 
-    location / {
-        proxy_pass http://${CLIENT_IP}:${CLIENT_PORT};
+
+    location ^~/client/ {
+        proxy_pass http://${CLIENT_IP}:${CLIENT_PORT}/client;
+        try_files $uri $uri/ /index.html;
     }
+
+    #  location / {
+       #  proxy_pass http://${CLIENT_IP}:${CLIENT_PORT};
+    # }
 
     # location / {
     #     root   /usr/share/nginx/html;
