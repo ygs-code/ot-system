@@ -17,7 +17,7 @@ server {
         }
  
          location /client {
-            proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/;     #后面的斜杠是一个关键
+            proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/client/;     #后面的斜杠是一个关键
             proxy_redirect  off;
             proxy_set_header  Host  $host;
             proxy_set_header  X-Real-IP  $remote_addr;
