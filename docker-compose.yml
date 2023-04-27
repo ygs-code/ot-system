@@ -69,6 +69,7 @@ services:
 
         SERVER_ADDRESS: ${SERVER_ADDRESS} # serverip 
         SERVER_PORT: ${SERVER_PORT} # server 端口
+        SERVER_NODE_ENV: ${SERVER_NODE_ENV} # server NODE_ENV
 
         CLIENT_ADDRESS: ${CLIENT_ADDRESS} # client ip  
         CLIENT_PORT: ${CLIENT_PORT} # client 端口
@@ -149,8 +150,6 @@ services:
         ENTRY_PORT: ${ENTRY_PORT} # ENTRY 端口
         ENTRY_SERVER_NAME: ${ENTRY_SERVER_NAME}
 
-
-
       dockerfile: Dockerfile
 
     # image: nginx # 镜像名称
@@ -219,11 +218,13 @@ services:
         CLIENT_PORT: ${CLIENT_PORT} # client 端口
         CLIENT_SERVER_NAME: ${CLIENT_SERVER_NAME}
         CLIENT_PUBLICPATH: ${CLIENT_PUBLICPATH}
+        CLIENT_NODE_ENV: ${CLIENT_NODE_ENV} # CLIENT NODE_ENV
 
         ADMIN_ADDRESS: ${ADMIN_ADDRESS} # admin ip  
         ADMIN_PORT: ${ADMIN_PORT} # admin 端口
         ADMIN_SERVER_NAME: ${ADMIN_SERVER_NAME}
         ADMIN_PUBLICPATH: ${ADMIN_PUBLICPATH}
+        ADMIN_NODE_ENV: ${ADMIN_NODE_ENV} # ADMIN NODE_ENV
 
         ENTRY_ADDRESS: ${ENTRY_ADDRESS} # ENTRY ip  
         ENTRY_PORT: ${ENTRY_PORT} # ENTRY 端口
