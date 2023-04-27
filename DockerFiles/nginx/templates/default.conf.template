@@ -7,7 +7,19 @@ server {
 
 
 
-      
+
+
+        # location  /static  {
+         #  proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/static
+          # try_files $uri $uri/;
+         #  error_page 404 = @fallback;
+       # }
+     
+      #  location @fallback {
+       #   proxy_pass proxy_pass http://${ADMIN_ADDRESS}:${ADMIN_PORT}/admin;
+      #    try_files $uri $uri/;
+      #  }
+
         location / {
             proxy_redirect  off;
             proxy_set_header  Host  $host;
@@ -15,9 +27,11 @@ server {
             proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
             return 302 http://localhost/client/;
         }
+
+
  
         location /client {
-            proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/client/;     #后面的斜杠是一个关键
+            proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/client;     #后面的斜杠是一个关键
             proxy_redirect  off;
             proxy_set_header  Host  $host;
             proxy_set_header  X-Real-IP  $remote_addr;
@@ -30,7 +44,7 @@ server {
 
 
         location /admin {
-            proxy_pass http://${ADMIN_ADDRESS}:${ADMIN_PORT}/admin/;     #后面的斜杠是一个关键
+            proxy_pass http://${ADMIN_ADDRESS}:${ADMIN_PORT}/admin;     #后面的斜杠是一个关键
             proxy_redirect  off;
             proxy_set_header  Host  $host;
             proxy_set_header  X-Real-IP  $remote_addr;

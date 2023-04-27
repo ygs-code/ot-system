@@ -15,7 +15,7 @@
     "publish:client": "cross-env type=publish_client node  -r  dotenv/config   ./bin/publish",
     "publish:admin": "cross-env type=publish_admin node   -r   dotenv/config   ./bin/publish",
     "publish:entry": "cross-env type=publish_entry node   -r   dotenv/config   ./bin/publish ",
-    "publish:redis:mysql": "docker-compose  -f  docker-compose-dev.yaml  down" 
+    "publish:redis:mysql": "docker-compose  -f  docker-compose-dev.yaml build  && docker-compose  -f  docker-compose-dev.yaml --env-file .env.dev up " 
   },
   "repository": {
     "type": "git",
