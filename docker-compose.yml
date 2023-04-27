@@ -59,6 +59,31 @@ services:
     # image: "node:14" #获取node镜像
     build:
       context: ./ot-system-server
+      args:
+        #将配置文件传入到 dockerfile 文件中
+        REDIS_ADDRESS: ${REDIS_ADDRESS} # redis ip  
+        REDIS_PORT: ${REDIS_PORT} # redis 端口
+        MYSQL_ADDRESS: ${MYSQL_ADDRESS} # mysql ip  
+        MYSQL_PORT: ${MYSQL_PORT} # mysql 端口
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # mysql 密码
+
+        SERVER_ADDRESS: ${SERVER_ADDRESS} # serverip 
+        SERVER_PORT: ${SERVER_PORT} # server 端口
+
+        CLIENT_ADDRESS: ${CLIENT_ADDRESS} # client ip  
+        CLIENT_PORT: ${CLIENT_PORT} # client 端口
+        CLIENT_SERVER_NAME: ${CLIENT_SERVER_NAME}
+        CLIENT_PUBLICPATH: ${CLIENT_PUBLICPATH}
+
+        ADMIN_ADDRESS: ${ADMIN_ADDRESS} # admin ip  
+        ADMIN_PORT: ${ADMIN_PORT} # admin 端口
+        ADMIN_SERVER_NAME: ${ADMIN_SERVER_NAME}
+        ADMIN_PUBLICPATH: ${ADMIN_PUBLICPATH}
+
+        ENTRY_ADDRESS: ${ENTRY_ADDRESS} # ENTRY ip  
+        ENTRY_PORT: ${ENTRY_PORT} # ENTRY 端口
+        ENTRY_SERVER_NAME: ${ENTRY_SERVER_NAME}
+
       dockerfile: Dockerfile
     container_name: server_container #mysql容器名称  docker run --name mysql
     restart: always # docker启动，当前容器必启动
@@ -98,9 +123,34 @@ services:
     build:
       context: ./ot-system-client
       args:
-        buildno: 1
-        gitcommithash: cdc3b19
+        #将配置文件传入到 dockerfile 文件中
+        REDIS_ADDRESS: ${REDIS_ADDRESS} # redis ip  
+        REDIS_PORT: ${REDIS_PORT} # redis 端口
+        MYSQL_ADDRESS: ${MYSQL_ADDRESS} # mysql ip  
+        MYSQL_PORT: ${MYSQL_PORT} # mysql 端口
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # mysql 密码
+
+        SERVER_ADDRESS: ${SERVER_ADDRESS} # serverip 
+        SERVER_PORT: ${SERVER_PORT} # server 端口
+
+        CLIENT_ADDRESS: ${CLIENT_ADDRESS} # client ip  
+        CLIENT_PORT: ${CLIENT_PORT} # client 端口
+        CLIENT_SERVER_NAME: ${CLIENT_SERVER_NAME}
         CLIENT_PUBLICPATH: ${CLIENT_PUBLICPATH}
+        CLIENT_TARGET: ${CLIENT_TARGET}
+        CLIENT_NODE_ENV : ${CLIENT_NODE_ENV}
+
+        ADMIN_ADDRESS: ${ADMIN_ADDRESS} # admin ip  
+        ADMIN_PORT: ${ADMIN_PORT} # admin 端口
+        ADMIN_SERVER_NAME: ${ADMIN_SERVER_NAME}
+        ADMIN_PUBLICPATH: ${ADMIN_PUBLICPATH}
+
+        ENTRY_ADDRESS: ${ENTRY_ADDRESS} # ENTRY ip  
+        ENTRY_PORT: ${ENTRY_PORT} # ENTRY 端口
+        ENTRY_SERVER_NAME: ${ENTRY_SERVER_NAME}
+
+
+
       dockerfile: Dockerfile
 
     # image: nginx # 镜像名称
@@ -154,6 +204,31 @@ services:
   admin:
     build:
       context: ot-system-admin
+      args:
+        #将配置文件传入到 dockerfile 文件中
+        REDIS_ADDRESS: ${REDIS_ADDRESS} # redis ip  
+        REDIS_PORT: ${REDIS_PORT} # redis 端口
+        MYSQL_ADDRESS: ${MYSQL_ADDRESS} # mysql ip  
+        MYSQL_PORT: ${MYSQL_PORT} # mysql 端口
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # mysql 密码
+
+        SERVER_ADDRESS: ${SERVER_ADDRESS} # serverip 
+        SERVER_PORT: ${SERVER_PORT} # server 端口
+
+        CLIENT_ADDRESS: ${CLIENT_ADDRESS} # client ip  
+        CLIENT_PORT: ${CLIENT_PORT} # client 端口
+        CLIENT_SERVER_NAME: ${CLIENT_SERVER_NAME}
+        CLIENT_PUBLICPATH: ${CLIENT_PUBLICPATH}
+
+        ADMIN_ADDRESS: ${ADMIN_ADDRESS} # admin ip  
+        ADMIN_PORT: ${ADMIN_PORT} # admin 端口
+        ADMIN_SERVER_NAME: ${ADMIN_SERVER_NAME}
+        ADMIN_PUBLICPATH: ${ADMIN_PUBLICPATH}
+
+        ENTRY_ADDRESS: ${ENTRY_ADDRESS} # ENTRY ip  
+        ENTRY_PORT: ${ENTRY_PORT} # ENTRY 端口
+        ENTRY_SERVER_NAME: ${ENTRY_SERVER_NAME}
+
       dockerfile: Dockerfile
     # image: nginx # 镜像名称
     container_name: admin_container # 容器名字
@@ -209,6 +284,31 @@ services:
   entry:
     build:
       context: ./DockerFiles/nginx
+      args:
+        #将配置文件传入到 dockerfile 文件中
+        REDIS_ADDRESS: ${REDIS_ADDRESS} # redis ip  
+        REDIS_PORT: ${REDIS_PORT} # redis 端口
+        MYSQL_ADDRESS: ${MYSQL_ADDRESS} # mysql ip  
+        MYSQL_PORT: ${MYSQL_PORT} # mysql 端口
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # mysql 密码
+
+        SERVER_ADDRESS: ${SERVER_ADDRESS} # serverip 
+        SERVER_PORT: ${SERVER_PORT} # server 端口
+
+        CLIENT_ADDRESS: ${CLIENT_ADDRESS} # client ip  
+        CLIENT_PORT: ${CLIENT_PORT} # client 端口
+        CLIENT_SERVER_NAME: ${CLIENT_SERVER_NAME}
+        CLIENT_PUBLICPATH: ${CLIENT_PUBLICPATH}
+
+        ADMIN_ADDRESS: ${ADMIN_ADDRESS} # admin ip  
+        ADMIN_PORT: ${ADMIN_PORT} # admin 端口
+        ADMIN_SERVER_NAME: ${ADMIN_SERVER_NAME}
+        ADMIN_PUBLICPATH: ${ADMIN_PUBLICPATH}
+
+        ENTRY_ADDRESS: ${ENTRY_ADDRESS} # ENTRY ip  
+        ENTRY_PORT: ${ENTRY_PORT} # ENTRY 端口
+        ENTRY_SERVER_NAME: ${ENTRY_SERVER_NAME}
+
       dockerfile: Dockerfile
       # args:   #传递参数给buid
       #   - NGINX_HOST=${NGINX_HOST}
