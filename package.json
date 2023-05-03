@@ -16,7 +16,8 @@
     "publish:admin": "cross-env type=publish_admin node   -r   dotenv/config   ./bin/publish",
     "publish:entry": "cross-env type=publish_entry node   -r   dotenv/config   ./bin/publish",
     "publish:client:server": "npm run publish:client && npm run  publish:admin",
-    "publish:redis:mysql": "docker-compose  -f  docker-compose-dev.yaml build  && docker-compose  -f  docker-compose-dev.yaml --env-file .env.dev up " 
+    "publish:redis:mysql": "npm run publish:redis & npm run publish:mysql", 
+    "publish:dev": "docker-compose  -f  docker-compose-dev.yaml build  && docker-compose  -f  docker-compose-dev.yaml --env-file .env.dev up " 
   },
   "repository": {
     "type": "git",
