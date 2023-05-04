@@ -20,7 +20,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 
 #清理缓存
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+# ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 # # 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
 COPY ./404  /usr/share/nginx/html/404
 

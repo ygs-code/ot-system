@@ -3,7 +3,17 @@
   "version": "0.0.0",
   "description": "博客code",
   "main": "gitConfig.js",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "scripts": {
+    "git": "node ./bin/git.js",
+    "commit": "git-cz",
+    "commitlint": "npx --no-install commitlint --edit $1",
+    "lint-staged": "lint-staged",
+    "husky-install": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "updateCode": "cross-env type=update_code node  -r  dotenv/config ./bin/publish",
     "updateBulidCode": "npm run updateCode & npm run bulidCode",
@@ -16,8 +26,8 @@
     "publish:admin": "cross-env type=publish_admin node   -r   dotenv/config   ./bin/publish",
     "publish:entry": "cross-env type=publish_entry node   -r   dotenv/config   ./bin/publish",
     "publish:client:server": "npm run publish:client && npm run  publish:admin",
-    "publish:redis:mysql": "npm run publish:redis & npm run publish:mysql", 
-    "publish:dev": "docker-compose  -f  docker-compose-dev.yaml build  && docker-compose  -f  docker-compose-dev.yaml --env-file .env.dev up " 
+    "publish:redis:mysql": "npm run publish:redis & npm run publish:mysql",
+    "publish:dev": "docker-compose  -f  docker-compose-dev.yaml build  && docker-compose  -f  docker-compose-dev.yaml --env-file .env.dev up "
   },
   "repository": {
     "type": "git",
@@ -30,12 +40,18 @@
   },
   "homepage": "https://github.com/qq281113270/Blogs#readme",
   "dependencies": {
+    "@babel/register": "^7.21.0",
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
     "chalk": "4.1.2",
+    "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "detect-port": "^1.5.1",
     "dotenv": "^16.0.3",
+    "husky": "^8.0.1",
     "kill-port": "^2.0.1",
     "ora": "4.1.1",
-    "rimraf": "^5.0.0"
+    "rimraf": "^5.0.0",
+    "lint-staged": "^13.0.0"
   }
 }
