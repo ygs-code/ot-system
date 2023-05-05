@@ -1425,15 +1425,58 @@ npm run publish:all
 
 ### 前端规范
 
-前端规范使用了eslint和stylelint这样可以保证一个项目的一个代码规范，然后也使用eslint头部引入文件排序整理等包。
+#### eslint和stylelint
+
+前端规范使用了eslint和stylelint这样可以保证一个项目的一个代码规范，然后也使用eslint头部引入文件排序整理等包。在webpack中也加入了校验，这样能够让开发者时时看到代码是否规范。
+
+```
+    new StylelintPlugin({
+      emitError: true, //发现的错误将始终被触发，将禁用设置为false。
+      emitWarning: true, //如果将disable设置为false，则发现的警告将始终被发出。
+      failOnError: false, //如果有任何错误，将导致模块构建失败，禁用设置为false。
+      failOnWarning: false, //如果有任何警告，如果设置为true，将导致模块构建失败。
+      quiet: false, //如果设置为true，将只处理和报告错误，而忽略警告。
+      fix: true, //自动修复
+      files: path.resolve(rootPath, "client/**/*.(less|css)"), // 文件设置
+      // stylelintPath:'',
+      extensions: ["dist/server/static/css/*.css"] // 排除目录检查
+    }),
+    // eslint 插件 
+    new ESLintPlugin({
+      emitError: true, //发现的错误将始终被触发，将禁用设置为false。
+      emitWarning: true, //如果将disable设置为false，则发现的警告将始终被发出。
+      failOnError: true, //如果有任何错误，将导致模块构建失败，禁用设置为false。
+      failOnWarning: false, //如果有任何警告，如果设置为true，将导致模块构建失败。
+      quiet: false, //如果设置为true，将只处理和报告错误，而忽略警告。
+      fix: true //自动修复
+    }),
+```
 
 
 
+#### git 代码提交规范
 
+我使用 git hook+husky+commitlint+lint-staged，这样Git提交工作流更加规范。
 
+当然我这里还写了一个自动化git代码提交脚本，开发只需要运行 npm rum git
 
+```
+npm rum git
+```
 
+<img src="./README_IMAGES/4.jpg" />
 
+然后会自动运行 git status 脚本。并输出git status 信息。
+
+后面会自动 git add . 再到弹出一个对话框，提示用户在命令窗口输入git commit -m 的信息。
+
+然后脚本会自动运行git commit -m "用户输入信息"。
+
+再到调用 lint 去校验 eslint 和style lint ，如果他们没有错误则 会执行 git push ，
+
+<img src="./README_IMAGES/5.jpg" />
+
+最后输入日志告诉开发者提交代码成功，仓库地址，分支名等信息。
 
 
 
