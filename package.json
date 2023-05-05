@@ -1,7 +1,7 @@
 {
-  "name": "bologs",
-  "version": "0.0.0",
-  "description": "博客code",
+  "name": "ot-system",
+  "version": "0.0.1",
+  "description": "ot-system协同系统",
   "main": "gitConfig.js",
   "config": {
     "commitizen": {
