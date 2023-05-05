@@ -200,7 +200,7 @@ class Git {
           spinner.stop();
           console.log(chalk.red(error));
           console.log(
-            chalk.red("eslint 校验错误，请检查代码重新提交。")
+            chalk.red("lint 校验错误，请检查代码重新提交。可以尝试运行 npm run eslint 与 npm run lint-style 命令进行修复。可以尝试运行npm run eslint修复")
           );
         });
     } else {
