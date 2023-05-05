@@ -211,7 +211,7 @@ class Git {
     let { status, remote, branch, addReg, pushReg, committedReg, spinner } =
       this;
     if (status.match(pushReg) || status.match(committedReg)) {
-      spinner = ora("代码在push中...");
+      spinner = ora("代码在push中...\n");
       spinner.start();
 
       await new Promise((reslove, reject) => {
