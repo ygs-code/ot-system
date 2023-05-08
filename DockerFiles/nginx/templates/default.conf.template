@@ -1,35 +1,16 @@
 server {
     listen       ${ENTRY_PORT};
     server_name  ${ENTRY_SERVER_NAME};
+       #access_log  /var/log/nginx/host.access.log  main;
 
- 
-
-
-    #access_log  /var/log/nginx/host.access.log  main;
-
-    # Nginx代理及Vue报Uncaught SyntaxError: Unexpected token 错误等汇总 https://blog.csdn.net/hithedy/article/details/100079460
-
-
-
-
-
-        # location  /static  {
-         #  proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/static
-          # try_files $uri $uri/;
-         #  error_page 404 = @fallback;
-       # }
-     
-      #  location @fallback {
-       #   proxy_pass proxy_pass http://${ADMIN_ADDRESS}:${ADMIN_PORT}/admin;
-      #    try_files $uri $uri/;
-      #  }
+       # Nginx代理及Vue报Uncaught SyntaxError: Unexpected token 错误等汇总 https://blog.csdn.net/hithedy/article/details/100079460
 
         location =/ {
             proxy_redirect  off;
             proxy_set_header  Host  $host;
             proxy_set_header  X-Real-IP  $remote_addr;
             proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-            return 302 http://localhost/client/;
+            return 302 http://${ENTRY_SERVER_NAME}/client/;
         }
 
 
@@ -43,7 +24,6 @@ server {
             #以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
             root   html;
             index  index.html index.htm;            #默认情况
-            # return 302 http://baidu.com;
         }
 
 
@@ -56,7 +36,6 @@ server {
             #以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
             root   html;
             index  index.html index.htm;            #默认情况
-            # return 302 http://baidu.com;
         }
 
    
