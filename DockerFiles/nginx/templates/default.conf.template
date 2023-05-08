@@ -39,8 +39,8 @@ server {
         }
 
        # location /api/ {
-            proxy_pass http://${SERVER_ADDRESS}:${SERVER_PORT}/api/;     #后面的斜杠是一个关键
-            try_files $uri $uri/;
+            proxy_pass http://${SERVER_ADDRESS}:${SERVER_PORT};     #后面的斜杠是一个关键
+            #try_files $uri $uri/;
             # proxy_redirect  off;
             # proxy_set_header  Host  $host;
             # proxy_set_header  X-Real-IP  $remote_addr;
