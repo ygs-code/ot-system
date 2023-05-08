@@ -87,11 +87,11 @@ class Publish {
     upContainer = "",
     port,
   }) {
-    console.log(`停止容器\n docker-compose stop ${stopContainer}`);
-    await this.PromiseExec(`docker-compose stop ${stopContainer}`);
+    console.log(`停止容器\n docker compose stop ${stopContainer}`);
+    await this.PromiseExec(`docker compose stop ${stopContainer}`);
 
-    console.log(`删除容器\n docker-compose rm -f ${rmContainer}`);
-    await this.PromiseExec(`docker-compose rm -f ${rmContainer}`);
+    console.log(`删除容器\n docker compose rm -f ${rmContainer}`);
+    await this.PromiseExec(`docker compose rm -f ${rmContainer}`);
 
     if ((port = "all")) {
       await this.killPort(CLIENT_PORT);
@@ -106,11 +106,11 @@ class Publish {
     console.log(`删除镜像\n docker rmi -f ${rmiImage}`);
     await this.PromiseExec(`docker rmi -f ${rmiImage}`);
 
-    console.log(`build编译镜像\n docker-compose build ${buildImage}`);
-    await this.PromiseExec(`docker-compose build ${buildImage}`);
+    console.log(`build编译镜像\n docker compose build ${buildImage}`);
+    await this.PromiseExec(`docker compose build ${buildImage}`);
 
-    console.log(`启动容器\n  docker-compose up -d ${upContainer}`);
-    await this.PromiseExec(`docker-compose up -d ${upContainer}`);
+    console.log(`启动容器\n  docker compose up -d ${upContainer}`);
+    await this.PromiseExec(`docker compose up -d ${upContainer}`);
 
     console.log("启动成功\n");
   }
