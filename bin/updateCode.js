@@ -38,8 +38,6 @@ class UpdateCode {
             ) {
                 continue;
             }
-
-            console.log('item==', item);
             process.chdir(path.join(__dirname, '../'));
             dir = path.join(__dirname, '../', dir);
             await new Promise((resolve, reject) => {
