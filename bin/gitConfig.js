@@ -15,7 +15,7 @@ module.exports = [
         name: '后台管理系统',
         container_name: 'admin',
         dir: 'ot-system-admin',
-        git: 'https://github.com/ygs-code/ot-system-client.git',
+        git: 'https://github.com/ygs-code/ot-system-admin.git',
     },
     {
         name: '后台服务',

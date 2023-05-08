@@ -22,8 +22,8 @@ services:
       # - ./html:/html         ###这里面放置项目目录
 
       #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
-      # env_file:
-      #   - ot-system-server/.env.production
+    env_file:
+      - .env
 
   mysql:
     # image: "mysql:5.7" #获取mysql 镜像
@@ -52,8 +52,8 @@ services:
       #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
       #   - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
       # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
-      # env_file:
-      #   - ot-system-server/.env.production
+    env_file:
+      - .env
 
   server:
     # image: "node:14" #获取node镜像
@@ -117,8 +117,8 @@ services:
       #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
       #   - /root/mysql_data:/var/lib/mysql # 绝对路径映射 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
       #   # - ./data:/var/lib/mysql # 映射多个数据卷 类似于docker run -v 注意：docker-compose使用绝对路劲要求必须先创建才能使用
-    # env_file:
-    #   - ot-system-server/.env.production
+    env_file:
+      - .env
 
   client:
     build:
@@ -139,7 +139,7 @@ services:
         CLIENT_SERVER_NAME: ${CLIENT_SERVER_NAME}
         CLIENT_PUBLICPATH: ${CLIENT_PUBLICPATH}
         CLIENT_RENDER: ${CLIENT_RENDER}
-        CLIENT_NODE_ENV : ${CLIENT_NODE_ENV}
+        CLIENT_NODE_ENV: ${CLIENT_NODE_ENV}
 
         ADMIN_ADDRESS: ${ADMIN_ADDRESS} # admin ip  
         ADMIN_PORT: ${ADMIN_PORT} # admin 端口
@@ -236,8 +236,8 @@ services:
     # image: nginx # 镜像名称
     container_name: admin_container # 容器名字
     restart: always # 开机自动重启
-    # env_file:
-    #   - ot-system-admin/.env.production  
+    env_file:
+      - .env
     ports:
       - '${ADMIN_PORT}:${ADMIN_PORT}' #   主机端口:容器端口
     expose:
@@ -272,7 +272,6 @@ services:
       - ADMIN_PUBLICPATH=${ADMIN_PUBLICPATH}
       - ADMIN_NODE_ENV=${ADMIN_NODE_ENV} # ADMIN NODE_ENV
       - ADMIN_RENDER=${ADMIN_RENDER}
-      
 
     volumes:
       #   # 代表给当前容器和宿主机指定数据卷， 类似于docker run -v
@@ -342,8 +341,8 @@ services:
       # - admin
       # 优先构建redis 容器， 在构建 server容器
       #  command: "redis-server /usr/local/etc/redis/redis.conf" # 覆盖 Dockerfile 中的 cmd
-      # env_file:
-      #   - .env
+    env_file:
+      - .env
     environment:
       # 是环境变量
       - CLIENT_ADDRESS=${CLIENT_ADDRESS} # client ip  
