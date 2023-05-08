@@ -37,6 +37,7 @@ ot-system-server/**/*
 package-lock.json
 yarn.lock
 yarn-error.log
+*.lock
  
 node_modules/ 
 node_modules/* 

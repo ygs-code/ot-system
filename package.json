@@ -9,6 +9,7 @@
     }
   },
   "scripts": {
+    "inquirer": "^7.3.3",
     "git": "node ./bin/git.js",
     "commit": "git-cz",
     "commitlint": "npx --no-install commitlint --edit $1",

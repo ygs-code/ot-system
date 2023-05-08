@@ -144,6 +144,7 @@ const execute = (command, options = { stdio: "inherit" }) => {
 
   if (
     os.type() === "Windows_NT" &&
+    !command[0].match(/^(docker)/) &&
     !command[0].match(/^(git)/) &&
     !command[0].match(/\.cmd$/)
   ) {
