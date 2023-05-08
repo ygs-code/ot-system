@@ -109,7 +109,6 @@ class UpdateCode {
         });
 
         console.log(`更新代码中\n `);
-        console.log(1);
         await this.PromiseExec(`git pull`);
         console.log(`${name} 代码更新成功\n\n`);
     }
@@ -120,13 +119,13 @@ class UpdateCode {
 
     // 执行程序
     PromiseExec(cmd, options = {}) {
-        console.log(1);
         const { getStdout = () => {}, callback = () => {} } = options;
         return new Promise((reslove, reject) => {
             execute(cmd, {
                 // stdio: null,
                 ...options,
                 getStdout: (stdout) => {
+         
                     getStdout(stdout);
                     callback();
                     reslove({
