@@ -8,16 +8,6 @@ const os = require('os');
 const { join } = require('path');
 const detect = require('detect-port');
 
-// require('dotenv').config()
-// console.log(process.env) // remove this after you've confirmed it is working
-
-// const {
-//     parsed: { ENTRY_NODE_ENV },
-// } = config();
-console.log(
-    'config()==',
-    config({ path: join(__dirname, '../', '.env.development') })
-);
 
 const {
     env: {
@@ -32,14 +22,12 @@ const {
     },
 } = process;
 
-console.log('type===', type);
-console.log('NODE_ENV===', NODE_ENV);
 
 class Publish {
     constructor() {
   
         this.Env = this.getEnv();
-        console.log('this.Env===', this.Env);
+      
         this.init();
     }
 
@@ -362,7 +350,7 @@ class Publish {
     }
 
     async publisServer() {
-      console.log('this.Env==',this.Env)
+     
         const {
             REDIS_ADDRESS,
             REDIS_PORT,
