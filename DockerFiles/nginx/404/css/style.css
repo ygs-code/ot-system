@@ -1,0 +1,87 @@
+﻿ 
+
+.container {
+    /* width: 1170px; */
+     /* 水平居中 */
+    /*  way3: 让元素左边界移到中线位置，然后让子元素左移自己的一半 */
+    position: absolute;
+    left: 50%;
+    /* 垂直居中 */
+    top: 50%;
+    /* 变形元素参考当前元素的百分比 */
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    margin-top: -50px;
+}
+ 
+.container img {
+    display: block;
+    margin: auto;
+}
+.container h2 {
+    font-size: 32px;
+    color: #333333;
+    text-align: center;
+    letter-spacing: 5px;
+    padding-top: 33px;
+    padding-bottom: 25px;
+}
+.container p {
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 1px;
+    text-align: center;
+    padding-bottom: 35px;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn_blue {
+    display: inline-block;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 3px;
+    background: #7caced;
+    color: #fff;
+    letter-spacing: 5px;
+    border: 0;
+    font-size: 18px;
+    padding: 0;
+    text-decoration: none;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    -webkit-transition-property: background;
+    transition-property: background;
+}
+.container a {
+    display: block;
+    margin: auto;
+    width: 220px;
+    height: 56px;
+}

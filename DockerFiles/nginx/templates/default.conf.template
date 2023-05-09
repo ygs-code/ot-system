@@ -1,0 +1,103 @@
+server {
+    listen       ${ENTRY_PORT};
+    server_name  ${ENTRY_SERVER_NAME};
+       #access_log  /var/log/nginx/host.access.log  main;
+
+    # Nginx代理及Vue报Uncaught SyntaxError: Unexpected token 错误等汇总 https://blog.csdn.net/hithedy/article/details/100079460
+
+    location =/ {
+        proxy_redirect  off;
+        proxy_set_header  Host  $host;
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        return 302 http://${ENTRY_SERVER_NAME}/client/;
+    }
+
+
+ 
+    location /client {
+        proxy_pass http://${CLIENT_ADDRESS}:${CLIENT_PORT}/client/;     #后面的斜杠是一个关键
+        proxy_redirect  off;
+        proxy_set_header  Host  $host;
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        #以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
+        root   html;
+        index  index.html index.htm;            #默认情况
+    }
+
+
+    location /admin {
+        proxy_pass http://${ADMIN_ADDRESS}:${ADMIN_PORT}/admin;     #后面的斜杠是一个关键
+        proxy_redirect  off;
+        proxy_set_header  Host  $host;
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        #以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
+        root   html;
+        index  index.html index.htm;            #默认情况
+    }
+
+    location /api/ {
+        proxy_pass http://${SERVER_ADDRESS}:${SERVER_PORT}/api/;     #后面的斜杠是一个关键
+        #try_files $uri $uri/;
+        # proxy_redirect  off;
+        # proxy_set_header  Host  $host;
+        # proxy_set_header  X-Real-IP  $remote_addr;
+        #  proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        #以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
+        # root   html;
+        # index  index.html index.htm;            #默认情况
+    }
+
+
+
+     
+    location  /socket/ { 
+            proxy_pass http://${SERVER_ADDRESS}:${SERVER_PORT}/socket/;     #后面的斜杠是一个关键
+            proxy_set_header x-forwarded-for  $proxy_add_x_forwarded_for; 
+            proxy_set_header Upgrade $http_upgrade; 
+            proxy_set_header Connection "upgrade";   #location设置了proxy_set_header,就不继承，但继承默认值，默认值优先级低于 location设置。
+    }
+
+   
+    error_page  404  /404;
+    location  /404{
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;            #默认情况
+        #internal;
+        #try_files $uri $uri/ /index.html;
+    }
+    
+    
+    
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts;
+    #    include        fastcgi_params;
+    #}
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
