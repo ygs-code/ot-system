@@ -38,9 +38,9 @@ server {
             index  index.html index.htm;            #默认情况
         }
 
-       # location /api/ {
-            proxy_pass http://${SERVER_ADDRESS}:${SERVER_PORT};     #后面的斜杠是一个关键
-            try_files $uri $uri/;
+        location /api/ {
+            proxy_pass http://${SERVER_ADDRESS}:${SERVER_PORT}/api/;     #后面的斜杠是一个关键
+            #try_files $uri $uri/;
             # proxy_redirect  off;
             # proxy_set_header  Host  $host;
             # proxy_set_header  X-Real-IP  $remote_addr;
@@ -48,7 +48,7 @@ server {
             #以上三行，目的是将代理服务器收到的用户的信息传到真实服务器上
             # root   html;
             # index  index.html index.htm;            #默认情况
-       # }
+        }
 
    
     error_page  404  /404;
