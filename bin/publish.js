@@ -188,14 +188,14 @@ class Publish {
                 ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
-            } up -d ${upContainer}`
+            } up -d `
         );
         await this.PromiseExec(
             `docker compose  ${
                 ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
-            } up -d ${upContainer}`
+            } up -d `
         );
 
         console.log('启动成功\n');
