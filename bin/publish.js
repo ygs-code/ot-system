@@ -160,27 +160,34 @@ class Publish {
         await this.PromiseExec(`docker rmi -f ${rmiImage}`);
 
         console.log(
-            `build编译镜像\n docker compose --env-file  ${
+            `build编译镜像\n docker compose --env-file  ${join(
+                __dirname,
+                '../',
                 ENV === 'development' ? '.env.development' : '.env.production'
-            } build ${buildImage}`
+            )} build ${buildImage}`
         );
 
- 
         await this.PromiseExec(
-            `docker compose --env-file ${
+            `docker compose --env-file ${join(
+                __dirname,
+                '../',
                 ENV === 'development' ? '.env.development' : '.env.production'
-            } build ${buildImage}`
+            )}  build ${buildImage}`
         );
 
         console.log(
-            `启动容器\n  docker compose --env-file ${
+            `启动容器\n  docker compose --env-file  ${join(
+                __dirname,
+                '../',
                 ENV === 'development' ? '.env.development' : '.env.production'
-            } up -d ${buildImage}`
+            )}   up -d ${buildImage}`
         );
         await this.PromiseExec(
-            `docker compose --env-file  ${
+            `docker compose --env-file  ${join(
+                __dirname,
+                '../',
                 ENV === 'development' ? '.env.development' : '.env.production'
-            } up -d ${buildImage}`
+            )}  up -d ${buildImage}`
         );
 
         console.log('启动成功\n');
