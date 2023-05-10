@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 const kill = require("kill-port");
-const updateCode = require("./bin/updateCode");
-const bulidCode = require("./bin/bulidCode");
-const { execute } = require("./bin/cmd"); //
+const updateCode = require("./updateCode");
+const bulidCode = require("./bulidCode");
+const { execute } = require("./cmd"); //
 const { config } = require("dotenv");
 const os = require("os");
 const { join } = require("path");
