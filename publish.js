@@ -159,31 +159,15 @@ class Publish {
     console.log(`删除镜像\n docker rmi -f ${rmiImage}`);
     await this.PromiseExec(`docker rmi -f ${rmiImage}`);
 
-    console.log(
-      `build编译镜像\n docker compose --env-file  ${
-        ENV === "development" ? ".env.development" : ".env.production"
-      } build ${buildImage}`
-    );
+    console.log(`build编译镜像\n docker compose --env-file  ${ENV === "development" ? ".env.development" : ".env.production"} build ${buildImage}`);
 
     // "publish:dev": "docker compose --env-file .env.dev up"
     // "publish:dev": "docker compose --env-file .env.dev up"
 
-    await this.PromiseExec(
-      `docker compose --env-file  ${
-        ENV === "development" ? ".env.development" : ".env.production"
-      } build ${buildImage}`
-    );
+    await this.PromiseExec(`docker compose --env-file ${ENV === "development" ? ".env.development" : ".env.production"} build ${buildImage}`);
 
-    console.log(
-      `启动容器\n  docker compose  --env-file ${
-        ENV === "development" ? ".env.development" : ".env.production"
-      } up -d ${buildImage}`
-    );
-    await this.PromiseExec(
-      `docker compose  ${
-        ENV === "development" ? ".env.development" : ".env.production"
-      } up -d ${buildImage}`
-    );
+    console.log(`启动容器\n  docker compose --env-file ${ENV === "development" ? ".env.development" : ".env.production"} up -d ${buildImage}`);
+    await this.PromiseExec(`docker compose  ${ENV === "development" ? ".env.development" : ".env.production"} up -d ${buildImage}`);
 
     console.log("启动成功\n");
   }
