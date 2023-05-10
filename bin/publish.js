@@ -7,7 +7,7 @@ const { config } = require('dotenv');
 const os = require('os');
 const { join } = require('path');
 const detect = require('detect-port');
-
+const path = require('path');
 
 const {
     env: {
@@ -144,6 +144,8 @@ class Publish {
             ENTRY_NODE_ENV,
         } = this.Env;
 
+        process.chdir(path.join(__dirname, '../'));
+
         console.log(`停止容器\n docker compose stop ${stopContainer}`);
         await this.PromiseExec(`docker compose stop ${stopContainer}`);
 
@@ -189,6 +191,7 @@ class Publish {
                     : '.env.production'
             } up -d ${upContainer}`
         );
+        process.chdir(path.join(__dirname, '../'));
         await this.PromiseExec(
             `docker compose  ${
                 NODE_ENV === 'development'
