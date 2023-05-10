@@ -18,7 +18,7 @@ const {
         // MYSQL_PORT,
         // SERVER_PORT,
         // ENTRY_NODE_ENV,
-        NODE_ENV,
+        ENV,
     },
 } = process;
 
@@ -36,7 +36,7 @@ class Publish {
             path: join(
                 __dirname,
                 '../',
-                NODE_ENV === 'development'
+                ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
             ),
@@ -145,7 +145,6 @@ class Publish {
         } = this.Env;
 
         process.chdir(path.join(__dirname, '../'));
-
         console.log(`停止容器\n docker compose stop ${stopContainer}`);
         await this.PromiseExec(`docker compose stop ${stopContainer}`);
 
@@ -167,7 +166,7 @@ class Publish {
 
         console.log(
             `build编译镜像\n docker compose --env-file  ${
-                NODE_ENV === 'development'
+                ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
             } build ${buildImage}`
@@ -178,7 +177,7 @@ class Publish {
 
         await this.PromiseExec(
             `docker compose --env-file  ${
-                NODE_ENV === 'development'
+                ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
             } build ${buildImage}`
@@ -186,15 +185,14 @@ class Publish {
 
         console.log(
             `启动容器\n  docker compose  --env-file ${
-                NODE_ENV === 'development'
+                ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
             } up -d ${upContainer}`
         );
-        process.chdir(path.join(__dirname, '../'));
         await this.PromiseExec(
             `docker compose  ${
-                NODE_ENV === 'development'
+                ENV === 'development'
                     ? '.env.development'
                     : '.env.production'
             } up -d ${upContainer}`
