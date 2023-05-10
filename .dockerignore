@@ -8,3 +8,6 @@ README.md
 package-lock.json
 yarn.lock
 yarn-error.log
+
+
+ DockerFiles/nginx/nginx.conf
