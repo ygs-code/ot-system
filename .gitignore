@@ -22,8 +22,6 @@ ot-system-client/**/*
 **/ot-system-client
 */ot-system-client  
 
-
-
 ot-system-server 
 ot-system-server/*
 ot-system-server/**
@@ -33,7 +31,6 @@ ot-system-server/**/*
 **/ot-system-server
 */ot-system-server
 
-
 package-lock.json
 yarn.lock
 yarn-error.log
@@ -42,5 +39,11 @@ yarn-error.log
 node_modules/ 
 node_modules/* 
 node_modules/**/* 
- 
+
+
+DockerFiles/nginx/nginx.conf
+**/**/nginx.conf
+*/**/nginx.conf
+**/nginx.conf
+*/nginx.conf
  
