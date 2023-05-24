@@ -9,5 +9,6 @@ package-lock.json
 yarn.lock
 yarn-error.log
 
-
+ **/**/nginx.conf
  DockerFiles/nginx/nginx.conf
+ nginx.conf
